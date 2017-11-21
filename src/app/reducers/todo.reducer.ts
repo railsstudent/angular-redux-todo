@@ -1,8 +1,21 @@
-import { ActionReducer, Action } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { TodoModel } from '../shared/index';
 import * as todoActions from './todo.actions';
 
-const INITIAL_STATE = [];
+const INITIAL_STATE = [
+  {
+    value: 'Learn to build angular app using ngrx/store',
+    done: false
+  },
+  {
+    value: 'Build a template-driven form to submit todo value',
+    done: false
+  },
+  {
+    value: 'Style the app with ngBootstrap 4',
+    done: false
+  }
+];
 
 export interface todoPayload {
   index?: number;
@@ -11,9 +24,10 @@ export interface todoPayload {
   newValue?: string;
 }
 
-const todo: ActionReducer<TodoModel[]> = (state: TodoModel[] = INITIAL_STATE, action: todoActions.TodoActions) => {
+export function todoReducer(state: TodoModel[] =INITIAL_STATE, action: todoActions.TodoActions) {
   Object.freeze(state);
   Object.freeze(action);
+
   switch (action.type) {
     case todoActions.GET_TODOS:
       return action.payload;
@@ -33,11 +47,9 @@ const todo: ActionReducer<TodoModel[]> = (state: TodoModel[] = INITIAL_STATE, ac
           Object.assign({}, o, { done: action.payload.done })
           : o;
       });
+    case todoActions.REMOVE_TODOS:
+      return [];
     default:
       return state;
   }
-}
-
-export function todoReducer(state: TodoModel[], action: todoActions.TodoActions) {
-  return todo(state, action);
 }

@@ -4,8 +4,19 @@
     Welcome to {{title}}!
   </h1>
 </div>
-<ul>
-  <li *ngFor="let todo of todos$ | async; let i = index">
-    {{ todo.value }}
-  </li>
-</ul>
+<div>
+  <button (click)="removeTodos()">Remove all</button>
+</div>
+Number of todo items: {{ (todos$ | async)?.length }}
+<div *ngIf="(todos$ | async)?.length > 0">
+  <ul>
+    <li *ngFor="let todo of todos$ | async; let i = index">
+      <span [class.done]="todo.done">{{ todo.value }}</span>
+      <button (click)="toggleDone(todo, i)">Toggle Done</button>
+      <button (click)="deleteTodo(i)">X</button>
+    </li>
+  </ul>
+</div>
+<div *ngIf="(todos$ | async)?.length === 0">
+  No todo item!!!!
+</div>
