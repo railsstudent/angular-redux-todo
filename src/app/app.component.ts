@@ -19,7 +19,7 @@ import {
 })
 export class AppComponent implements OnInit {
   title = 'Angular + Redux Todo App';
-  todos$: Observable<any>;
+  todos$: Observable<TodoModel[]>;
   todo: string = '';
   modTodo: string = '';
   editing: boolean = false;
@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
 
   updateTodo(newValue) {
     this.store.dispatch({ type: UPDATE_TODO, payload: { index: this.indexToEdit, newValue } });
-    this.cancelEdit();    
+    this.cancelEdit();
   }
 
   toggleDone(todo, index) {
