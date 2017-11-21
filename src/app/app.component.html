@@ -18,7 +18,10 @@
 <div *ngIf="(todos$ | async)?.length > 0">
   <ul>
     <li *ngFor="let todo of todos$ | async; let i = index">
-      <span [class.done]="todo.done">{{ todo.value }}</span>
+      <span [class.done]="todo.done" *ngIf="!isEditingRow(i)">{{ todo.value }}</span>
+      <input type="text" size="80" id="editTodo" name="editTodo" [(ngModel)]="modTodo" *ngIf="isEditingRow(i) && !todo.done" />
+      <button (click)="editTodo(todo, i)" *ngIf="!isEditingRow(i) && !todo.done">Edit</button>
+      <button (click)="updateTodo(modTodo)" *ngIf="isEditingRow(i) && !todo.done">Update</button>
       <button (click)="toggleDone(todo, i)">Toggle Done</button>
       <button (click)="deleteTodo(i)">X</button>
     </li>
