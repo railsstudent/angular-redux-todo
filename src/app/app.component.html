@@ -22,6 +22,7 @@
       <input type="text" size="80" id="editTodo" name="editTodo" [(ngModel)]="modTodo" *ngIf="isEditingRow(i) && !todo.done" />
       <button (click)="editTodo(todo, i)" *ngIf="!isEditingRow(i) && !todo.done">Edit</button>
       <button (click)="updateTodo(modTodo)" *ngIf="isEditingRow(i) && !todo.done">Update</button>
+      <button (click)="cancelEdit()" *ngIf="isEditingRow(i) && !todo.done">Cancel</button>
       <button (click)="toggleDone(todo, i)">Toggle Done</button>
       <button (click)="deleteTodo(i)">X</button>
     </li>
