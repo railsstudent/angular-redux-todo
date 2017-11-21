@@ -9,7 +9,6 @@ import {
   DELETE_TODO,
   UPDATE_TODO,
   TOGGLE_DONE,
-  GET_TODOS,
   REMOVE_TODOS
 } from './reducers/todo.actions';
 
@@ -35,6 +34,7 @@ export class AppComponent implements OnInit {
 
   addTodo() {
     this.store.dispatch({ type: ADD_TODO, payload: { value: this.todo, done: false } });
+    this.todo = '';
   }
 
   deleteTodo(index) {
@@ -59,10 +59,6 @@ export class AppComponent implements OnInit {
 
   toggleDone(todo, index) {
     this.store.dispatch({ type: TOGGLE_DONE, payload: { index, done: !todo.done } });
-  }
-
-  getTodos() {
-    this.store.dispatch({ type: GET_TODOS, payload: [] });
   }
 
   removeTodos() {

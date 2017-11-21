@@ -5,7 +5,6 @@ export const ADD_TODO = 'ADD_TODO';
 export const DELETE_TODO = 'DELETE_TODO';
 export const UPDATE_TODO = 'UPDATE_TODO';
 export const TOGGLE_DONE = 'TOGGLE_DONE';
-export const GET_TODOS = 'GET_TODOS';
 export const REMOVE_TODOS = 'REMOVE_TODOS';
 
 export class AddTodoAction implements Action {
@@ -28,15 +27,10 @@ export class ToggleDoneAction implements Action {
     constructor (public payload: {index: number, done: boolean }) {}
 }
 
-export class GetTodosAction implements Action {
-    readonly type = GET_TODOS;
-    constructor (public payload: TodoModel[]) {}
-}
-
 export class RemoveTodosAction implements Action {
     readonly type = REMOVE_TODOS;
     constructor () {}
 }
 
 export type TodoActions = AddTodoAction | DeleteTodoAction | UpdateTodoAction |
-  ToggleDoneAction | GetTodosAction | RemoveTodosAction;
+  ToggleDoneAction | RemoveTodosAction;

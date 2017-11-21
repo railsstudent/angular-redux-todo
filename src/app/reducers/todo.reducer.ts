@@ -29,8 +29,6 @@ export function todoReducer(state: TodoModel[] =INITIAL_STATE, action: todoActio
   Object.freeze(action);
 
   switch (action.type) {
-    case todoActions.GET_TODOS:
-      return action.payload;
     case todoActions.ADD_TODO:
       return [...state, action.payload];
     case todoActions.DELETE_TODO:
