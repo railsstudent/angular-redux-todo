@@ -5,9 +5,16 @@
   </h1>
 </div>
 <div>
+  <form #form="ngForm" (ngSubmit)="addTodo()">
+    <input type="text" id="todo" name="todo" placeholder="Your todo" size="80" [(ngModel)]="todo" />
+    <button type="submit">Add</button>
+  </form>
+</div>
+<hr />
+<div>
+  Number of todo items: {{ (todos$ | async)?.length }}
   <button (click)="removeTodos()">Remove all</button>
 </div>
-Number of todo items: {{ (todos$ | async)?.length }}
 <div *ngIf="(todos$ | async)?.length > 0">
   <ul>
     <li *ngFor="let todo of todos$ | async; let i = index">

@@ -33,8 +33,8 @@ export class AppComponent implements OnInit {
     this.todos$ = this.store.select('todoReducer');
   }
 
-  addTodo(value) {
-    this.store.dispatch({ type: ADD_TODO, payload: { value, done: false } });
+  addTodo() {
+    this.store.dispatch({ type: ADD_TODO, payload: { value: this.todo, done: false } });
   }
 
   deleteTodo(index) {
