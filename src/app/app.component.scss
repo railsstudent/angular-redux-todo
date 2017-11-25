@@ -1,0 +1,11 @@
+.app {
+  &-title {
+    text-align: center;
+  }
+  &-item {
+    &-done {
+      text-decoration: line-through;
+      color: salmon;
+    }
+  }
+}
