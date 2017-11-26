@@ -27,8 +27,6 @@ export class AppComponent implements OnInit {
   editing: boolean = false;
   indexToEdit: number | null;
 
-
-
   constructor(private titleService: Title,
     private store: Store<AppStore>, private modalService: NgbModal) {
     titleService.setTitle(this.title);
@@ -87,7 +85,7 @@ export class AppComponent implements OnInit {
      }, () => {});
   }
 
-  openAllRemove(content) {
+  openAllRemove() {
      const modalRef = this.modalService.open(ConfirmModalComponent);
      modalRef.componentInstance.message = 'Are you sure to clear all todo items?';
      modalRef.componentInstance.title = 'Remove all todo items';
