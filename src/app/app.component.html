@@ -5,11 +5,16 @@
   </h1>
 </div>
 <div class="p-2">
-  <form #form="ngForm" (ngSubmit)="addTodo()" class="form-inline">
+  <form #form="ngForm" (ngSubmit)="addTodo(); form.reset()" class="form-inline">
     <div class="form-group">
-      <input type="text" id="todo" class="form-control mb-2 mr-sm-2 mb-sm-0" name="todo" placeholder="Your todo" size="80" [(ngModel)]="newTodo" />
-      <button type="submit" class="btn btn-primary">Add</button>
+      <div class="col-md-12">
+        <input type="text" id="todo" name="todo" class="form-control mb-2 mr-sm-2 mb-sm-0" required minlength="5"
+          placeholder="Your todo" size="80" [(ngModel)]="newTodo" #todo="ngModel" />
+        <div class="text-danger" *ngIf="todo.errors?.required && todo.dirty">New todo item is a required field</div>
+        <div class="text-danger" *ngIf="todo.errors?.minlength">Minimum character of new todo item is 5</div>
+      </div>
     </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!form.form.valid">Add</button>
   </form>
 </div>
 <hr />
@@ -45,7 +50,7 @@
           Cancel
         </button>
         <button (click)="toggleDone(todo, i)" class="btn btn-outline-secondary" placement="top" ngbTooltip="Mark this task done">
-          Toggle Done
+          Toggle Done <i class="fa fa-check" aria-hidden="true"></i>
         </button>
         <button (click)="openConfirmDelete(todo, i)" class="btn btn-outline-danger" placement="top" ngbTooltip="This task will be deleted">
           <i class="fa fa-trash-o" aria-hidden="true"></i>

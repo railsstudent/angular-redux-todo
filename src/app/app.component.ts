@@ -81,21 +81,13 @@ export class AppComponent implements OnInit {
      const modalRef = this.modalService.open(ConfirmModalComponent);
      modalRef.componentInstance.message = 'Are you sure to clear all todo items?';
      modalRef.componentInstance.title = 'Remove all todo items';
-     modalRef.result.then(result => {
-       if (result === 'Confirm') {
-         this.removeTodos();
-       }
-     }, () => {});
+     modalRef.result.then(() => this.removeTodos(), () => {});
   }
 
   openConfirmDelete(todo: TodoModel, index: number) {
     const modalRef = this.modalService.open(ConfirmModalComponent);
     modalRef.componentInstance.message = `Are you sure to delete "${todo.value}"?`;
     modalRef.componentInstance.title = 'Delete todo item';
-    modalRef.result.then(result => {
-      if (result === 'Confirm') {
-        this.deleteTodo(index);
-      }
-    }, () => {});
+    modalRef.result.then(() => this.deleteTodo(index), () => {});
   }
 }
