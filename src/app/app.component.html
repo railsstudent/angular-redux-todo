@@ -15,13 +15,14 @@
 <hr />
 <div class="p-2">
   Number of todo items: {{ (todos$ | async)?.length }}
-  <button (click)="removeTodos()" class="btn btn-danger">Remove all</button>
+  <button (click)="open(confirmRemoveAll)" class="btn btn-danger ml-3" placement="top" ngbTooltip="All tasks will be deleted">Remove all</button>
 </div>
-<div *ngIf="(todos$ | async)?.length > 0">
+<div *ngIf="(todos$ | async)?.length > 0 else noItems">
   <table class="table table-striped table-bordered">
     <thead class="thead-dark">
       <tr>
-        <th>Task</th><th>Actions</th>
+        <th>Task</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tr *ngFor="let todo of todos$ | async; let i = index">
@@ -31,25 +32,50 @@
           *ngIf="isEditingRow(i) && !todo.done" class="form-control" />
       </td>
       <td>
-        <button (click)="editTodo(todo, i)" *ngIf="!isEditingRow(i) && !todo.done" class="btn btn-light">
+        <button (click)="editTodo(todo, i)" *ngIf="!isEditingRow(i) && !todo.done" class="btn btn-outline-secondary"
+          placement="top" ngbTooltip="Revise this task">
           Edit
         </button>
-        <button (click)="updateTodo(modTodo)" *ngIf="isEditingRow(i) && !todo.done" class="btn btn-light">
+        <button (click)="updateTodo(modTodo)" *ngIf="isEditingRow(i) && !todo.done" class="btn btn-outline-secondary"
+          placement="top" ngbTooltip="Save the changes">
           Update
         </button>
-        <button (click)="cancelEdit()" *ngIf="isEditingRow(i) && !todo.done" class="btn btn-light">
+        <button (click)="cancelEdit()" *ngIf="isEditingRow(i) && !todo.done" class="btn btn-outline-secondary"
+          placement="top" ngbTooltip="Cancel the revision">
           Cancel
         </button>
-        <button (click)="toggleDone(todo, i)" class="btn btn-light">
+        <button (click)="toggleDone(todo, i)" class="btn btn-outline-secondary" placement="top" ngbTooltip="Mark this task done">
           Toggle Done
         </button>
-        <button (click)="deleteTodo(i)" class="btn btn-light">
+        <button (click)="deleteTodo(i)" class="btn btn-outline-danger" placement="top" ngbTooltip="This task will be deleted">
           <i class="fa fa-trash-o" aria-hidden="true"></i>
         </button>
       </td>
     </tr>
   </table>
 </div>
-<div *ngIf="(todos$ | async)?.length === 0">
-  No todo item!!!!
-</div>
+
+<ng-template #noItems>
+  <div class="m-3 card bg-primary text-white">
+    <div class="card-body">
+      <p class="card-text">No todo item. You can start to create some!!!</p>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #confirmRemoveAll let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Remove all todo items</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cancel')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Do you wish to remove all todo items?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="c('Confirm')">Confirm</button>
+    <button type="button" class="btn btn-danger" (click)="d('Cancel')">Canel</button>
+  </div>
+</ng-template>
