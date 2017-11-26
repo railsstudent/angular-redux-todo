@@ -5,7 +5,7 @@
   </h1>
 </div>
 <div class="p-2">
-  <form #form="ngForm" (ngSubmit)="addTodo(); form.reset()" class="form-inline">
+  <form #todoForm="ngForm" (ngSubmit)="addTodo(); todoForm.reset()" class="form-inline">
     <div class="form-group">
       <div class="col-md-12">
         <input type="text" id="todo" name="todo" class="form-control mb-2 mr-sm-2 mb-sm-0" required minlength="5"
@@ -14,7 +14,7 @@
         <div class="text-danger" *ngIf="todo.errors?.minlength">Minimum character of new todo item is 5</div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary" [disabled]="!form.form.valid">Add</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!todoForm.form.valid">Add</button>
   </form>
 </div>
 <hr />
