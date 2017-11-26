@@ -10,8 +10,8 @@
       <div class="col-md-12">
         <input type="text" id="todo" name="todo" class="form-control mb-2 mr-sm-2 mb-sm-0" required minlength="5"
           placeholder="Your todo" size="80" [(ngModel)]="newTodo" #todo="ngModel" />
-        <div class="text-danger" *ngIf="todo.errors?.required && todo.dirty">New todo item is a required field</div>
-        <div class="text-danger" *ngIf="todo.errors?.minlength">Minimum character of new todo item is 5</div>
+        <div class="text-danger" [hidden]="!todo.errors?.required || todo.pristine">New todo item is a required field</div>
+        <div class="text-danger" [hidden]="!todo.errors?.minlength">Minimum character of new todo item is 5</div>
       </div>
     </div>
     <button type="submit" class="btn btn-primary" [disabled]="!todoForm.form.valid">Add</button>
