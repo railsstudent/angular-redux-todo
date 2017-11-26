@@ -76,10 +76,12 @@ export class AppComponent implements OnInit {
     return this.editing && index === this.indexToEdit;
   }
 
-  open(content) {
+  open(content, data) {
     this.modalService.open(content).result.then(result => {
-       if (result === 'Confirm') {
+       if (result === 'ConfirmRemoveAll') {
           this.removeTodos();
+       } else if (result === 'ConfirmDelete') {
+         this.deleteTodo(data.index);
        }
      }, () => {});
   }

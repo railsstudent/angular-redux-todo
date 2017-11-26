@@ -75,7 +75,23 @@
     <p>Do you wish to remove all todo items?</p>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="c('Confirm')">Confirm</button>
+    <button type="button" class="btn btn-primary" (click)="c('ConfirmRemoveAll')">Confirm</button>
+    <button type="button" class="btn btn-danger" (click)="d('Cancel')">Canel</button>
+  </div>
+</ng-template>
+
+<ng-template #confirmDeleteTodo let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Delete todo item</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cancel')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Do you wish to delete?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="c('ConfirmDelete')">Confirm</button>
     <button type="button" class="btn btn-danger" (click)="d('Cancel')">Canel</button>
   </div>
 </ng-template>
