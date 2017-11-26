@@ -7,12 +7,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { todoReducer } from './reducers/todo.reducer';
 import { AppComponent } from './app.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { EditModalComponent } from './edit-modal/edit-modal.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    EditModalComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +26,8 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
     Title
   ],
   entryComponents: [
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    EditModalComponent
   ],
   bootstrap: [AppComponent]
 })

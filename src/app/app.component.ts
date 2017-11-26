@@ -13,6 +13,7 @@ import {
   REMOVE_TODOS
 } from './reducers/todo.actions';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { EditModalComponent } from './edit-modal/edit-modal.component';
 
 @Component({
   selector: 'app-root',
@@ -58,8 +59,8 @@ export class AppComponent implements OnInit {
      this.indexToEdit = null;
    }
 
-  updateTodo(newValue) {
-    this.store.dispatch({ type: UPDATE_TODO, payload: { index: this.indexToEdit, newValue } });
+  updateTodo(newValue, index) {
+    this.store.dispatch({ type: UPDATE_TODO, payload: { index, newValue } });
     this.cancelEdit();
   }
 
@@ -89,5 +90,12 @@ export class AppComponent implements OnInit {
     modalRef.componentInstance.message = `Are you sure to delete "${todo.value}"?`;
     modalRef.componentInstance.title = 'Delete todo item';
     modalRef.result.then(() => this.deleteTodo(index), () => {});
+  }
+
+  openEdit(todo: TodoModel, index: number) {
+    const modalRef = this.modalService.open(EditModalComponent);
+    modalRef.componentInstance.todo = todo.value;
+    modalRef.componentInstance.title = 'Edit todo item';
+    modalRef.result.then(todo => this.updateTodo(todo, index), () => {});
   }
 }
