@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { TodoModel, AppStore } from './shared/index';
 import {
@@ -25,7 +26,8 @@ export class AppComponent implements OnInit {
   editing: boolean = false;
   indexToEdit: number | null;
 
-  constructor(private titleService: Title, private store: Store<AppStore>) {
+  constructor(private titleService: Title,
+    private store: Store<AppStore>, private modalService: NgbModal) {
     titleService.setTitle(this.title);
   }
 
@@ -39,7 +41,8 @@ export class AppComponent implements OnInit {
   }
 
   deleteTodo(index) {
-    this.store.dispatch({ type: DELETE_TODO, payload: { index } });
+    this.store.dispatch({ type: DELETE_TODO, payload: { index } });    this.cancelEdit();
+
   }
 
   editTodo(todo, index) {
@@ -66,10 +69,18 @@ export class AppComponent implements OnInit {
 
   removeTodos() {
     this.store.dispatch({ type: REMOVE_TODOS, payload: [] });
+    this.cancelEdit();
   }
 
   isEditingRow(index) {
     return this.editing && index === this.indexToEdit;
   }
 
+  open(content) {
+    this.modalService.open(content).result.then(result => {
+       if (result === 'Confirm') {
+          this.removeTodos();
+       }
+     }, () => {});
+  }
 }
