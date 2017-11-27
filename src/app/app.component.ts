@@ -12,6 +12,7 @@ import {
   TOGGLE_DONE,
   REMOVE_TODOS
 } from './reducers/todo.actions';
+import * as todoActions from './reducers/todo.actions';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
 
@@ -38,24 +39,24 @@ export class AppComponent implements OnInit {
   }
 
   addTodo() {
-    this.store.dispatch({ type: ADD_TODO, payload: { value: this.newTodo, done: false } });
+    this.store.dispatch(new todoActions.AddTodoAction({ value: this.newTodo, done: false }));
     this.newTodo = '';
   }
 
   deleteTodo(index) {
-    this.store.dispatch({ type: DELETE_TODO, payload: { index } });
+    this.store.dispatch(new todoActions.DeleteTodoAction({ index }));
   }
 
   updateTodo(newValue, index) {
-    this.store.dispatch({ type: UPDATE_TODO, payload: { index, newValue } });
+    this.store.dispatch(new todoActions.UpdateTodoAction({ index, newValue }));
   }
 
   toggleDone(todo, index) {
-    this.store.dispatch({ type: TOGGLE_DONE, payload: { index, done: !todo.done } });
+    this.store.dispatch(new todoActions.ToggleDoneAction({index, done: !todo.done}));
   }
 
   removeTodos() {
-    this.store.dispatch({ type: REMOVE_TODOS, payload: [] });
+    this.store.dispatch(new todoActions.RemoveTodosAction());
   }
 
   isEditingRow(index) {
