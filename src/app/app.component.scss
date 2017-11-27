@@ -1,11 +1,24 @@
-.app {
-  &-title {
-    text-align: center;
+#main {
+  $banner-color: #e9ecef;
+
+  .jumbotron {
+    padding: 1rem 2rem;
+    background: $banner-color;
   }
-  &-item {
-    &-done {
-      text-decoration: line-through;
-      color: salmon;
+
+  .has-danger {
+    border: solid 1px #dc3545;
+  }
+
+  .app {
+    &-title {
+      text-align: center;
+    }
+    &-item {
+      &-done {
+        text-decoration: line-through;
+        color: salmon;
+      }
     }
   }
 }

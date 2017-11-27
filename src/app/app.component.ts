@@ -13,6 +13,7 @@ import {
   REMOVE_TODOS
 } from './reducers/todo.actions';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { EditModalComponent } from './edit-modal/edit-modal.component';
 
 @Component({
   selector: 'app-root',
@@ -43,34 +44,18 @@ export class AppComponent implements OnInit {
 
   deleteTodo(index) {
     this.store.dispatch({ type: DELETE_TODO, payload: { index } });
-    this.cancelEdit();
   }
 
-  editTodo(todo, index) {
-     this.editing = true;
-     this.modTodo = todo.value;
-     this.indexToEdit = index;
-   }
-
-   cancelEdit() {
-     this.editing = false;
-     this.modTodo = '';
-     this.indexToEdit = null;
-   }
-
-  updateTodo(newValue) {
-    this.store.dispatch({ type: UPDATE_TODO, payload: { index: this.indexToEdit, newValue } });
-    this.cancelEdit();
+  updateTodo(newValue, index) {
+    this.store.dispatch({ type: UPDATE_TODO, payload: { index, newValue } });
   }
 
   toggleDone(todo, index) {
     this.store.dispatch({ type: TOGGLE_DONE, payload: { index, done: !todo.done } });
-    this.cancelEdit();
   }
 
   removeTodos() {
     this.store.dispatch({ type: REMOVE_TODOS, payload: [] });
-    this.cancelEdit();
   }
 
   isEditingRow(index) {
@@ -81,21 +66,20 @@ export class AppComponent implements OnInit {
      const modalRef = this.modalService.open(ConfirmModalComponent);
      modalRef.componentInstance.message = 'Are you sure to clear all todo items?';
      modalRef.componentInstance.title = 'Remove all todo items';
-     modalRef.result.then(result => {
-       if (result === 'Confirm') {
-         this.removeTodos();
-       }
-     }, () => {});
+     modalRef.result.then(() => this.removeTodos(), () => {});
   }
 
   openConfirmDelete(todo: TodoModel, index: number) {
     const modalRef = this.modalService.open(ConfirmModalComponent);
     modalRef.componentInstance.message = `Are you sure to delete "${todo.value}"?`;
     modalRef.componentInstance.title = 'Delete todo item';
-    modalRef.result.then(result => {
-      if (result === 'Confirm') {
-        this.deleteTodo(index);
-      }
-    }, () => {});
+    modalRef.result.then(() => this.deleteTodo(index), () => {});
+  }
+
+  openEdit(todo: TodoModel, index: number) {
+    const modalRef = this.modalService.open(EditModalComponent);
+    modalRef.componentInstance.todo = todo.value;
+    modalRef.componentInstance.title = 'Edit todo item';
+    modalRef.result.then(todo => this.updateTodo(todo, index), () => {});
   }
 }

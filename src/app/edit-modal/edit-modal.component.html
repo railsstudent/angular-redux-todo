@@ -1,0 +1,18 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{title}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cancel')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+    <div class="form-group">
+      <input type="text" class="form-control" size="80" minlength="5" required [(ngModel)]="todo"
+        #todoRef="ngModel" (change)="updateResult()" />
+    </div>
+    <div class="text-danger" [hidden]="!todoRef.errors?.required || todoRef.pristine">Todo item is a required field</div>
+    <div class="text-danger" [hidden]="!todoRef.errors?.minlength">Minimum character of todo item is 5</div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="activeModal.close(todo)">Confirm</button>
+  <button type="button" class="btn btn-danger" (click)="activeModal.dismiss('Cancel')">Canel</button>
+</div>
