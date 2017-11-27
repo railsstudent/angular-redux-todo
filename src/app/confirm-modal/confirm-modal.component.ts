@@ -10,9 +10,12 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class ConfirmModalComponent implements OnInit {
 
   @Input()
-  todo: string;
+  message: string;
 
-  constructor(private activeModal: NgbActiveModal) { }
+  @Input()
+  title: string;
+
+  constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit() {
   }

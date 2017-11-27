@@ -14,7 +14,7 @@ export class EditModalComponent implements OnInit {
   @Input()
   title: string = '';
 
-  constructor(private activeModal: NgbActiveModal) { }
+  constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit() {
   }
