@@ -44,34 +44,18 @@ export class AppComponent implements OnInit {
 
   deleteTodo(index) {
     this.store.dispatch({ type: DELETE_TODO, payload: { index } });
-    this.cancelEdit();
   }
-
-  editTodo(todo, index) {
-     this.editing = true;
-     this.modTodo = todo.value;
-     this.indexToEdit = index;
-   }
-
-   cancelEdit() {
-     this.editing = false;
-     this.modTodo = '';
-     this.indexToEdit = null;
-   }
 
   updateTodo(newValue, index) {
     this.store.dispatch({ type: UPDATE_TODO, payload: { index, newValue } });
-    this.cancelEdit();
   }
 
   toggleDone(todo, index) {
     this.store.dispatch({ type: TOGGLE_DONE, payload: { index, done: !todo.done } });
-    this.cancelEdit();
   }
 
   removeTodos() {
     this.store.dispatch({ type: REMOVE_TODOS, payload: [] });
-    this.cancelEdit();
   }
 
   isEditingRow(index) {
