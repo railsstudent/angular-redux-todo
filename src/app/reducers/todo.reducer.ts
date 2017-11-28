@@ -1,5 +1,5 @@
-import { Action } from '@ngrx/store';
-import { TodoModel } from '../shared/index';
+import { Action, createSelector } from '@ngrx/store';
+import { TodoModel, AppStore } from '../shared/';
 import * as todoActions from './todo.actions';
 
 const INITIAL_STATE = [
@@ -23,6 +23,12 @@ export interface todoPayload {
   value?: string;
   newValue?: string;
 }
+
+export const selectTodos = (state: AppStore) => state.todo;
+export const selectCompletedTodosCount = createSelector(selectTodos,
+  (todos: TodoModel[]) => todos.filter(todo => todo.done === true).length);
+export const selectPendingTodosCount = createSelector(selectTodos,
+    (todos: TodoModel[]) => todos.filter(todo => todo.done === false).length);
 
 export function todoReducer(state: TodoModel[] =INITIAL_STATE, action: todoActions.TodoActions) {
   Object.freeze(state);

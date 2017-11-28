@@ -18,7 +18,7 @@ import { EditModalComponent } from './edit-modal/edit-modal.component';
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot({ todoReducer }),
+    StoreModule.forRoot({ todo: todoReducer }),
     FormsModule,
     NgbModule.forRoot()
   ],
