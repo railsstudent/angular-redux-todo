@@ -20,5 +20,20 @@
         color: salmon;
       }
     }
+
+    &-todo-section {
+      display: flex;
+      &-stat {
+        flex: 2 0 auto;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      &-remove {
+        flex: 1 0 auto;
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
   }
 }
