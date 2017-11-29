@@ -13,6 +13,7 @@ import {
   REMOVE_TODOS
 } from './reducers/todo.actions';
 import * as todoActions from './reducers/todo.actions';
+import { selectPendingTodosCount, selectCompletedTodosCount } from './reducers/todo.reducer';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
 
@@ -24,6 +25,8 @@ import { EditModalComponent } from './edit-modal/edit-modal.component';
 export class AppComponent implements OnInit {
   title = 'Angular + Redux Todo App';
   todos$: Observable<TodoModel[]>;
+  completedTodosCount$ : Observable<number>;
+  pendingTodosCount$ : Observable<number>;
   newTodo: string = '';
   modTodo: string = '';
   editing: boolean = false;
@@ -35,7 +38,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.todos$ = this.store.select('todoReducer');
+    this.todos$ = this.store.select('todo');
+    this.completedTodosCount$ = this.store.select(selectCompletedTodosCount);
+    this.pendingTodosCount$ = this.store.select(selectPendingTodosCount);
   }
 
   addTodo() {
