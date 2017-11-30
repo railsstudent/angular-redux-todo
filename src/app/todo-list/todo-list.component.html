@@ -1,19 +1,4 @@
 <div id="todoList">
-  <div class="p-2">
-    <form #todoForm="ngForm" (ngSubmit)="addTodo(); todoForm.reset()" class="form-inline">
-      <div class="form-group">
-        <div class="col-md-12">
-          <input type="text" id="todo" name="todo" class="form-control form-control-danger mb-2 mr-sm-2 mb-sm-0" required minlength="5"
-            placeholder="Your todo" size="80" [(ngModel)]="newTodo" #todo="ngModel"
-            [ngClass]="{'has-danger': todo.invalid && todo.dirty }" />
-          <div class="text-danger" [hidden]="!todo.errors?.required || todo.pristine">New todo item is a required field</div>
-          <div class="text-danger" [hidden]="!todo.errors?.minlength">Minimum character of new todo item is 5</div>
-        </div>
-      </div>
-      <button type="submit" class="btn btn-primary" [disabled]="!todoForm.form.valid">Add</button>
-    </form>
-  </div>
-  <hr />
   <div class="p-2 app-todo-section">
     <div class="item stat">
       <div>
@@ -42,7 +27,7 @@
       </thead>
       <tr *ngFor="let todo of todos$ | async; let i = index">
         <td>
-          <span [class.app-item-done]="todo.done" *ngIf="!isEditingRow(i)">{{ todo.value }}</span>
+          <span [class.app-item-done]="todo.done">{{ todo.value }}</span>
         </td>
         <td>
           <button (click)="openEdit(todo, i)" *ngIf="!todo.done" class="btn btn-outline-secondary"

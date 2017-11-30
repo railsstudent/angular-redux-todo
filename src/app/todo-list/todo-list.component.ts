@@ -5,7 +5,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { TodoModel, AppStore } from '../shared/index';
 import {
-  ADD_TODO,
   DELETE_TODO,
   UPDATE_TODO,
   TOGGLE_DONE,
@@ -26,10 +25,6 @@ export class TodoListComponent implements OnInit {
   todos$: Observable<TodoModel[]>;
   completedTodosCount$ : Observable<number>;
   pendingTodosCount$ : Observable<number>;
-  newTodo: string = '';
-  modTodo: string = '';
-  editing: boolean = false;
-  indexToEdit: number | null;
 
   constructor(private store: Store<AppStore>, private modalService: NgbModal) {}
 
@@ -37,11 +32,6 @@ export class TodoListComponent implements OnInit {
     this.todos$ = this.store.select('todo');
     this.completedTodosCount$ = this.store.select(selectCompletedTodosCount);
     this.pendingTodosCount$ = this.store.select(selectPendingTodosCount);
-  }
-
-  addTodo() {
-    this.store.dispatch(new todoActions.AddTodoAction({ value: this.newTodo, done: false }));
-    this.newTodo = '';
   }
 
   deleteTodo(index) {
@@ -59,11 +49,7 @@ export class TodoListComponent implements OnInit {
   removeTodos() {
     this.store.dispatch(new todoActions.RemoveTodosAction());
   }
-
-  isEditingRow(index) {
-    return this.editing && index === this.indexToEdit;
-  }
-
+  
   openAllRemove() {
      const modalRef = this.modalService.open(ConfirmModalComponent);
      modalRef.componentInstance.message = 'Are you sure to clear all todo items?';
