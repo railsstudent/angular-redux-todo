@@ -7,7 +7,7 @@
 <div class="modal-body">
     <div class="form-group">
       <input type="text" class="form-control" size="80" minlength="5" required [(ngModel)]="todo"
-        #todoRef="ngModel" />
+        #todoRef="ngModel" [ngClass]="{'has-danger': todoRef.invalid && todoRef.dirty }" />
     </div>
     <div class="text-danger" [hidden]="!todoRef.errors?.required || todoRef.pristine">Todo item is a required field</div>
     <div class="text-danger" [hidden]="!todoRef.errors?.minlength">Minimum character of todo item is 5</div>

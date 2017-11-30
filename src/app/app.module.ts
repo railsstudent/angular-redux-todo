@@ -8,13 +8,15 @@ import { todoReducer } from './reducers/todo.reducer';
 import { AppComponent } from './app.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
+import { TodoListComponent } from './todo-list/todo-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ConfirmModalComponent,
-    EditModalComponent
+    EditModalComponent,
+    TodoListComponent
   ],
   imports: [
     BrowserModule,
