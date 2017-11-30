@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
+import { TodoFormComponent } from './todo-form/todo-form.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { TodoListComponent } from './todo-list/todo-list.component';
     AppComponent,
     ConfirmModalComponent,
     EditModalComponent,
-    TodoListComponent
+    TodoListComponent,
+    TodoFormComponent
   ],
   imports: [
     BrowserModule,
