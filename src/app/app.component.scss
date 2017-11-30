@@ -5,35 +5,4 @@
     padding: 1rem 2rem;
     background: $banner-color;
   }
-
-  .has-danger {
-    border: solid 1px #dc3545;
-  }
-
-  .app {
-    &-title {
-      text-align: center;
-    }
-    &-item {
-      &-done {
-        text-decoration: line-through;
-        color: salmon;
-      }
-    }
-
-    &-todo-section {
-      display: flex;
-      &-stat {
-        flex: 2 0 auto;
-        display: flex;
-        justify-content: space-between;
-      }
-
-      &-remove {
-        flex: 1 0 auto;
-        display: flex;
-        justify-content: flex-end;
-      }
-    }
-  }
 }

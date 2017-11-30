@@ -1,0 +1,34 @@
+#todoList {
+  .app {
+    &-title {
+      text-align: center;
+    }
+    &-item {
+      &-done {
+        text-decoration: line-through;
+        color: salmon;
+      }
+    }
+
+    &-todo-section {
+      display: flex;
+      flex-wrap: wrap;
+      .item {
+        flex: 1 0 auto;
+      }
+
+      .stat {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        max-width: 50%;
+      }
+
+      .remove {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
+      }
+    }
+  }
+}
