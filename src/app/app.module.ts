@@ -10,6 +10,7 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoFormComponent } from './todo-form/todo-form.component';
+import { InstructorComponent } from './instructor/instructor.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { TodoFormComponent } from './todo-form/todo-form.component';
     ConfirmModalComponent,
     EditModalComponent,
     TodoListComponent,
-    TodoFormComponent
+    TodoFormComponent,
+    InstructorComponent
   ],
   imports: [
     BrowserModule,
