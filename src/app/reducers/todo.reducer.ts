@@ -20,7 +20,7 @@ const INITIAL_STATE = [
 export interface todoPayload {
   index?: number;
   done?: boolean;
-  value?: string;sadsad
+  value?: string;
   newValue?: string;
 }
 
@@ -32,7 +32,6 @@ export const selectPendingTodos = createSelector(selectTodos,
   (todos: TodoModel[]) => todos.filter(todo => todo.done === false));
 
 export function todoReducer(state: TodoModel[] =INITIAL_STATE, action: todoActions.TodoActions) {
-
   switch (action.type) {
     case todoActions.ADD_TODO:
       return [...state, action.payload];

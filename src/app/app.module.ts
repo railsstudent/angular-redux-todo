@@ -7,7 +7,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment'; // Angular CLI environment
 
 import { AppStore, reducers } from './shared/index';
-import { todoReducer } from './reducers/todo.reducer';
 import { AppComponent } from './app.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { EditModalComponent } from './edit-modal/edit-modal.component';

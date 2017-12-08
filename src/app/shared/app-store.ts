@@ -6,7 +6,6 @@ export interface AppStore {
   todo: TodoModel[]
 };
 
-// Reducer Interface
 export const reducers: ActionReducerMap<AppStore> = {
   todo: fromTodo.todoReducer
 };
