@@ -32,8 +32,6 @@ export const selectPendingTodos = createSelector(selectTodos,
   (todos: TodoModel[]) => todos.filter(todo => todo.done === false));
 
 export function todoReducer(state: TodoModel[] =INITIAL_STATE, action: todoActions.TodoActions) {
-  Object.freeze(state);
-  Object.freeze(action);
 
   switch (action.type) {
     case todoActions.ADD_TODO:
