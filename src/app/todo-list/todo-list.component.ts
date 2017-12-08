@@ -11,7 +11,7 @@ import {
   REMOVE_TODOS
 } from '../reducers/todo.actions';
 import * as todoActions from '../reducers/todo.actions';
-import { selectPendingTodosCount, selectCompletedTodosCount } from '../reducers/todo.reducer';
+import { selectPendingTodos, selectCompletedTodos } from '../reducers/todo.reducer';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 import { EditModalComponent } from '../edit-modal/edit-modal.component';
 
@@ -25,13 +25,15 @@ export class TodoListComponent implements OnInit {
   todos$: Observable<TodoModel[]>;
   completedTodosCount$ : Observable<number>;
   pendingTodosCount$ : Observable<number>;
+  completedTodos$: Observable<TodoModel[]>;
+  pendingTodos$: Observable<TodoModel[]>;
 
   constructor(private store: Store<AppStore>, private modalService: NgbModal) {}
 
   ngOnInit() {
     this.todos$ = this.store.select('todo');
-    this.completedTodosCount$ = this.store.select(selectCompletedTodosCount);
-    this.pendingTodosCount$ = this.store.select(selectPendingTodosCount);
+    this.completedTodos$ = this.store.select(selectCompletedTodos);
+    this.pendingTodos$ = this.store.select(selectPendingTodos);
   }
 
   deleteTodo(index) {
@@ -49,7 +51,7 @@ export class TodoListComponent implements OnInit {
   removeTodos() {
     this.store.dispatch(new todoActions.RemoveTodosAction());
   }
-  
+
   openAllRemove() {
      const modalRef = this.modalService.open(ConfirmModalComponent);
      modalRef.componentInstance.message = 'Are you sure to clear all todo items?';

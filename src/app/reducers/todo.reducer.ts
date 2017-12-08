@@ -20,15 +20,16 @@ const INITIAL_STATE = [
 export interface todoPayload {
   index?: number;
   done?: boolean;
-  value?: string;
+  value?: string;sadsad
   newValue?: string;
 }
 
+// Selector
 export const selectTodos = (state: AppStore) => state.todo;
-export const selectCompletedTodosCount = createSelector(selectTodos,
-  (todos: TodoModel[]) => todos.filter(todo => todo.done === true).length);
-export const selectPendingTodosCount = createSelector(selectTodos,
-    (todos: TodoModel[]) => todos.filter(todo => todo.done === false).length);
+export const selectCompletedTodos = createSelector(selectTodos,
+  (todos: TodoModel[]) => todos.filter(todo => todo.done === true));
+export const selectPendingTodos = createSelector(selectTodos,
+  (todos: TodoModel[]) => todos.filter(todo => todo.done === false));
 
 export function todoReducer(state: TodoModel[] =INITIAL_STATE, action: todoActions.TodoActions) {
   Object.freeze(state);
