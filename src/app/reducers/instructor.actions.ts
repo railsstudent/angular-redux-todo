@@ -4,6 +4,7 @@ import { InstructorModel } from '../shared/';
 export const ADD_INSTRUCTOR = 'ADD_INSTRUCTOR';
 export const DELETE_INSTRUCTOR = 'DELETE_INSTRUCTOR';
 export const UPDATE_INSTRUCTOR = 'UPDATE_INSTRUCTOR';
+export const SELECT_INSTRUCTOR = 'SELECT_INSTRUCTOR';
 
 export class AddInstructorAction implements Action {
     readonly type = ADD_INSTRUCTOR;
@@ -20,4 +21,12 @@ export class UpdateInstructorAction implements Action {
     constructor (public payload: { id: string, name: string, description: string }) {}
 }
 
-export type InstructorActions = AddInstructorAction | DeleteInstructorAction | UpdateInstructorAction;
+export class SelectInstructorAction implements Action {
+    readonly type = SELECT_INSTRUCTOR;
+    constructor (public payload: { id: string }) {}
+}
+
+export type InstructorActions = AddInstructorAction
+  | DeleteInstructorAction
+  | UpdateInstructorAction
+  | SelectInstructorAction;

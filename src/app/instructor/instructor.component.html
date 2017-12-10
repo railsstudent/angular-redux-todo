@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-6">
       <div *ngIf="(instructors$ | async)?.length > 0 else noInstructors">
-        <div *ngFor="let instructor of instructors$ | async" class="card">
+        <div *ngFor="let instructor of instructors$ | async" class="card" (click)="selectInstructor(instructor.id)">
           <div class="card-body">
              <h4 class="card-title">{{instructor.name}}</h4>
              <p class="card-text">{{instructor.description}}</p>
@@ -12,7 +12,8 @@
       </div>
     </div>
     <div class="col-md-6">
-      <form #instructorForm="ngForm" (ngSubmit)="createInstructor(); instructorForm.reset()">
+      <form #instructorForm="ngForm" (ngSubmit)="createInstructor(); instructorForm.reset()"
+        *ngIf="!(currentInstructor$ | async)">
         <div class="form-group">
           <label for="instructorName">Name</label>
           <input type="text" class="form-control" id="instructorName" name="instructorName" aria-describedby="nameHelp"
@@ -29,6 +30,26 @@
           </textarea>
         </div>
         <button type="submit" class="btn btn-primary" [disabled]="instructorForm.form.invalid">Save</button>
+      </form>
+
+      <form #editInstructorForm="ngForm" (ngSubmit)="updateInstructor(); editInstructorForm.reset()"
+        *ngIf="currentInstructor$ | async; let currentInstructor">
+        <div class="form-group">
+          <label for="instructorName">Edit Name</label>
+          <input type="text" class="form-control" id="instructorName" name="instructorName" aria-describedby="nameHelp"
+            placeholder="Enter name" required [(ngModel)]="currentInstructor.name" #validateName="ngModel"
+            [ngClass]="{'has-danger': validateName.invalid && validateName.dirty }">
+            <div class="text-danger" [hidden]="!validateName.errors?.required || validateName.pristine">
+              Instructor name is a required field
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="description">Edit Description</label>
+          <textarea  class="form-control" id="description" name="description" placeholder="Description"
+            [(ngModel)]="currentInstructor.description">
+          </textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="editInstructorForm.form.invalid">Save</button>
       </form>
     </div>
   </div>

@@ -17,13 +17,27 @@ export function instructorReducer(state: InstructorState = initialState,
   action: instructorActions.InstructorActions) {
   switch (action.type) {
     case instructorActions.ADD_INSTRUCTOR:
-      return instructorAdapter.addOne(action.payload.instructor, state);
+      return {
+        ...instructorAdapter.addOne(action.payload.instructor, state),
+        selectedInstructorId: null
+      };
     case instructorActions.DELETE_INSTRUCTOR:
-      return instructorAdapter.removeOne(action.payload.id, state);
+      return {
+        ...instructorAdapter.removeOne(action.payload.id, state),
+        selectedInstructorId: null
+      }
     case instructorActions.UPDATE_INSTRUCTOR:
-      return instructorAdapter.updateOne({ id: action.payload.id,
-        changes: { name: action.payload.name, description: action.payload.description }
-      }, state);
+      return {
+        ...instructorAdapter.updateOne({ id: action.payload.id,
+          changes: { name: action.payload.name, description: action.payload.description }
+        }, state),
+        selectedInstructorId: null
+      };
+    case instructorActions.SELECT_INSTRUCTOR:
+      return {
+        ...state,
+        selectedInstructorId: action.payload.id
+      }
     default:
       return state;
   }

@@ -38,4 +38,12 @@ export class InstructorComponent implements OnInit {
   deleteInstructor(id: string) {
     this.store.dispatch(new instructorActions.DeleteInstructorAction({ id }));
   }
+
+  selectInstructor(id: string) {
+    this.store.dispatch(new instructorActions.SelectInstructorAction({ id }));
+  }
+
+  updateInstructor() {
+
+  }
 }
