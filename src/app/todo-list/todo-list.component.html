@@ -18,7 +18,7 @@
     </div>
   </div>
   <div *ngIf="(todos$ | async)?.length > 0 else noItems">
-    <ngb-tabset>
+    <ngb-tabset [justify]="'justified'">
     <ngb-tab title="All">
       <ng-template ngbTabContent>
           <table class="table table-striped table-bordered">

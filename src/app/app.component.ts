@@ -7,7 +7,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Angular + Redux Todo App';
+  title = 'Todo App';
 
   constructor(private titleService: Title) {
     titleService.setTitle(this.title);
