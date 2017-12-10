@@ -36,16 +36,16 @@ export class TodoListComponent implements OnInit {
     this.pendingTodos$ = this.store.select(selectPendingTodos);
   }
 
-  deleteTodo(index) {
-    this.store.dispatch(new todoActions.DeleteTodoAction({ index }));
+  deleteTodo(id) {
+    this.store.dispatch(new todoActions.DeleteTodoAction({ id }));
   }
 
-  updateTodo(newValue, index) {
-    this.store.dispatch(new todoActions.UpdateTodoAction({ index, newValue }));
+  updateTodo(id, newValue) {
+    this.store.dispatch(new todoActions.UpdateTodoAction({ id, newValue }));
   }
 
-  toggleDone(todo, index) {
-    this.store.dispatch(new todoActions.ToggleDoneAction({index, done: !todo.done}));
+  toggleDone(todo) {
+    this.store.dispatch(new todoActions.ToggleDoneAction({id: todo.id, done: !todo.done}));
   }
 
   removeTodos() {
@@ -59,18 +59,18 @@ export class TodoListComponent implements OnInit {
      modalRef.result.then(() => this.removeTodos(), () => {});
   }
 
-  openConfirmDelete(todo: TodoModel, index: number) {
+  openConfirmDelete(todo: TodoModel) {
     const modalRef = this.modalService.open(ConfirmModalComponent);
     modalRef.componentInstance.message = `Are you sure to delete "${todo.value}"?`;
     modalRef.componentInstance.title = 'Delete todo item';
-    modalRef.result.then(() => this.deleteTodo(index), () => {});
+    modalRef.result.then(() => this.deleteTodo(todo.id), () => {});
   }
 
-  openEdit(todo: TodoModel, index: number) {
+  openEdit(todo: TodoModel) {
     const modalRef = this.modalService.open(EditModalComponent);
     modalRef.componentInstance.todo = todo.value;
     modalRef.componentInstance.title = 'Edit todo item';
-    modalRef.result.then(todo => this.updateTodo(todo, index), () => {});
+    modalRef.result.then(newValue => this.updateTodo(todo.id, newValue), () => {});
   }
 
 }

@@ -28,19 +28,19 @@
                 <th>Actions</th>
               </tr>
             </thead>
-            <tr *ngFor="let todo of todos$ | async; let i = index">
+            <tr *ngFor="let todo of todos$ | async">
               <td>
                 <span [class.app-item-done]="todo.done">{{ todo.value }}</span>
               </td>
               <td>
-                <button (click)="openEdit(todo, i)" *ngIf="!todo.done" class="btn btn-outline-secondary"
+                <button (click)="openEdit(todo)" *ngIf="!todo.done" class="btn btn-outline-secondary"
                   placement="top" ngbTooltip="Revise this task">
                   Edit
                 </button>
-                <button (click)="toggleDone(todo, i)" class="btn btn-outline-secondary" placement="top" ngbTooltip="Mark this task done">
+                <button (click)="toggleDone(todo)" class="btn btn-outline-secondary" placement="top" ngbTooltip="Mark this task done">
                   Toggle Done <i class="fa fa-check" aria-hidden="true"></i>
                 </button>
-                <button (click)="openConfirmDelete(todo, i)" class="btn btn-outline-danger" placement="top"
+                <button (click)="openConfirmDelete(todo)" class="btn btn-outline-danger" placement="top"
                   ngbTooltip="This task will be deleted" *ngIf="!todo.done">
                   <i class="fa fa-trash-o" aria-hidden="true"></i>
                 </button>
@@ -58,19 +58,19 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tr *ngFor="let todo of pendingTodos$ | async; let i = index">
+          <tr *ngFor="let todo of pendingTodos$ | async">
             <td>
               <span [class.app-item-done]="todo.done">{{ todo.value }}</span>
             </td>
             <td>
-              <button (click)="openEdit(todo, i)" *ngIf="!todo.done" class="btn btn-outline-secondary"
+              <button (click)="openEdit(todo)" *ngIf="!todo.done" class="btn btn-outline-secondary"
                 placement="top" ngbTooltip="Revise this task">
                 Edit
               </button>
-              <button (click)="toggleDone(todo, i)" class="btn btn-outline-secondary" placement="top" ngbTooltip="Mark this task done">
+              <button (click)="toggleDone(todo)" class="btn btn-outline-secondary" placement="top" ngbTooltip="Mark this task done">
                 Toggle Done <i class="fa fa-check" aria-hidden="true"></i>
               </button>
-              <button (click)="openConfirmDelete(todo, i)" class="btn btn-outline-danger" placement="top"
+              <button (click)="openConfirmDelete(todo)" class="btn btn-outline-danger" placement="top"
                 ngbTooltip="This task will be deleted" *ngIf="!todo.done">
                 <i class="fa fa-trash-o" aria-hidden="true"></i>
               </button>
@@ -87,7 +87,7 @@
               <th>Completed Task</th>
             </tr>
           </thead>
-          <tr *ngFor="let todo of completedTodos$ | async; let i = index">
+          <tr *ngFor="let todo of completedTodos$ | async">
             <td>
               <span>{{ todo.value }}</span>
             </td>
