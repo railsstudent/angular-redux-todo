@@ -1,2 +1,2 @@
 export { TodoModel } from './todo-model';
-export { AppStore } from './app-store';
+export { AppStore, reducers } from './app-store';

@@ -14,17 +14,17 @@ export class AddTodoAction implements Action {
 
 export class DeleteTodoAction implements Action {
     readonly type = DELETE_TODO;
-    constructor (public payload: {index: number}) {}
+    constructor (public payload: {id: string}) {}
 }
 
 export class UpdateTodoAction implements Action {
     readonly type = UPDATE_TODO;
-    constructor (public payload: {index: number, newValue: string}) {}
+    constructor (public payload: {id: string, newValue: string}) {}
 }
 
 export class ToggleDoneAction implements Action {
     readonly type = TOGGLE_DONE;
-    constructor (public payload: {index: number, done: boolean }) {}
+    constructor (public payload: {id: string, done: boolean }) {}
 }
 
 export class RemoveTodosAction implements Action {
