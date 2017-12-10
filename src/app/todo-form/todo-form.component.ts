@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
+import { UUID } from 'angular2-uuid';
 
 import { ADD_TODO } from '../reducers/todo.actions';
 import { TodoModel, AppStore } from '../shared/index';
@@ -22,7 +23,11 @@ export class TodoFormComponent implements OnInit {
   }
 
   addTodo() {
-    this.store.dispatch(new todoActions.AddTodoAction({ value: this.newTodo, done: false }));
+    this.store.dispatch(new todoActions.AddTodoAction({
+      id: UUID.UUID(),
+      value: this.newTodo,
+      done: false
+    }));
     this.newTodo = '';
   }
 }
