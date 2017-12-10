@@ -1,14 +1,17 @@
 #main {
-  $banner-color: #e9ecef;
-
-  .jumbotron {
-    padding: 1rem 2rem;
-    background: $banner-color;
+  
+  .navbar {
+    background: #563d7c;
   }
 
-  .app {
-    &-title {
-      text-align: center;
+  .nav-link {
+    color: #fff;
+    &.active {
+      color: #1299AE;
     }
+  }
+
+  .navbar-brand {
+    color: #fff;
   }
 }

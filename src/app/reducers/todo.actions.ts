@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { TodoModel } from '../shared/index';
+import { TodoModel } from '../shared/';
 
 export const ADD_TODO = 'ADD_TODO';
 export const DELETE_TODO = 'DELETE_TODO';

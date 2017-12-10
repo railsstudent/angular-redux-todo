@@ -8,6 +8,12 @@ import { Title } from '@angular/platform-browser';
 })
 export class AppComponent implements OnInit {
   title = 'Todo App';
+  isCollapsed: boolean = true;
+
+  links = {
+    instructor: ['/instructor'],
+    course: ['/course']
+  };
 
   constructor(private titleService: Title) {
     titleService.setTitle(this.title);
