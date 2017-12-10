@@ -10,10 +10,11 @@ import { AppStore, reducers } from './shared/index';
 import { AppComponent } from './app.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
-import { TodoListComponent } from './todo-list/todo-list.component';
-import { TodoFormComponent } from './todo-form/todo-form.component';
+import { TodoListComponent } from './todo/todo-list/todo-list.component';
+import { TodoFormComponent } from './todo/todo-form/todo-form.component';
 import { InstructorComponent } from './instructor/instructor.component';
 import { CourseComponent } from './course/course.component';
+import { TodoComponent } from './todo/todo.component';
 
 export const metaReducers: MetaReducer<AppStore>[] = !environment.production ? [storeFreeze]: [];
 
@@ -25,7 +26,8 @@ export const metaReducers: MetaReducer<AppStore>[] = !environment.production ? [
     TodoListComponent,
     TodoFormComponent,
     InstructorComponent,
-    CourseComponent
+    CourseComponent,
+    TodoComponent
   ],
   imports: [
     BrowserModule,

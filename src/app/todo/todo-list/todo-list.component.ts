@@ -3,17 +3,17 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { TodoModel, AppStore } from '../shared/index';
+import { TodoModel, AppStore } from '../../shared/index';
 import {
   DELETE_TODO,
   UPDATE_TODO,
   TOGGLE_DONE,
   REMOVE_TODOS
-} from '../reducers/todo.actions';
-import * as todoActions from '../reducers/todo.actions';
-import { selectPendingTodos, selectCompletedTodos } from '../reducers/todo.reducer';
-import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
-import { EditModalComponent } from '../edit-modal/edit-modal.component';
+} from '../../reducers/todo.actions';
+import * as todoActions from '../../reducers/todo.actions';
+import { selectPendingTodos, selectCompletedTodos } from '../../reducers/todo.reducer';
+import { ConfirmModalComponent } from '../../confirm-modal/confirm-modal.component';
+import { EditModalComponent } from '../../edit-modal/edit-modal.component';
 
 @Component({
   selector: 'app-todo-list',
