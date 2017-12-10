@@ -12,28 +12,25 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
 import { TodoListComponent } from './todo/todo-list/todo-list.component';
 import { TodoFormComponent } from './todo/todo-form/todo-form.component';
-import { InstructorComponent } from './instructor/instructor.component';
-import { CourseComponent } from './course/course.component';
-import { TodoComponent } from './todo/todo.component';
+import { AppRoutingModule, RoutingComponents } from './app-routing.module';
 
 export const metaReducers: MetaReducer<AppStore>[] = !environment.production ? [storeFreeze]: [];
 
 @NgModule({
   declarations: [
     AppComponent,
-    ConfirmModalComponent,
-    EditModalComponent,
+    RoutingComponents,
     TodoListComponent,
     TodoFormComponent,
-    InstructorComponent,
-    CourseComponent,
-    TodoComponent
+    ConfirmModalComponent,
+    EditModalComponent
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
     FormsModule,
-    NgbModule.forRoot()
+    StoreModule.forRoot(reducers, { metaReducers }),
+    NgbModule.forRoot(),
+    AppRoutingModule
   ],
   providers: [
     Title

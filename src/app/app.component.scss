@@ -11,4 +11,19 @@
       text-align: center;
     }
   }
+
+  .navbar {
+    background: #563d7c;
+  }
+
+  .nav-link {
+    color: #fff;
+    &.active {
+      color: #1299AE;
+    }
+  }
+
+  .navbar-brand {
+    color: #fff;
+  }
 }
