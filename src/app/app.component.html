@@ -6,7 +6,7 @@
         <button class="navbar-toggler" type="button"
             aria-controls="navbarNav"
             aria-expanded="!isCollapsed" aria-label="Toggle navigation"
-            (click)="toggleMenu()">
+            (click)="isCollapsed = !isCollapsed">
           <span class="navbar-toggler-icon"></span>
         </button>
       <div class="collapse navbar-collapse" id="navbarNav" [ngbCollapse]="isCollapsed">
@@ -21,11 +21,6 @@
       </div>
     </div>
   </nav>
-  <div class="jumbotron m-2">
-    <h1 class="app-title">
-      Welcome to {{title}}!
-    </h1>
-  </div>
   <!-- Routed views go here -->
   <router-outlet></router-outlet>
 </div>

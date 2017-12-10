@@ -1,0 +1,14 @@
+.todo {
+  $banner-color: #e9ecef;
+
+  .jumbotron {
+    padding: 1rem 2rem;
+    background: $banner-color;
+  }
+
+  .app {
+    &-title {
+      text-align: center;
+    }
+  }
+}

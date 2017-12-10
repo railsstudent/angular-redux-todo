@@ -21,8 +21,4 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  toggleMenu() {
-    this.isCollapsed = !this.isCollapsed;
-  }
 }
