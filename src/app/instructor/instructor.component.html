@@ -6,6 +6,7 @@
           <div class="card-body">
              <h4 class="card-title">{{instructor.name}}</h4>
              <p class="card-text">{{instructor.description}}</p>
+             <button type="button" class="btn btn-danger" (click)="deleteInstructor(instructor.id)">Delete</button>
           </div>
         </div>
       </div>

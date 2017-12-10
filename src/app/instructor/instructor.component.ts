@@ -34,4 +34,8 @@ export class InstructorComponent implements OnInit {
       }
     }));
   }
+
+  deleteInstructor(id: string) {
+    this.store.dispatch(new instructorActions.DeleteInstructorAction({ id }));
+  }
 }
