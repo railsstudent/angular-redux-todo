@@ -24,14 +24,20 @@ export function instructorReducer(state: InstructorState = initialState,
     case instructorActions.DELETE_INSTRUCTOR:
       return {
         ...instructorAdapter.removeOne(action.payload.id, state),
-        selectedInstructorId: (action.payload.id != state.selectedInstructorId) ?
-          state.selectedInstructorId : null
+        selectedInstructorId: (action.payload.id != state.selectedInstructorId) ? state.selectedInstructorId : null
       }
     case instructorActions.UPDATE_INSTRUCTOR:
+      const changedInstructor = {
+          name: action.payload.name,
+          description: action.payload.description
+      };
+      const newState: InstructorState = instructorAdapter.updateOne(
+        { id: action.payload.id,
+          changes: changedInstructor
+        }, state);
+        
       return {
-        ...instructorAdapter.updateOne({ id: action.payload.id,
-          changes: { name: action.payload.name, description: action.payload.description }
-        }, state),
+        ...newState,
         selectedInstructorId: null
       };
     case instructorActions.SELECT_INSTRUCTOR:

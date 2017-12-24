@@ -25,7 +25,14 @@ export class InstructorComponent implements OnInit {
     this.instructors$ = this.store.select(selectAllInstructors);
     this.currentInstructor$ = this.store.select(selectCurrentInstructor);
     this.currentInstructor$.subscribe(instructor => {
-      this.currentInstructor = instructor || { id: '', name: '', description: '' };
+      if (instructor) {
+        this.currentInstructor = { id: instructor.id,
+          name: instructor.name,
+          description: instructor.description
+        };
+      } else {
+        this.currentInstructor = { id: '', name: '', description: '' };
+      }
       console.log('instructor: ', instructor);
       console.log('subscribe - currentInstructor: ', this.currentInstructor);
     });

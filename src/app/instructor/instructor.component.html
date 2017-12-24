@@ -1,22 +1,19 @@
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid" id="container">
+  <div class="row instructor">
     <div class="col-md-6">
       <div *ngIf="(instructors$ | async)?.length > 0 else noInstructors">
-        <div *ngFor="let instructor of instructors$ | async" class="card" (click)="selectInstructor(instructor.id)">
+        <div *ngFor="let instructor of instructors$ | async" class="card mt-3"  (click)="selectInstructor(instructor.id)">
           <div class="card-body">
              <h4 class="card-title">{{instructor.name}}</h4>
-             <p class="card-text">{{instructor.description}}</p>
+             <p class="card-text instructor-description">{{instructor.description}}</p>
              <button type="button" class="btn btn-danger" (click)="deleteInstructor(instructor.id)">Delete</button>
           </div>
         </div>
       </div>
     </div>
     <div class="col-md-6">
-      <form #editInstructorForm="ngForm" (ngSubmit)="updateInstructor(); editInstructorForm.reset()">
+      <form #editInstructorForm="ngForm" (ngSubmit)="updateInstructor(); editInstructorForm.reset()" class="mt-3">
         <div class="form-group">
-          <pre>
-            {{ currentInstructor | json }}<br/>
-          </pre>
           <label for="instructorName">Name</label>
           <input type="text" class="form-control" id="instructorName" name="instructorName" aria-describedby="nameHelp"
             placeholder="Enter name" required [(ngModel)]="currentInstructor.name" #validateName="ngModel"
