@@ -13,7 +13,8 @@ import { UUID } from 'angular2-uuid';
 export class InstructorComponent implements OnInit {
   instructors$: Observable<InstructorModel[]>;
   currentInstructor$: Observable<InstructorModel>;
-  newInstructor = {
+  currentInstructor: any = {
+    id: '',
     name: '',
     description: ''
   };
@@ -23,23 +24,44 @@ export class InstructorComponent implements OnInit {
   ngOnInit() {
     this.instructors$ = this.store.select(selectAllInstructors);
     this.currentInstructor$ = this.store.select(selectCurrentInstructor);
-  }
-
-  createInstructor() {
-    this.store.dispatch(new instructorActions.AddInstructorAction({
-      instructor: {
-        id: UUID.UUID(),
-        name: this.newInstructor.name,
-        description: this.newInstructor.description
+    this.currentInstructor$.subscribe(instructor => {
+      if (instructor) {
+        this.currentInstructor = { id: instructor.id,
+          name: instructor.name,
+          description: instructor.description
+        };
+      } else {
+        this.currentInstructor = { id: '', name: '', description: '' };
       }
-    }));
+      console.log('instructor: ', instructor);
+      console.log('subscribe - currentInstructor: ', this.currentInstructor);
+    });
   }
 
   deleteInstructor(id: string) {
     this.store.dispatch(new instructorActions.DeleteInstructorAction({ id }));
   }
 
-  updateInstructor(id: string) {
+  selectInstructor(id: string = null) {
+    this.store.dispatch(new instructorActions.SelectInstructorAction({ id }));
+  }
 
+  updateInstructor() {
+    console.log('updateInstructor: ', this.currentInstructor);
+    if (this.currentInstructor.id) {
+      this.store.dispatch(new instructorActions.UpdateInstructorAction({
+        id: this.currentInstructor.id,
+        name: this.currentInstructor.name,
+        description: this.currentInstructor.description
+      }));
+    } else {
+      this.store.dispatch(new instructorActions.AddInstructorAction({
+        instructor: {
+          id: UUID.UUID(),
+          name: this.currentInstructor.name,
+          description: this.currentInstructor.description
+        }
+      }));
+    }
   }
 }
