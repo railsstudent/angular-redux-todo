@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { AppStore, selectAllCourses, selectCourseTotal, selectCurrentCourse, CourseModel } from '../shared';
+import { AppStore, selectCourseTotal, selectCurrentCourse,
+  selectAllInstructors, selectAllCoursesWithInstructors, CourseModel, InstructorModel } from '../shared';
 import * as courseActions from '../reducers/course.actions';
 import { UUID } from 'angular2-uuid';
 import * as objectAssign from 'es6-object-assign';
@@ -13,7 +14,7 @@ import * as objectAssign from 'es6-object-assign';
   encapsulation: ViewEncapsulation.None
 })
 export class CourseComponent implements OnInit {
-  courses$: Observable<CourseModel[]>;
+  courses$: Observable<any>;
   courseTotal$: Observable<number>;
   currentCourse$: Observable<CourseModel>;
   currentCourse: CourseModel = {
@@ -22,11 +23,12 @@ export class CourseComponent implements OnInit {
     description: '',
     instructorId: ''
   };
+  instructors$: Observable<InstructorModel[]>;
 
   constructor(private store: Store<AppStore>) { }
 
   ngOnInit() {
-    this.courses$ = this.store.select(selectAllCourses);
+    this.courses$ = this.store.select(selectAllCoursesWithInstructors);
     this.courseTotal$ = this.store.select(selectCourseTotal);
     this.currentCourse$ = this.store.select(selectCurrentCourse);
 
@@ -36,6 +38,7 @@ export class CourseComponent implements OnInit {
         id, name, description, instructorId
       });
     });
+    this.instructors$ = this.store.select(selectAllInstructors);
   }
 
   deleteCourse(id: string) {

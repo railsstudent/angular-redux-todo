@@ -1,5 +1,5 @@
 import { createSelector, createFeatureSelector, ActionReducerMap } from '@ngrx/store';
-import { TodoModel } from './model';
+import { TodoModel, CourseModel } from './model';
 import * as fromTodo from '../reducers/todo.reducer';
 import * as fromInstructor from '../reducers/instructor.reducer';
 import * as fromCourse from '../reducers/course.reducer';
@@ -63,3 +63,17 @@ export const {
 // return Course
 export const selectCurrentCourse = createSelector(selectCourseEntities, selectCurrentCourseId,
   (courseEntities, courseId) => courseEntities[courseId]);
+
+// return Courses with instructor names
+export const selectAllCoursesWithInstructors = createSelector(selectAllCourses, selectInstructorEntities,
+  (courses, instructorEntities) =>
+      courses.map((course: CourseModel) => (
+        {
+          id: course.id,
+          name: course.name,
+          description: course.description,
+          instructorId: course.instructorId,
+          instructorName: instructorEntities[course.instructorId].name || ''
+        }
+      ))
+  );
