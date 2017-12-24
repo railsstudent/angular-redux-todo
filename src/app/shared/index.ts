@@ -1,6 +1,8 @@
-export { TodoModel, InstructorModel } from './model';
+export { TodoModel, InstructorModel, CourseModel } from './model';
 export { AppStore, reducers, selectInstructorIds,
   selectInstructorEntities, selectAllInstructors, selectInstructorTotal,
-  selectCurrentInstructorId, selectCurrentInstructor,
-  selectTodos, selectCompletedTodos, selectPendingTodos
+  selectCurrentInstructor,
+  selectTodos, selectCompletedTodos, selectPendingTodos,
+  selectCourseIds, selectCourseEntities, selectAllCourses,
+  selectCourseTotal, selectCurrentCourse
 } from './app-store';

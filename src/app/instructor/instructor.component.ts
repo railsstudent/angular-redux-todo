@@ -15,7 +15,7 @@ export class InstructorComponent implements OnInit {
   instructors$: Observable<InstructorModel[]>;
   instructorTotal$: Observable<number>;
   currentInstructor$: Observable<InstructorModel>;
-  currentInstructor: any = {
+  currentInstructor: InstructorModel = {
     id: '',
     name: '',
     description: ''
@@ -27,13 +27,12 @@ export class InstructorComponent implements OnInit {
     this.instructors$ = this.store.select(selectAllInstructors);
     this.instructorTotal$ = this.store.select(selectInstructorTotal);
     this.currentInstructor$ = this.store.select(selectCurrentInstructor);
-    this.currentInstructor$.subscribe(instructor => {
+    this.currentInstructor$.subscribe((instructor: InstructorModel) => {
       const { id = '', name = '', description = '' } = instructor || {};
       this.currentInstructor = objectAssign.assign({}, {
         id, name, description
       });
     });
-    this.currentInstructor$ = this.store.select(selectCurrentInstructor);
   }
 
   deleteInstructor(id: string) {

@@ -2,15 +2,18 @@ import { createSelector, createFeatureSelector, ActionReducerMap } from '@ngrx/s
 import { TodoModel } from './model';
 import * as fromTodo from '../reducers/todo.reducer';
 import * as fromInstructor from '../reducers/instructor.reducer';
+import * as fromCourse from '../reducers/course.reducer';
 
 export interface AppStore {
   todo: TodoModel[],
-  instructor: fromInstructor.InstructorState
+  instructor: fromInstructor.InstructorState,
+  course: fromCourse.CourseState
 };
 
 export const reducers: ActionReducerMap<AppStore> = {
   todo: fromTodo.todoReducer,
-  instructor: fromInstructor.instructorReducer
+  instructor: fromInstructor.instructorReducer,
+  course: fromCourse.courseReducer
 };
 
 // Selector
@@ -41,3 +44,22 @@ export const {
 // return Instructor
 export const selectCurrentInstructor = createSelector(selectInstructorEntities, selectCurrentInstructorId,
   (instructorEntities, instructorId) => instructorEntities[instructorId]);
+
+export const selectCourseState = createFeatureSelector<fromCourse.CourseState>('course');
+export const selectCurrentCourseId = createSelector(selectCourseState,
+  (state: fromCourse.CourseState) => state.selectedCourseId);
+
+export const {
+  // select the array of course ids
+  selectIds: selectCourseIds,
+  // select the dictionary of course entities
+  selectEntities: selectCourseEntities,
+  // select the array of courses
+  selectAll: selectAllCourses,
+  // select the total course count
+  selectTotal: selectCourseTotal
+} = fromCourse.courseAdapter.getSelectors(selectCourseState);
+
+// return Course
+export const selectCurrentCourse = createSelector(selectCourseEntities, selectCurrentCourseId,
+  (courseEntities, courseId) => courseEntities[courseId]);

@@ -9,3 +9,10 @@ export interface InstructorModel {
   name: string;
   description: string;
 }
+
+export interface CourseModel {
+  id: string;
+  instructorId: string;
+  name: string;
+  description: string;
+}
