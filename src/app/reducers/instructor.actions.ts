@@ -1,10 +1,10 @@
 import { Action } from '@ngrx/store';
 import { InstructorModel } from '../shared/';
 
-export const ADD_INSTRUCTOR = 'ADD_INSTRUCTOR';
-export const DELETE_INSTRUCTOR = 'DELETE_INSTRUCTOR';
-export const UPDATE_INSTRUCTOR = 'UPDATE_INSTRUCTOR';
-export const SELECT_INSTRUCTOR = 'SELECT_INSTRUCTOR';
+export const ADD_INSTRUCTOR = '[Instructor] ADD_INSTRUCTOR';
+export const DELETE_INSTRUCTOR = '[Instructor] DELETE_INSTRUCTOR';
+export const UPDATE_INSTRUCTOR = '[Instructor] UPDATE_INSTRUCTOR';
+export const SELECT_INSTRUCTOR = '[Instructor] SELECT_INSTRUCTOR';
 
 export class AddInstructorAction implements Action {
     readonly type = ADD_INSTRUCTOR;
