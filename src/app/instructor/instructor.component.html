@@ -2,13 +2,15 @@
   <div class="row instructor">
     <div class="col-md-6">
       <div *ngIf="(instructors$ | async)?.length > 0 else noInstructors">
-        <div *ngFor="let instructor of instructors$ | async" class="card mt-3"  (click)="selectInstructor(instructor.id)">
-          <div class="card-body">
-             <h4 class="card-title">{{instructor.name}}</h4>
-             <p class="card-text instructor-description">{{instructor.description}}</p>
-             <button type="button" class="btn btn-danger" (click)="deleteInstructor(instructor.id)">Delete</button>
+        <div class="row">
+            <div *ngFor="let instructor of instructors$ | async" class="card mt-3 col-md-6"  (click)="selectInstructor(instructor.id)">
+              <div class="card-body">
+                 <h4 class="card-title">{{instructor.name}}</h4>
+                 <p class="card-text instructor-description">{{instructor.description}}</p>
+                 <button type="button" class="btn btn-danger" (click)="deleteInstructor(instructor.id)">Delete</button>
+              </div>
+            </div>
           </div>
-        </div>
       </div>
     </div>
     <div class="col-md-6">

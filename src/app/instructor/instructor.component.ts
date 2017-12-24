@@ -26,15 +26,10 @@ export class InstructorComponent implements OnInit {
     this.instructors$ = this.store.select(selectAllInstructors);
     this.currentInstructor$ = this.store.select(selectCurrentInstructor);
     this.currentInstructor$.subscribe(instructor => {
-      if (instructor) {
-        this.currentInstructor = objectAssign.assign({}, {
-          id: instructor.id,
-          name: instructor.name,
-          description: instructor.description
-        });
-      } else {
-        this.currentInstructor = { id: '', name: '', description: '' };
-      }
+      const { id = '', name = '', description = '' } = instructor || {};
+      this.currentInstructor = objectAssign.assign({}, {
+        id, name, description
+      });
     });
   }
 
@@ -47,9 +42,8 @@ export class InstructorComponent implements OnInit {
   }
 
   updateInstructor() {
-    console.log('updateInstructor: ', this.currentInstructor);
-    const { id, name, description } = this.currentInstructor;
-    if (this.currentInstructor.id) {
+    const { id = null, name = '', description = '' } = this.currentInstructor || {};
+    if (id) {
       this.store.dispatch(new instructorActions.UpdateInstructorAction({
         id, name, description
       }));
