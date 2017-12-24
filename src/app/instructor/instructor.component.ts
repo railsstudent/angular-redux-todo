@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { AppStore, selectAllInstructors, selectCurrentInstructor, InstructorModel } from '../shared';
+import { AppStore, selectAllInstructors, selectCurrentInstructor, selectInstructorTotal, InstructorModel } from '../shared';
 import * as instructorActions from '../reducers/instructor.actions';
 import { UUID } from 'angular2-uuid';
 import * as objectAssign from 'es6-object-assign';
@@ -13,6 +13,7 @@ import * as objectAssign from 'es6-object-assign';
 })
 export class InstructorComponent implements OnInit {
   instructors$: Observable<InstructorModel[]>;
+  instructorTotal$: Observable<number>;
   currentInstructor$: Observable<InstructorModel>;
   currentInstructor: any = {
     id: '',
@@ -24,6 +25,7 @@ export class InstructorComponent implements OnInit {
 
   ngOnInit() {
     this.instructors$ = this.store.select(selectAllInstructors);
+    this.instructorTotal$ = this.store.select(selectInstructorTotal);
     this.currentInstructor$ = this.store.select(selectCurrentInstructor);
     this.currentInstructor$.subscribe(instructor => {
       const { id = '', name = '', description = '' } = instructor || {};
@@ -31,6 +33,7 @@ export class InstructorComponent implements OnInit {
         id, name, description
       });
     });
+    this.currentInstructor$ = this.store.select(selectCurrentInstructor);
   }
 
   deleteInstructor(id: string) {
