@@ -27,15 +27,9 @@ export function instructorReducer(state: InstructorState = initialState,
         selectedInstructorId: (action.payload.id != state.selectedInstructorId) ? state.selectedInstructorId : null
       }
     case instructorActions.UPDATE_INSTRUCTOR:
-      const changedInstructor = {
-          name: action.payload.name,
-          description: action.payload.description
-      };
-      const newState: InstructorState = instructorAdapter.updateOne(
-        { id: action.payload.id,
-          changes: changedInstructor
-        }, state);
-
+      const { id = '', name = '', description = '' } = action.payload || {};
+      const changes = { name, description };
+      const newState: InstructorState = instructorAdapter.updateOne({ id, changes }, state);
       return {
         ...newState,
         selectedInstructorId: null
