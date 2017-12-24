@@ -8,7 +8,7 @@ export const SELECT_INSTRUCTOR = 'SELECT_INSTRUCTOR';
 
 export class AddInstructorAction implements Action {
     readonly type = ADD_INSTRUCTOR;
-    constructor (public payload: { instructor: InstructorModel }) {}
+    constructor (public payload: InstructorModel) {}
 }
 
 export class DeleteInstructorAction implements Action {

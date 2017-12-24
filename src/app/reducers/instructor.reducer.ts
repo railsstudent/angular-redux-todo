@@ -18,7 +18,7 @@ export function instructorReducer(state: InstructorState = initialState,
   switch (action.type) {
     case instructorActions.ADD_INSTRUCTOR:
       return {
-        ...instructorAdapter.addOne(action.payload.instructor, state),
+        ...instructorAdapter.addOne(action.payload, state),
         selectedInstructorId: null
       };
     case instructorActions.DELETE_INSTRUCTOR:
@@ -35,7 +35,7 @@ export function instructorReducer(state: InstructorState = initialState,
         { id: action.payload.id,
           changes: changedInstructor
         }, state);
-        
+
       return {
         ...newState,
         selectedInstructorId: null
