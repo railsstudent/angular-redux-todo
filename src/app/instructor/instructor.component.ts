@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { AppStore, selectAllInstructors, selectCurrentInstructor, selectInstructorTotal, InstructorModel } from '../shared';
 import * as instructorActions from '../reducers/instructor.actions';
+import { DeleteCoursesByInstructorAction } from '../reducers/course.actions';
 import { UUID } from 'angular2-uuid';
 import * as objectAssign from 'es6-object-assign';
 
@@ -36,7 +37,11 @@ export class InstructorComponent implements OnInit {
   }
 
   deleteInstructor(id: string) {
-    this.store.dispatch(new instructorActions.DeleteInstructorAction({ id }));
+    // delete all courses and instructor
+    [
+      new DeleteCoursesByInstructorAction({ instructorId: id }),
+      new instructorActions.DeleteInstructorAction({ id })
+    ].map(action => this.store.dispatch(action));
   }
 
   selectInstructor(id: string = null) {

@@ -41,7 +41,7 @@ export const {
   selectTotal: selectInstructorTotal
 } = fromInstructor.instructorAdapter.getSelectors(selectInstructorState);
 
-// return Instructor
+// return current Instructor
 export const selectCurrentInstructor = createSelector(selectInstructorEntities, selectCurrentInstructorId,
   (instructorEntities, instructorId) => instructorEntities[instructorId]);
 
@@ -60,7 +60,7 @@ export const {
   selectTotal: selectCourseTotal
 } = fromCourse.courseAdapter.getSelectors(selectCourseState);
 
-// return Course
+// return current Course
 export const selectCurrentCourse = createSelector(selectCourseEntities, selectCurrentCourseId,
   (courseEntities, courseId) => courseEntities[courseId]);
 
