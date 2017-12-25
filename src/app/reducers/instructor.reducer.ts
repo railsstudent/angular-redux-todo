@@ -10,7 +10,15 @@ export interface InstructorState extends EntityState<InstructorModel> {
 export const instructorAdapter: EntityAdapter<InstructorModel> = createEntityAdapter<InstructorModel>();
 export const initialState: InstructorState = instructorAdapter.getInitialState({
   // additional entities state properties
-  selectedInstructorId: null
+  entities: {
+    '1': {
+      id: '1',
+      name: 'Kyle Simpson',
+      description: 'Author of You Don\'t know JS Series'
+    }
+  },
+  ids: ['1'],
+  selectedInstructorId: null,
 });
 
 export function instructorReducer(state: InstructorState = initialState,

@@ -7,9 +7,11 @@
       <div *ngIf="(courses$ | async)?.length > 0 else noCourses">
           <div *ngFor="let course of courses$ | async" class="card mt-3"  (click)="selectCourse(course.id)">
             <div class="card-body">
-               <h3 class="card-title">{{course.name}}</h3>
+              <div class="card-block">
+                <h3 class="card-title">{{course.name}}</h3>
+                <h6 class="card-subtitle text-muted">{{course.instructorName}}</h6>
+               </div>
                <p class="card-text course-description">{{course.description}}</p>
-               <h4 class="card-subtitle">{{course.instructorName}}</h4>
                <button type="button" class="btn btn-danger" (click)="deleteCourse(course.id)">Delete</button>
             </div>
           </div>
@@ -28,14 +30,14 @@
         </div>
         <div class="form-group">
           <label for="description">Description</label>
-          <textarea  class="form-control" id="description" name="description" placeholder="Course Description"
-            [(ngModel)]="currentCourse.description" maxlength="500" rows="10">
+          <textarea  class="form-control" id="description" name="description" placeholder="Course Description (Max. 750 characters)"
+            [(ngModel)]="currentCourse.description" maxlength="750" rows="10">
           </textarea>
         </div>
         <!-- todo Add course instructor -->
         <div class="form-group">
           <label for="courseInstructor">Course Instructor</label>
-          <select id="courseInstructor" name="courseInstructor" [(ngModel)]="currentCourse.instructorId" required>
+          <select id="courseInstructor" name="courseInstructor" class="form-control" [(ngModel)]="currentCourse.instructorId" required>
             <option *ngFor="let instructor of instructors$ | async" [value]="instructor.id">{{instructor.name}}</option>
           </select>
         </div>

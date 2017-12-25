@@ -5,6 +5,7 @@ export const ADD_COURSE = '[Course] ADD_COURSE';
 export const DELETE_COURSE = '[Course] DELETE_COURSE';
 export const UPDATE_COURSE = '[Course] UPDATE_COURSE';
 export const SELECT_COURSE = '[Course] SELECT_COURSE';
+export const DELETE_COURSES_By_INSTRUCTOR = '[Course] DELETE_COURSES_By_INSTRUCTOR';
 
 export class AddCourseAction implements Action {
     readonly type = ADD_COURSE;
@@ -26,7 +27,14 @@ export class SelectCourseAction implements Action {
     constructor (public payload: { id: string }) {}
 }
 
+export class DeleteCoursesByInstructorAction implements Action {
+    readonly type = DELETE_COURSES_By_INSTRUCTOR;
+    constructor (public payload: { instructorId: string }) {}
+}
+
+
 export type CourseActions = AddCourseAction
   | DeleteCourseAction
   | UpdateCourseAction
-  | SelectCourseAction;
+  | SelectCourseAction
+  | DeleteCoursesByInstructorAction;

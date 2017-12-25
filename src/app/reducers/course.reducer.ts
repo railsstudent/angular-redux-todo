@@ -38,6 +38,16 @@ export function courseReducer(state: CourseState = initialCourseState,
         ...state,
         selectedCourseId: action.payload.id
       };
+    case courseActions.DELETE_COURSES_By_INSTRUCTOR:
+      const courseIds = Object.keys(state.entities)
+        .map(id => state.entities[id])
+        .filter(course => course.instructorId === action.payload.instructorId)
+        .map(course => course.id);
+      console.log('courseIds', courseIds);
+      return {
+        ...courseAdapter.removeMany(courseIds, state),
+        selectedCourseId: courseIds.indexOf(state.selectedCourseId) < 0 ? state.selectedCourseId : null
+      }
     default:
       return state;
   }
