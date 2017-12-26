@@ -5,14 +5,14 @@
         <span>Total Courses: {{ courseTotal$ | async }}</span>
       </div>
       <div *ngIf="(courses$ | async)?.length > 0 else noCourses">
-          <div *ngFor="let course of courses$ | async" class="card mt-3"  (click)="selectCourse(course.id)">
+          <div *ngFor="let course of courses$ | async" class="card mt-3"  (click)="selectCourse(course.rawCourse.id)">
             <div class="card-body">
               <div class="card-block">
-                <h3 class="card-title">{{course.name}}</h3>
+                <h3 class="card-title">{{course.rawCourse.name}}</h3>
                 <h6 class="card-subtitle text-muted">{{course.instructorName}}</h6>
                </div>
-               <p class="card-text course-description">{{course.description}}</p>
-               <button type="button" class="btn btn-danger" (click)="deleteCourse(course.id)">Delete</button>
+               <p class="card-text course-description">{{course.rawCourse.description}}</p>
+               <button type="button" class="btn btn-danger" (click)="deleteCourse(course.rawCourse.id)">Delete</button>
             </div>
           </div>
       </div>
@@ -33,6 +33,7 @@
           <textarea  class="form-control" id="description" name="description" placeholder="Course Description (Max. 750 characters)"
             [(ngModel)]="currentCourse.description" maxlength="750" rows="10">
           </textarea>
+          <p>{{750 - (currentCourse && currentCourse.description && currentCourse.description.length || 0)}} characters left</p>
         </div>
         <!-- todo Add course instructor -->
         <div class="form-group">

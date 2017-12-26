@@ -30,8 +30,9 @@
         <div class="form-group">
           <label for="description">Description</label>
           <textarea  class="form-control" id="description" name="description" placeholder="Description (Max. 500 characters)"
-            [(ngModel)]="currentInstructor.description" maxlength="500" rows="10">
+            [(ngModel)]="currentInstructor.description" maxlength="500" rows="8">
           </textarea>
+          <p>{{500 - (currentInstructor && currentInstructor.description && currentInstructor.description.length || 0)}} characters left</p>
         </div>
         <button type="submit" class="btn btn-primary" [disabled]="editInstructorForm.form.invalid">Save</button>
         <button type="button" class="btn btn-danger" (click)="selectInstructor(); editInstructorForm.reset()">New</button>

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { AppStore, selectCourseTotal, selectCurrentCourse,
-  selectAllInstructors, selectAllCoursesWithInstructors, CourseModel, InstructorModel } from '../shared';
+  selectAllInstructors, selectAllCoursesWithInstructors, CourseModel, InstructorModel, DisplayCourse } from '../shared';
 import * as courseActions from '../reducers/course.actions';
 import { UUID } from 'angular2-uuid';
 import * as objectAssign from 'es6-object-assign';
@@ -14,7 +14,7 @@ import * as objectAssign from 'es6-object-assign';
   encapsulation: ViewEncapsulation.None
 })
 export class CourseComponent implements OnInit {
-  courses$: Observable<any>;
+  courses$: Observable<DisplayCourse[]>;
   courseTotal$: Observable<number>;
   currentCourse$: Observable<CourseModel>;
   currentCourse: CourseModel = {

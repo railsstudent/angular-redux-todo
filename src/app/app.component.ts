@@ -12,7 +12,8 @@ export class AppComponent implements OnInit {
 
   links = {
     instructor: ['/instructor'],
-    course: ['/course']
+    course: ['/course'],
+    courseOverview: ['/courseOverview']
   };
 
   constructor(private titleService: Title) {

@@ -1,9 +1,10 @@
-export { TodoModel, InstructorModel, CourseModel } from './model';
+export { TodoModel, InstructorModel, CourseModel, CourseOverviewModel, DisplayCourse } from './model';
 export { AppStore, reducers,
   selectInstructorEntities, selectAllInstructors, selectInstructorTotal,
   selectCurrentInstructor,
   selectTodos, selectCompletedTodos, selectPendingTodos,
   selectCourseEntities,
   selectCourseTotal, selectCurrentCourse,
-  selectAllCoursesWithInstructors
+  selectAllCoursesWithInstructors,
+  selectCourseOverview
 } from './app-store';

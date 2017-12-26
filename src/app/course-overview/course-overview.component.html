@@ -1,0 +1,16 @@
+<div id="course-overview-container">
+  <div class="card" *ngFor="let overview of courseOverview$ | async">
+    <div class="card-block p-3">
+        <h4 class="class-title">{{overview.name}}</h4>
+        <h6 class="class-subtitle text-muted instructor-description">{{overview.description}}</h6>
+    </div>
+    <div class="card-block p-3">
+      <p>Taught the following courses: </p>
+      <ol>
+        <li *ngFor="let course of overview.courses">
+          {{course.name}}
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
