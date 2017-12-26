@@ -1,0 +1,12 @@
+#course-overview-container {
+  .card {
+    flex-direction: row;
+    &-block {
+      flex: 1 1 0;
+    }
+  }
+
+  .instructor-description {
+    white-space: pre-line;;
+  }
+}

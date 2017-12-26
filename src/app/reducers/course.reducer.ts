@@ -40,9 +40,8 @@ export function courseReducer(state: CourseState = initialCourseState,
       };
     case courseActions.DELETE_COURSES_By_INSTRUCTOR:
       const courseIds = Object.keys(state.entities)
-        .map(id => state.entities[id])
-        .filter(course => course.instructorId === action.payload.instructorId)
-        .map(course => course.id);
+        .filter(id => state.entities[id].instructorId === action.payload.instructorId)
+        .map(id => state.entities[id].id)
       console.log('courseIds', courseIds);
       return {
         ...courseAdapter.removeMany(courseIds, state),

@@ -1,8 +1,9 @@
 import { createSelector, createFeatureSelector, ActionReducerMap } from '@ngrx/store';
-import { TodoModel, CourseModel } from './model';
+import { TodoModel, CourseModel, CourseOverviewModel, DisplayCourse } from './model';
 import * as fromTodo from '../reducers/todo.reducer';
 import * as fromInstructor from '../reducers/instructor.reducer';
 import * as fromCourse from '../reducers/course.reducer';
+import { EntityState } from '@ngrx/entity';
 
 export interface AppStore {
   todo: TodoModel[],
@@ -68,12 +69,20 @@ export const selectCurrentCourse = createSelector(selectCourseEntities, selectCu
 export const selectAllCoursesWithInstructors = createSelector(selectAllCourses, selectInstructorEntities,
   (courses, instructorEntities) =>
       courses.map((course: CourseModel) => (
-        {
-          id: course.id,
-          name: course.name,
-          description: course.description,
-          instructorId: course.instructorId,
+        <DisplayCourse>{
+          rawCourse: course,
           instructorName: instructorEntities[course.instructorId].name || ''
         }
       ))
+  );
+
+export const selectCourseOverview = createSelector(selectInstructorEntities, selectAllCourses,
+  (instructorEntities, courses) =>
+    Object.keys(instructorEntities)
+      .map((id: string) => (<CourseOverviewModel>{
+          id: id,
+          name: instructorEntities[id].name,
+          description: instructorEntities[id].description,
+          courses: courses.filter(course => course.instructorId === id)
+      }))
   );

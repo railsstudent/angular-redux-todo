@@ -12,7 +12,10 @@
       <div class="collapse navbar-collapse" id="navbarNav" [ngbCollapse]="isCollapsed">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" [routerLink]="links.instructor" routerLinkActive="active">Instructor <span class="sr-only">(current)</span></a>
+            <a class="nav-link" [routerLink]="links.courseOverview" routerLinkActive="active">Course Overview <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="links.instructor" routerLinkActive="active">Instructor</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" [routerLink]="links.course" routerLinkActive="active">Course</a>
