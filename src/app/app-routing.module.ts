@@ -9,6 +9,7 @@ import { InstructorDetailComponent } from './instructor/instructor-detail/instru
 const routes: Routes = [
   { path:'', pathMatch:'full', component: TodoComponent },
   { path:'instructor', component: InstructorComponent },
+  { path:'instructor/:id', component: InstructorComponent },
   { path:'course', component: CourseComponent },
   { path:'courseOverview', component: CourseOverviewComponent },
   { path:'**', component: TodoComponent }
