@@ -13,6 +13,7 @@ import { EditModalComponent } from './edit-modal/edit-modal.component';
 import { TodoListComponent } from './todo/todo-list/todo-list.component';
 import { TodoFormComponent } from './todo/todo-form/todo-form.component';
 import { AppRoutingModule, RoutingComponents } from './app-routing.module';
+import { CourseDetailComponent } from './course/course-detail/course-detail.component';
 
 export const metaReducers: MetaReducer<AppStore>[] = !environment.production ? [storeFreeze]: [];
 
@@ -23,7 +24,8 @@ export const metaReducers: MetaReducer<AppStore>[] = !environment.production ? [
     TodoListComponent,
     TodoFormComponent,
     ConfirmModalComponent,
-    EditModalComponent
+    EditModalComponent,
+    CourseDetailComponent
   ],
   imports: [
     BrowserModule,
