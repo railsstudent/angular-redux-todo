@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { AppStore, selectAllInstructors, selectCurrentInstructor, selectInstructorTotal, InstructorModel } from '../shared';
+import { AppStore, selectAllInstructors, selectInstructorTotal, InstructorModel } from '../shared';
 import * as instructorActions from '../reducers/instructor.actions';
 import { DeleteCoursesByInstructorAction } from '../reducers/course.actions';
 import { UUID } from 'angular2-uuid';
@@ -15,25 +15,12 @@ import * as objectAssign from 'es6-object-assign';
 export class InstructorComponent implements OnInit {
   instructors$: Observable<InstructorModel[]>;
   instructorTotal$: Observable<number>;
-  currentInstructor$: Observable<InstructorModel>;
-  currentInstructor: InstructorModel = {
-    id: '',
-    name: '',
-    description: ''
-  };
 
   constructor(private store: Store<AppStore>) { }
 
   ngOnInit() {
     this.instructors$ = this.store.select(selectAllInstructors);
     this.instructorTotal$ = this.store.select(selectInstructorTotal);
-    this.currentInstructor$ = this.store.select(selectCurrentInstructor);
-    this.currentInstructor$.subscribe((instructor: InstructorModel) => {
-      const { id = '', name = '', description = '' } = instructor || {};
-      this.currentInstructor = objectAssign.assign({}, {
-        id, name, description
-      });
-    });
   }
 
   deleteInstructor(id: string) {
@@ -46,18 +33,5 @@ export class InstructorComponent implements OnInit {
 
   selectInstructor(id: string = null) {
     this.store.dispatch(new instructorActions.SelectInstructorAction({ id }));
-  }
-
-  updateInstructor() {
-    const { id = null, name = '', description = '' } = this.currentInstructor || {};
-    if (id) {
-      this.store.dispatch(new instructorActions.UpdateInstructorAction({
-        id, name, description
-      }));
-    } else {
-      this.store.dispatch(new instructorActions.AddInstructorAction({
-          id: UUID.UUID(), name, description
-      }));
-    }
   }
 }

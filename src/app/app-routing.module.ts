@@ -4,6 +4,7 @@ import { TodoComponent } from './todo/todo.component';
 import { InstructorComponent } from './instructor/instructor.component';
 import { CourseComponent } from './course/course.component';
 import { CourseOverviewComponent } from './course-overview/course-overview.component';
+import { InstructorDetailComponent } from './instructor/instructor-detail/instructor-detail.component';
 
 const routes: Routes = [
   { path:'', pathMatch:'full', component: TodoComponent },
@@ -20,7 +21,8 @@ const routes: Routes = [
 export class AppRoutingModule {}
 
 export const RoutingComponents = [
-  TodoComponent, 
+  TodoComponent,
   InstructorComponent,
   CourseComponent,
-  CourseOverviewComponent ];
+  CourseOverviewComponent,
+  InstructorDetailComponent ];
