@@ -9,7 +9,7 @@
             <div class="card-body">
               <div class="card-block">
                 <h3 class="card-title">{{course.rawCourse.name}}</h3>
-                <h6 class="card-subtitle text-muted">{{course.instructorName}}</h6>
+                <a [routerLink]="['../instructor', course.rawCourse.instructorId]" routerLinkActive="active">{{course.instructorName}}</a>
                </div>
                <p class="card-text course-description">{{course.rawCourse.description}}</p>
                <button type="button" class="btn btn-danger" (click)="deleteCourse(course.rawCourse.id)">Delete</button>
