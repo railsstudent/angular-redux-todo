@@ -47,4 +47,8 @@ export class InstructorDetailComponent implements OnInit {
       }));
     }
   }
+
+  newInstructor() {
+    this.store.dispatch(new instructorActions.SelectInstructorAction({ id: null }));
+  }
 }

@@ -4,8 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import { AppStore, selectAllInstructors, selectInstructorTotal, InstructorModel } from '../shared';
 import * as instructorActions from '../reducers/instructor.actions';
 import { DeleteCoursesByInstructorAction } from '../reducers/course.actions';
-import { UUID } from 'angular2-uuid';
-import * as objectAssign from 'es6-object-assign';
 
 @Component({
   selector: 'app-instructor',

@@ -16,5 +16,5 @@
     <p>{{maxDescriptionLen - (currentInstructor && currentInstructor.description && currentInstructor.description.length || 0)}} characters left</p>
   </div>
   <button type="submit" class="btn btn-primary" [disabled]="editInstructorForm.form.invalid">Save</button>
-  <button type="button" class="btn btn-danger" (click)="selectInstructor(); editInstructorForm.reset()">New</button>
+  <button type="button" class="btn btn-danger" (click)="newInstructor(); editInstructorForm.reset()">New</button>
 </form>
