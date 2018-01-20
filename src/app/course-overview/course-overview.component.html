@@ -4,7 +4,7 @@
         <h4 class="class-title">{{overview.name}}</h4>
         <h6 class="class-subtitle text-muted instructor-description">{{overview.description}}</h6>
     </div>
-    <div class="card-block p-3">
+    <div class="card-block p-3" *ngIf="overview.courses.length > 0">
       <p>Taught the following courses: </p>
       <ol>
         <li *ngFor="let course of overview.courses">
