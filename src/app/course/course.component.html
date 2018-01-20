@@ -1,11 +1,20 @@
 <div class="container-fluid" id="course-container">
   <div class="row course">
-    <div class="col-md-6">
+    <div class="col-md-6" *ngIf="(courses$ | async) as courses">
       <div class="row bg-secondary text-white">
         <span>Total Courses: {{ courseTotal$ | async }}</span>
       </div>
-      <ng-container
-        *ngIf="(courses$ | async)?.length > 0; then hasCourses else noCourses">
+      <ng-container *ngIf="courses.length > 0; else noCourses">
+        <div *ngFor="let course of courses" class="card mt-3"  (click)="selectCourse(course.rawCourse.id)">
+          <div class="card-body">
+            <div class="card-block">
+              <h3 class="card-title">{{course.rawCourse.name}}</h3>
+              <a [routerLink]="['../instructor', course.rawCourse.instructorId]" routerLinkActive="active">{{course.instructorName}}</a>
+             </div>
+             <p class="card-text course-description">{{course.rawCourse.description}}</p>
+             <button type="button" class="btn btn-danger" (click)="deleteCourse(course.rawCourse.id)">Delete</button>
+          </div>
+        </div>
       </ng-container>
     </div>
     <div class="col-md-6">
@@ -13,19 +22,6 @@
     </div>
   </div>
 </div>
-
-<ng-template #hasCourses>
-  <div *ngFor="let course of courses$ | async" class="card mt-3"  (click)="selectCourse(course.rawCourse.id)">
-    <div class="card-body">
-      <div class="card-block">
-        <h3 class="card-title">{{course.rawCourse.name}}</h3>
-        <a [routerLink]="['../instructor', course.rawCourse.instructorId]" routerLinkActive="active">{{course.instructorName}}</a>
-       </div>
-       <p class="card-text course-description">{{course.rawCourse.description}}</p>
-       <button type="button" class="btn btn-danger" (click)="deleteCourse(course.rawCourse.id)">Delete</button>
-    </div>
-  </div>
-</ng-template>
 
 <ng-template #noCourses>
   <div class="mt-3 card bg-primary text-white">

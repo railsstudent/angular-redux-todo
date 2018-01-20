@@ -1,11 +1,19 @@
 <div class="container-fluid" id="container">
   <div class="row instructor">
-    <div class="col-md-6">
+    <div class="col-md-6" *ngIf="(instructors$ | async) as instructors">
       <div class="row bg-secondary text-white">
         <span>Total Instructors: {{ instructorTotal$ | async }}</span>
       </div>
-      <ng-container
-        *ngIf="(instructors$ | async)?.length > 0; then hasInstructors; else noInstructors">
+      <ng-container *ngIf="instructors.length > 0; else noInstructors">
+        <div class="row">
+            <div *ngFor="let instructor of instructors" class="card mt-3 col-md-6"  (click)="selectInstructor(instructor.id)">
+              <div class="card-body">
+                 <h4 class="card-title">{{instructor.name}}</h4>
+                 <p class="card-text instructor-description">{{instructor.description}}</p>
+                 <button type="button" class="btn btn-danger" (click)="deleteInstructor(instructor.id)">Delete</button>
+              </div>
+            </div>
+        </div>
       </ng-container>
     </div>
     <div class="col-md-6">
@@ -13,18 +21,6 @@
     </div>
   </div>
 </div>
-
-<ng-template #hasInstructors>
-  <div class="row">
-      <div *ngFor="let instructor of instructors$ | async" class="card mt-3 col-md-6"  (click)="selectInstructor(instructor.id)">
-        <div class="card-body">
-           <h4 class="card-title">{{instructor.name}}</h4>
-           <p class="card-text instructor-description">{{instructor.description}}</p>
-           <button type="button" class="btn btn-danger" (click)="deleteInstructor(instructor.id)">Delete</button>
-        </div>
-      </div>
-    </div>
-</ng-template>
 
 <ng-template #noInstructors>
   <div class="mt-3 card bg-primary text-white">
