@@ -6,13 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment'; // Angular CLI environment
 import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import {
-  CustomSerializer,
-  RouterEffects
-} from './shared';
 import {
   AppStore,
   reducers
@@ -43,19 +38,13 @@ export const metaReducers: MetaReducer<AppStore>[] = !environment.production ? [
     StoreModule.forRoot(reducers, { metaReducers }),
     AppRoutingModule,
 
-    /**
-     * @ngrx/router-store keeps router state up-to-date in the store.
-     */
-    StoreRouterConnectingModule,
-    EffectsModule.forRoot([RouterEffects]),
     NgbModule.forRoot(),
     StoreDevtoolsModule.instrument({
      maxAge: 25 //  Retains last 25 states
    })
   ],
   providers: [
-    Title,
-    { provide: RouterStateSerializer, useClass: CustomSerializer }
+    Title
   ],
   entryComponents: [
     ConfirmModalComponent,
