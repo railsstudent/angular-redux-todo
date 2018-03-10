@@ -1,6 +1,6 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { CourseModel, AppStore } from '../shared/';
+import { CourseModel } from '../shared/';
 import * as courseActions from './course.actions';
 
 export interface CourseState extends EntityState<CourseModel> {

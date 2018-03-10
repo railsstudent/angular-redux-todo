@@ -3,8 +3,8 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { TodoModel, AppStore } from '../../shared/';
-import { selectPendingTodos, selectCompletedTodos, selectAllTodos, selectTodosTotal,
+import { TodoModel } from '../../shared/';
+import { AppStore, selectPendingTodos, selectCompletedTodos, selectAllTodos, selectTodosTotal,
   selectCompletedTodosCount, selectPendingTodosCount
 } from '../../reducers/';
 import * as todoActions from '../../reducers/todo.actions';

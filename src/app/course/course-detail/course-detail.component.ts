@@ -3,8 +3,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { UUID } from 'angular2-uuid';
 import * as objectAssign from 'es6-object-assign';
-import { AppStore, InstructorModel, CourseModel  } from '../../shared';
-import { selectCurrentCourse, selectAllInstructors } from '../../reducers';
+import { InstructorModel, CourseModel  } from '../../shared';
+import { AppStore, selectCurrentCourse, selectAllInstructors } from '../../reducers';
 import * as courseActions from '../../reducers/course.actions';
 
 @Component({
