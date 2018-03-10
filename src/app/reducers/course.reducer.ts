@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store';
+import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { CourseModel, AppStore } from '../shared/';
 import * as courseActions from './course.actions';
@@ -66,3 +66,22 @@ export function courseReducer(state: CourseState = initialCourseState,
       return state;
   }
 }
+
+export const selectCourseState = createFeatureSelector<CourseState>('course');
+export const selectCurrentCourseId = createSelector(selectCourseState,
+  (state: CourseState) => state.selectedCourseId);
+
+export const {
+  // select the array of course ids
+  selectIds: selectCourseIds,
+  // select the dictionary of course entities
+  selectEntities: selectCourseEntities,
+  // select the array of courses
+  selectAll: selectAllCourses,
+  // select the total course count
+  selectTotal: selectCourseTotal
+} = courseAdapter.getSelectors(selectCourseState);
+
+// return current Course
+export const selectCurrentCourse = createSelector(selectCourseEntities, selectCurrentCourseId,
+  (courseEntities, courseId) => courseEntities[courseId]);

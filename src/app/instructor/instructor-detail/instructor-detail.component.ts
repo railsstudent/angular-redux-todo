@@ -4,7 +4,8 @@ import { UUID } from 'angular2-uuid';
 import { Observable } from 'rxjs/Observable';
 import * as objectAssign from 'es6-object-assign';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { AppStore, InstructorModel, selectCurrentInstructor } from '../../shared';
+import { AppStore, InstructorModel } from '../../shared';
+import { selectCurrentInstructor } from '../../reducers';
 import * as instructorActions from '../../reducers/instructor.actions';
 
 const MAX_LEN = 500;
