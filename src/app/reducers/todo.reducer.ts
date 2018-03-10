@@ -1,4 +1,4 @@
-import { Action, createSelector, createFeatureSelector } from '@ngrx/store';
+import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { TodoModel, AppStore } from '../shared/';
 import * as todoActions from './todo.actions';

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { AppStore, selectAllInstructors, selectInstructorTotal, InstructorModel } from '../shared';
+import { AppStore,  InstructorModel } from '../shared';
+import { selectAllInstructors, selectInstructorTotal, } from '../reducers';
 import * as instructorActions from '../reducers/instructor.actions';
 import { DeleteCoursesByInstructorAction } from '../reducers/course.actions';
 

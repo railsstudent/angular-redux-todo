@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { InstructorModel, AppStore } from '../shared/';
 import * as instructorActions from './instructor.actions';
@@ -51,3 +51,25 @@ export function instructorReducer(state: InstructorState = initialState,
       return state;
   }
 }
+
+export const selectInstructorState = createFeatureSelector<InstructorState>('instructor');
+export const selectCurrentInstructorId = createSelector(selectInstructorState,
+  (state: InstructorState) => state.selectedInstructorId);
+
+export const {
+  // select the array of instructor ids
+  selectIds: selectInstructorIds,
+
+  // select the dictionary of instructor entities
+  selectEntities: selectInstructorEntities,
+
+  // select the array of instructors
+  selectAll: selectAllInstructors,
+
+  // select the total instructor count
+  selectTotal: selectInstructorTotal
+} = instructorAdapter.getSelectors(selectInstructorState);
+
+// return current Instructor
+export const selectCurrentInstructor = createSelector(selectInstructorEntities, selectCurrentInstructorId,
+  (instructorEntities, instructorId) => instructorEntities[instructorId]);
