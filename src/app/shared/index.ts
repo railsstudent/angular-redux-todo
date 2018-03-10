@@ -7,6 +7,7 @@ export { AppStore, reducers,
   selectCourseTotal, selectCurrentCourse,
   selectAllCoursesWithInstructors,
   selectCourseOverview,
-  CustomSerializer
+  CustomSerializer,
+  selectAllTodos, selectTodosTotal, selectCompletedTodosCount, selectPendingTodosCount
 } from './app.reducers';
 export { RouterEffects } from '../effects/router.effect';

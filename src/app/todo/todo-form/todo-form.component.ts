@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { UUID } from 'angular2-uuid';
 
 import { ADD_TODO } from '../../reducers/todo.actions';
-import { TodoModel, AppStore } from '../../shared/index';
+import { TodoModel, AppStore, selectAllTodos } from '../../shared/index';
 import * as todoActions from '../../reducers/todo.actions';
 
 @Component({
@@ -19,7 +19,7 @@ export class TodoFormComponent implements OnInit {
   constructor(private store: Store<AppStore>) { }
 
   ngOnInit() {
-    this.todo$ = this.store.select('todo');
+    this.todo$ = this.store.select(selectAllTodos);
   }
 
   addTodo() {
