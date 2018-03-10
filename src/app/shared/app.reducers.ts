@@ -41,22 +41,6 @@ export const reducers: ActionReducerMap<AppStore> = {
 };
 
 // Selector
-export const selectTodos = createFeatureSelector<fromTodo.TodoState>('todo');
-
-export const {
-  // select the array of todos
-  selectAll: selectAllTodos,
-  // select the total todos courseEntities
-  selectTotal: selectTodosTotal
-} = fromTodo.todoAdapter.getSelectors(selectTodos);
-
-export const selectCompletedTodos = createSelector(selectAllTodos,
-  (todos: TodoModel[]) => todos.filter(todo => todo.done === true));
-export const selectPendingTodos = createSelector(selectAllTodos,
-  (todos: TodoModel[]) => todos.filter(todo => todo.done === false));
-export const selectCompletedTodosCount = createSelector(selectCompletedTodos, (t: TodoModel[]) => t.length);
-export const selectPendingTodosCount = createSelector(selectPendingTodos, (t: TodoModel[]) => t.length);
-
 export const selectInstructorState = createFeatureSelector<fromInstructor.InstructorState>('instructor');
 export const selectCurrentInstructorId = createSelector(selectInstructorState,
   (state: fromInstructor.InstructorState) => state.selectedInstructorId);

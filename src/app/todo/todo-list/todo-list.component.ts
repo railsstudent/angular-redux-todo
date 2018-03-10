@@ -3,9 +3,10 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { TodoModel, AppStore, selectPendingTodos, selectCompletedTodos,
-  selectAllTodos, selectTodosTotal, selectCompletedTodosCount, selectPendingTodosCount
-} from '../../shared/';
+import { TodoModel, AppStore } from '../../shared/';
+import { selectPendingTodos, selectCompletedTodos, selectAllTodos, selectTodosTotal,
+  selectCompletedTodosCount, selectPendingTodosCount
+} from '../../reducers/';
 import * as todoActions from '../../reducers/todo.actions';
 import { ConfirmModalComponent } from '../../confirm-modal/confirm-modal.component';
 import { EditModalComponent } from '../../edit-modal/edit-modal.component';

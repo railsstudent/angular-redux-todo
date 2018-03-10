@@ -4,7 +4,8 @@ import { Store } from '@ngrx/store';
 import { UUID } from 'angular2-uuid';
 
 import { ADD_TODO } from '../../reducers/todo.actions';
-import { TodoModel, AppStore, selectAllTodos } from '../../shared/index';
+import { TodoModel, AppStore } from '../../shared/';
+import { selectAllTodos } from '../../reducers/';
 import * as todoActions from '../../reducers/todo.actions';
 
 @Component({
