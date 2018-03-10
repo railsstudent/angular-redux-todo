@@ -3,7 +3,10 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { TodoModel, AppStore, selectPendingTodos, selectCompletedTodos } from '../../shared/';
+import { TodoModel, AppStore } from '../../shared/';
+import { selectPendingTodos, selectCompletedTodos, selectAllTodos, selectTodosTotal,
+  selectCompletedTodosCount, selectPendingTodosCount
+} from '../../reducers/';
 import * as todoActions from '../../reducers/todo.actions';
 import { ConfirmModalComponent } from '../../confirm-modal/confirm-modal.component';
 import { EditModalComponent } from '../../edit-modal/edit-modal.component';
@@ -16,29 +19,35 @@ import { EditModalComponent } from '../../edit-modal/edit-modal.component';
 })
 export class TodoListComponent implements OnInit {
   todos$: Observable<TodoModel[]>;
-  completedTodosCount$ : Observable<number>;
-  pendingTodosCount$ : Observable<number>;
+  todosCount$: Observable<number>;
+  completedTodosCount$: Observable<number>;
+  pendingTodosCount$: Observable<number>;
   completedTodos$: Observable<TodoModel[]>;
   pendingTodos$: Observable<TodoModel[]>;
 
   constructor(private store: Store<AppStore>, private modalService: NgbModal) {}
 
   ngOnInit() {
-    this.todos$ = this.store.select('todo');
+    this.todos$ = this.store.select(selectAllTodos);
+    this.todosCount$ = this.store.select(selectTodosTotal);
     this.completedTodos$ = this.store.select(selectCompletedTodos);
     this.pendingTodos$ = this.store.select(selectPendingTodos);
+    this.completedTodosCount$ = this.store.select(selectCompletedTodosCount);
+    this.pendingTodosCount$ = this.store.select(selectPendingTodosCount);
   }
 
   deleteTodo(id) {
     this.store.dispatch(new todoActions.DeleteTodoAction({ id }));
   }
 
-  updateTodo(id, newValue) {
-    this.store.dispatch(new todoActions.UpdateTodoAction({ id, newValue }));
+  updateTodo(todo: TodoModel) {
+    const { id, value, done } = todo;
+    this.store.dispatch(new todoActions.UpdateTodoAction({ id, value, done }));
   }
 
-  toggleDone(todo) {
-    this.store.dispatch(new todoActions.ToggleDoneAction({id: todo.id, done: !todo.done}));
+  toggleDone(todo: TodoModel) {
+    const { id, value, done } = todo;
+    this.store.dispatch(new todoActions.ToggleDoneAction({id, value, done: !done}));
   }
 
   removeTodos() {
@@ -63,7 +72,10 @@ export class TodoListComponent implements OnInit {
     const modalRef = this.modalService.open(EditModalComponent);
     modalRef.componentInstance.todo = todo.value;
     modalRef.componentInstance.title = 'Edit todo item';
-    modalRef.result.then(newValue => this.updateTodo(todo.id, newValue), () => {});
+    modalRef.result.then(newValue => this.updateTodo({
+      id: todo.id,
+      value: newValue,
+      done: todo.done
+    }), () => {});
   }
-
 }

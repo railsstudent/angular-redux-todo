@@ -2,9 +2,10 @@ export { TodoModel, InstructorModel, CourseModel, CourseOverviewModel, DisplayCo
 export { AppStore, reducers,
   selectInstructorEntities, selectAllInstructors, selectInstructorTotal,
   selectCurrentInstructor,
-  selectTodos, selectCompletedTodos, selectPendingTodos,
   selectCourseEntities,
   selectCourseTotal, selectCurrentCourse,
   selectAllCoursesWithInstructors,
-  selectCourseOverview
-} from './app-store';
+  selectCourseOverview,
+  CustomSerializer
+} from './app.reducers';
+export { RouterEffects } from '../effects/router.effect';

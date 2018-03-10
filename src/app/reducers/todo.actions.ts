@@ -1,11 +1,11 @@
 import { Action } from '@ngrx/store';
 import { TodoModel } from '../shared/';
 
-export const ADD_TODO = 'ADD_TODO';
-export const DELETE_TODO = 'DELETE_TODO';
-export const UPDATE_TODO = 'UPDATE_TODO';
-export const TOGGLE_DONE = 'TOGGLE_DONE';
-export const REMOVE_TODOS = 'REMOVE_TODOS';
+export const ADD_TODO = '[TODO] ADD_TODO';
+export const DELETE_TODO = '[TODO] DELETE_TODO';
+export const UPDATE_TODO = '[TODO] UPDATE_TODO';
+export const TOGGLE_DONE = '[TODO] TOGGLE_DONE';
+export const REMOVE_TODOS = '[TODO] REMOVE_TODOS';
 
 export class AddTodoAction implements Action {
     readonly type = ADD_TODO;
@@ -19,12 +19,12 @@ export class DeleteTodoAction implements Action {
 
 export class UpdateTodoAction implements Action {
     readonly type = UPDATE_TODO;
-    constructor (public payload: {id: string, newValue: string}) {}
+    constructor (public payload: TodoModel) {}
 }
 
 export class ToggleDoneAction implements Action {
     readonly type = TOGGLE_DONE;
-    constructor (public payload: {id: string, done: boolean }) {}
+    constructor (public payload: TodoModel) {}
 }
 
 export class RemoveTodosAction implements Action {

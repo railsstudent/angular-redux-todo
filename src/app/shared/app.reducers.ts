@@ -4,26 +4,43 @@ import * as fromTodo from '../reducers/todo.reducer';
 import * as fromInstructor from '../reducers/instructor.reducer';
 import * as fromCourse from '../reducers/course.reducer';
 import { EntityState } from '@ngrx/entity';
+import { Params, RouterStateSnapshot } from '@angular/router';
+import { routerReducer,
+  RouterReducerState,
+  RouterStateSerializer
+} from '@ngrx/router-store';
+
+export interface RouterStateUrl {
+  url: string;
+  queryParams: Params;
+}
+
+export class CustomSerializer implements RouterStateSerializer<RouterStateUrl> {
+  serialize(routerState: RouterStateSnapshot): RouterStateUrl {
+    const { url } = routerState;
+    const queryParams = routerState.root.queryParams;
+
+    // Only return an object including the URL and query params
+    // instead of the entire snapshot
+    return { url, queryParams };
+  }
+}
 
 export interface AppStore {
-  todo: TodoModel[],
+  todo: fromTodo.TodoState,
   instructor: fromInstructor.InstructorState,
-  course: fromCourse.CourseState
+  course: fromCourse.CourseState,
+  router: RouterReducerState<RouterStateUrl>
 };
 
 export const reducers: ActionReducerMap<AppStore> = {
   todo: fromTodo.todoReducer,
   instructor: fromInstructor.instructorReducer,
-  course: fromCourse.courseReducer
+  course: fromCourse.courseReducer,
+  router: routerReducer
 };
 
 // Selector
-export const selectTodos = (state: AppStore) => state.todo;
-export const selectCompletedTodos = createSelector(selectTodos,
-  (todos: TodoModel[]) => todos.filter(todo => todo.done === true));
-export const selectPendingTodos = createSelector(selectTodos,
-  (todos: TodoModel[]) => todos.filter(todo => todo.done === false));
-
 export const selectInstructorState = createFeatureSelector<fromInstructor.InstructorState>('instructor');
 export const selectCurrentInstructorId = createSelector(selectInstructorState,
   (state: fromInstructor.InstructorState) => state.selectedInstructorId);
