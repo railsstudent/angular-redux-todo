@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { AppStore, selectCourseOverview, CourseOverviewModel } from '../shared';
+import { CourseOverviewModel } from '../shared';
+import { AppStore, selectCourseOverview } from '../reducers';
 
 @Component({
   selector: 'app-course-overview',

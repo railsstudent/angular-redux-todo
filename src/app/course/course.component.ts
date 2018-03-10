@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { AppStore, selectAllCoursesWithInstructors, DisplayCourse } from '../shared';
-import { selectCourseTotal, selectCurrentCourse } from '../reducers';
+import { DisplayCourse } from '../shared';
+import { AppStore, selectCourseTotal, selectCurrentCourse, selectAllCoursesWithInstructors } from '../reducers';
 import * as courseActions from '../reducers/course.actions';
 
 @Component({

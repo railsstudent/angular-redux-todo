@@ -9,11 +9,14 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { AppStore,
-  reducers,
+import {
   CustomSerializer,
   RouterEffects
 } from './shared';
+import {
+  AppStore,
+  reducers
+} from './reducers';
 import { AppComponent } from './app.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
