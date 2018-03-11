@@ -3,7 +3,9 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { TodoModel } from '../shared/';
 import * as todoActions from './todo.actions';
 
-export interface TodoState extends EntityState<TodoModel> {}
+export interface TodoState extends EntityState<TodoModel> {
+  loading: boolean
+}
 export const todoAdapter: EntityAdapter<TodoModel> = createEntityAdapter<TodoModel>();
 export const initialTodoState: TodoState = todoAdapter.getInitialState({
   ids: ['1', '2', '3'],
@@ -23,13 +25,27 @@ export const initialTodoState: TodoState = todoAdapter.getInitialState({
       value: 'Style the app with ngBootstrap 4',
       done: false
     }
-  }
+  },
+  loading: false
 });
 
 export function todoReducer(state: TodoState = initialTodoState, action: todoActions.TodoActions): TodoState {
   switch (action.type) {
     case todoActions.ADD_TODO:
-      return todoAdapter.addOne(action.payload, state);
+      return {
+        ...state,
+        loading: true
+      };
+    case todoActions.ADD_TODO_SUCCESS:
+      return {
+        ...todoAdapter.addOne(action.payload, state),
+        loading: false
+      };
+    case todoActions.ADD_TODO_FAILED:
+      return {
+        ...state,
+        loading: false
+      };
     case todoActions.DELETE_TODO:
       return todoAdapter.removeOne(action.payload.id, state);
     case todoActions.UPDATE_TODO:
@@ -60,3 +76,4 @@ export const selectPendingTodos = createSelector(selectAllTodos,
   (todos: TodoModel[]) => todos.filter(todo => todo.done === false));
 export const selectCompletedTodosCount = createSelector(selectCompletedTodos, (t: TodoModel[]) => t.length);
 export const selectPendingTodosCount = createSelector(selectPendingTodos, (t: TodoModel[]) => t.length);
+export const selectTodoLoading = createSelector(selectTodos, (state: TodoState) => state.loading);

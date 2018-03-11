@@ -1,4 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+import { selectTodoLoading, AppStore } from '../reducers';
 
 @Component({
   selector: 'app-todo',
@@ -8,10 +11,11 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class TodoComponent implements OnInit {
   title = 'Todo App';
+  todoLoading$: any;
 
-  constructor() { }
+  constructor(private store: Store<AppStore>) { }
 
   ngOnInit() {
+    this.todoLoading$ = this.store.select(selectTodoLoading);
   }
-
 }
