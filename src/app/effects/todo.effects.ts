@@ -30,4 +30,17 @@ export class TodoEffects {
           catchError(() => of(new todoActions.AddTodoFailedAction()))
         );
     });
+
+    @Effect()
+    deleteTodo$: Observable<Action> = this.actions$
+      .ofType<todoActions.DeleteTodoAction>(todoActions.DELETE_TODO)
+      .map((action: todoActions.DeleteTodoAction) => action.payload.id)
+      .mergeMap((todoId: string) => {
+        return of(todoId)
+          .pipe(
+            delay(3000),
+            map(id => new todoActions.DeleteTodoSuccessAction({ id })),
+            catchError(() => of(new todoActions.DeleteTodoFailedAction()))
+          );
+      });
 }
