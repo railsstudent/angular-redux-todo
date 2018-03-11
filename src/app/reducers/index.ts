@@ -7,7 +7,7 @@ import { todoReducer, TodoState } from './todo.reducer';
 export {
   selectCompletedTodos, selectPendingTodos,
   selectAllTodos, selectTodosTotal, selectCompletedTodosCount, selectPendingTodosCount,
-  todoReducer, TodoState
+  todoReducer, TodoState, selectTodoLoading
 } from './todo.reducer';
 
 export {

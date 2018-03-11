@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment'; // Angular CLI environment
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { TodoEffects } from './effects/';
 
 import {
   AppStore,
@@ -36,6 +37,7 @@ export const metaReducers: MetaReducer<AppStore>[] = !environment.production ? [
     BrowserModule,
     FormsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([TodoEffects]),
     AppRoutingModule,
 
     NgbModule.forRoot(),
