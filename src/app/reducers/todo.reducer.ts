@@ -33,6 +33,9 @@ export function todoReducer(state: TodoState = initialTodoState, action: todoAct
   switch (action.type) {
     case todoActions.ADD_TODO:
     case todoActions.DELETE_TODO:
+    case todoActions.UPDATE_TODO:
+    case todoActions.TOGGLE_DONE:
+    case todoActions.REMOVE_TODOS:
       return { ...state, loading: true };
     case todoActions.ADD_TODO_SUCCESS:
       return {
@@ -41,18 +44,21 @@ export function todoReducer(state: TodoState = initialTodoState, action: todoAct
       };
     case todoActions.ADD_TODO_FAILED:
     case todoActions.DELETE_TODO_FAILED:
+    case todoActions.UPDATE_TODO_FAILED:
+    case todoActions.TOGGLE_DONE_FAILED:
+    case todoActions.REMOVE_TODOS_FAILED:
       return { ...state, loading: false };
     case todoActions.DELETE_TODO_SUCCESS:
       return {
         ...todoAdapter.removeOne(action.payload.id, state),
         loading: false
       };
-    case todoActions.UPDATE_TODO:
-    case todoActions.TOGGLE_DONE:
+    case todoActions.UPDATE_TODO_SUCCESS:
+    case todoActions.TOGGLE_DONE_SUCCESS:
       let { id = '', value = '', done = false } = action.payload || {};
       let changes = { value, done };
       return todoAdapter.updateOne({ id, changes }, state);
-    case todoActions.REMOVE_TODOS:
+    case todoActions.REMOVE_TODOS_SUCCESS:
       return todoAdapter.removeAll(state);
     default:
       return state;
