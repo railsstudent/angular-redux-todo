@@ -57,11 +57,20 @@ export function todoReducer(state: TodoState = initialTodoState, action: todoAct
     case todoActions.TOGGLE_DONE_SUCCESS:
       let { id = '', value = '', done = false } = action.payload || {};
       let changes = { value, done };
-      return todoAdapter.updateOne({ id, changes }, state);
+      return {
+        ...todoAdapter.updateOne({ id, changes }, state),
+        loading: false
+      };
     case todoActions.REMOVE_TODOS_SUCCESS:
-      return todoAdapter.removeAll(state);
+      return {
+        ...todoAdapter.removeAll(state),
+        loading: false
+      }
     default:
-      return state;
+      return {
+        ...state,
+        loading: false
+      };
   }
 }
 
