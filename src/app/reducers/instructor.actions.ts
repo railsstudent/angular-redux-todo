@@ -2,13 +2,31 @@ import { Action } from '@ngrx/store';
 import { InstructorModel } from '../shared/';
 
 export const ADD_INSTRUCTOR = '[Instructor] ADD_INSTRUCTOR';
+export const ADD_INSTRUCTOR_SUCCESS = '[Instructor] ADD_INSTRUCTOR_SUCCESS';
+export const ADD_INSTRUCTOR_FAILED = '[Instructor] ADD_INSTRUCTOR_FAILED';
 export const DELETE_INSTRUCTOR = '[Instructor] DELETE_INSTRUCTOR';
+export const DELETE_INSTRUCTOR_SUCCESS = '[Instructor] DELETE_INSTRUCTOR_SUCCESS';
+export const DELETE_INSTRUCTOR_FAILED = '[Instructor] DELETE_INSTRUCTOR_FAILED';
 export const UPDATE_INSTRUCTOR = '[Instructor] UPDATE_INSTRUCTOR';
+export const UPDATE_INSTRUCTOR_SUCCESS = '[Instructor] UPDATE_INSTRUCTOR_SUCCESS';
+export const UPDATE_INSTRUCTOR_FAILED = '[Instructor] UPDATE_INSTRUCTOR_FAILED';
 export const SELECT_INSTRUCTOR = '[Instructor] SELECT_INSTRUCTOR';
+export const SELECT_INSTRUCTOR_SUCCESS = '[Instructor] SELECT_INSTRUCTOR_SUCCESS';
+export const SELECT_INSTRUCTOR_FAILED = '[Instructor] SELECT_INSTRUCTOR_FAILED';
 
 export class AddInstructorAction implements Action {
     readonly type = ADD_INSTRUCTOR;
     constructor (public payload: InstructorModel) {}
+}
+
+export class AddInstructorSuccessAction implements Action {
+    readonly type = ADD_INSTRUCTOR_SUCCESS;
+    constructor (public payload: InstructorModel) {}
+}
+
+export class AddInstructorFailedAction implements Action {
+    readonly type = ADD_INSTRUCTOR_FAILED;
+    constructor () {}
 }
 
 export class DeleteInstructorAction implements Action {
@@ -16,9 +34,29 @@ export class DeleteInstructorAction implements Action {
     constructor (public payload: { id: string }) {}
 }
 
+export class DeleteInstructorSuccessAction implements Action {
+    readonly type = DELETE_INSTRUCTOR_SUCCESS;
+    constructor (public payload: { id: string }) {}
+}
+
+export class DeleteInstructorFailedAction implements Action {
+    readonly type = DELETE_INSTRUCTOR_FAILED;
+    constructor () {}
+}
+
 export class UpdateInstructorAction implements Action {
     readonly type = UPDATE_INSTRUCTOR;
-    constructor (public payload: { id: string, name: string, description: string }) {}
+    constructor (public payload: InstructorModel) {}
+}
+
+export class UpdateInstructorSuccessAction implements Action {
+    readonly type = UPDATE_INSTRUCTOR_SUCCESS;
+    constructor (public payload: InstructorModel) {}
+}
+
+export class UpdateInstructorFailedAction implements Action {
+    readonly type = UPDATE_INSTRUCTOR_FAILED;
+    constructor () {}
 }
 
 export class SelectInstructorAction implements Action {
@@ -26,7 +64,25 @@ export class SelectInstructorAction implements Action {
     constructor (public payload: { id: string }) {}
 }
 
+export class SelectInstructorSuccessAction implements Action {
+    readonly type = SELECT_INSTRUCTOR_SUCCESS;
+    constructor (public payload: { id: string }) {}
+}
+
+export class SelectInstructorFailedAction implements Action {
+    readonly type = SELECT_INSTRUCTOR_FAILED;
+    constructor () {}
+}
+
 export type InstructorActions = AddInstructorAction
+  | AddInstructorSuccessAction
+  | AddInstructorFailedAction
   | DeleteInstructorAction
+  | DeleteInstructorSuccessAction
+  | DeleteInstructorFailedAction
   | UpdateInstructorAction
-  | SelectInstructorAction;
+  | UpdateInstructorSuccessAction
+  | UpdateInstructorFailedAction
+  | SelectInstructorAction
+  | SelectInstructorSuccessAction
+  | SelectInstructorFailedAction;

@@ -1,7 +1,6 @@
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/concatMap';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Action } from '@ngrx/store';
@@ -10,19 +9,20 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, delay, merge } from 'rxjs/operators';
 
 import * as todoActions from '../reducers/todo.actions';
-import { TodoModel } from '../shared';
+import { TodoModel, InstructorModel } from '../shared';
+import * as instructorActions from '../reducers/instructor.actions';
 
 @Injectable()
-export class TodoEffects {
+export class InstructorEffects {
   constructor(private actions$: Actions) {
 
   }
 
   @Effect()
-  addTodo$: Observable<Action> = this.actions$
+  addInstructor$: Observable<Action> = this.actions$
     .ofType<todoActions.AddTodoAction>(todoActions.ADD_TODO)
     .map((action: todoActions.AddTodoAction) => action.payload)
-    .concatMap((newTodo: TodoModel) => {
+    .mergeMap((newTodo: TodoModel) => {
       return of(newTodo)
         .pipe(
           // waits 3 seconds before returing add todo success action
@@ -44,10 +44,4 @@ export class TodoEffects {
             catchError(() => of(new todoActions.DeleteTodoFailedAction()))
           );
       });
-
-      // @Effect()
-      // updateTodo$: Observable<Action> = this.actions$
-      //   .ofType<todoActions.UpdateTodoAction>(todoActions.UPDATE_TODO)
-      //   .map((action: todoActions.UpdateTodoAction) => action.payload)
-      //   .
 }
