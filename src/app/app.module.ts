@@ -7,7 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment'; // Angular CLI environment
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { TodoEffects, InstructorEffects } from './effects/';
+import { TodoEffects, CourseEffects, InstructorEffects } from './effects/';
 
 import {
   AppStore,
@@ -37,7 +37,11 @@ export const metaReducers: MetaReducer<AppStore>[] = !environment.production ? [
     BrowserModule,
     FormsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
+<<<<<<< Updated upstream
     EffectsModule.forRoot([TodoEffects, InstructorEffects]),
+=======
+    EffectsModule.forRoot([TodoEffects, CourseEffects]),
+>>>>>>> Stashed changes
     AppRoutingModule,
 
     NgbModule.forRoot(),

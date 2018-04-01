@@ -15,9 +15,7 @@ const DELAY_TIME = 1000;
 
 @Injectable()
 export class TodoEffects {
-  constructor(private actions$: Actions) {
-
-  }
+  constructor(private actions$: Actions) {}
 
   @Effect()
   addTodo$: Observable<Action> = this.actions$
