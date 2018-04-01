@@ -4,7 +4,7 @@ import { TodoModel } from '../shared/';
 import * as todoActions from './todo.actions';
 
 export interface TodoState extends EntityState<TodoModel> {
-  loading: boolean
+  loading: boolean;
 }
 export const todoAdapter: EntityAdapter<TodoModel> = createEntityAdapter<TodoModel>();
 export const initialTodoState: TodoState = todoAdapter.getInitialState({
@@ -65,7 +65,7 @@ export function todoReducer(state: TodoState = initialTodoState, action: todoAct
       return {
         ...todoAdapter.removeAll(state),
         loading: false
-      }
+      };
     default:
       return {
         ...state,

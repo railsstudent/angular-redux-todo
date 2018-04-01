@@ -6,6 +6,7 @@ import * as instructorActions from './instructor.actions';
 export interface InstructorState extends EntityState<InstructorModel> {
   // additional entities state properties
   selectedInstructorId: string | null;
+  loading: boolean;
 };
 export const instructorAdapter: EntityAdapter<InstructorModel> = createEntityAdapter<InstructorModel>();
 export const initialState: InstructorState = instructorAdapter.getInitialState({
@@ -19,6 +20,7 @@ export const initialState: InstructorState = instructorAdapter.getInitialState({
   },
   ids: ['1'],
   selectedInstructorId: null,
+  loading: false
 });
 
 export function instructorReducer(state: InstructorState = initialState,
@@ -26,8 +28,14 @@ export function instructorReducer(state: InstructorState = initialState,
   switch (action.type) {
     case instructorActions.ADD_INSTRUCTOR:
       return {
+        ...state,
+        loading: true
+      }
+    case instructorActions.ADD_INSTRUCTOR:
+      return {
         ...instructorAdapter.addOne(action.payload, state),
-        selectedInstructorId: null
+        selectedInstructorId: null,
+        loading: false
       };
     case instructorActions.DELETE_INSTRUCTOR:
       return {
