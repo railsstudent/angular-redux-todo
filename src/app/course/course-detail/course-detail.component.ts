@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { UUID } from 'angular2-uuid';
 import * as objectAssign from 'es6-object-assign';
 import { InstructorModel, CourseModel  } from '../../shared';
-import { AppStore, selectCurrentCourse, selectAllInstructors } from '../../reducers';
+import { AppStore, selectCurrentCourse, selectAllInstructors, selectCourseError } from '../../reducers';
 import * as courseActions from '../../reducers/course.actions';
 
 @Component({
@@ -22,8 +22,12 @@ export class CourseDetailComponent implements OnInit {
     instructorId: ''
   };
   instructors$: Observable<InstructorModel[]>;
+  courseError$: Observable<string>;
+  courseErrMsg: string;
 
-  constructor(private store: Store<AppStore>) { }
+  constructor(private store: Store<AppStore>) {
+    this.courseErrMsg = '';
+  }
 
   ngOnInit() {
     this.currentCourse$ = this.store.select(selectCurrentCourse);
@@ -35,6 +39,11 @@ export class CourseDetailComponent implements OnInit {
       });
     });
     this.instructors$ = this.store.select(selectAllInstructors);
+    this.courseError$ = this.store.select(selectCourseError);
+
+    this.courseError$.subscribe(err => {
+      this.courseErrMsg = err;
+    });
   }
 
   updateCourse() {

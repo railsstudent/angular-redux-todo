@@ -2,7 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { DisplayCourse } from '../shared';
-import { AppStore, selectCourseTotal, selectCurrentCourse, selectAllCoursesWithInstructors } from '../reducers';
+import { AppStore, selectCourseTotal, selectCurrentCourse,
+  selectAllCoursesWithInstructors, selectCourseLoading } from '../reducers';
 import * as courseActions from '../reducers/course.actions';
 
 @Component({
@@ -14,12 +15,14 @@ import * as courseActions from '../reducers/course.actions';
 export class CourseComponent implements OnInit {
   courses$: Observable<DisplayCourse[]>;
   courseTotal$: Observable<number>;
+  courseLoading$: Observable<boolean>;
 
   constructor(private store: Store<AppStore>) { }
 
   ngOnInit() {
     this.courses$ = this.store.select(selectAllCoursesWithInstructors);
     this.courseTotal$ = this.store.select(selectCourseTotal);
+    this.courseLoading$ = this.store.select(selectCourseLoading);
   }
 
   deleteCourse(id: string) {

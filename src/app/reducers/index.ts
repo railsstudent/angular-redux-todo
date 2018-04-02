@@ -18,7 +18,8 @@ export {
 
 export {
   selectCourseEntities, selectCourseTotal, selectCurrentCourse, selectAllCourses,
-  courseReducer, CourseState
+  courseReducer, CourseState,
+  selectCourseLoading, selectCourseError
 } from './course.reducer';
 
 export const selectAllCoursesWithInstructors = createSelector(selectAllCourses, selectInstructorEntities,

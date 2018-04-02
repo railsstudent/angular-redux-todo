@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import { InstructorModel } from '../shared';
 import { AppStore, selectAllInstructors, selectInstructorTotal, } from '../reducers';
 import * as instructorActions from '../reducers/instructor.actions';
-import { DeleteCoursesByInstructorAction } from '../reducers/course.actions';
 
 @Component({
   selector: 'app-instructor',
@@ -23,11 +22,7 @@ export class InstructorComponent implements OnInit {
   }
 
   deleteInstructor(id: string) {
-    // delete all courses and instructor
-    [
-      new DeleteCoursesByInstructorAction({ instructorId: id }),
-      new instructorActions.DeleteInstructorAction({ id })
-    ].map(action => this.store.dispatch(action));
+    this.store.dispatch(new instructorActions.DeleteInstructorAction({ id }));
   }
 
   selectInstructor(id: string = null) {

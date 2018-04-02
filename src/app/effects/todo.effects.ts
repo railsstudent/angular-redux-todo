@@ -15,9 +15,7 @@ const DELAY_TIME = 1000;
 
 @Injectable()
 export class TodoEffects {
-  constructor(private actions$: Actions) {
-
-  }
+  constructor(private actions$: Actions) {}
 
   @Effect()
   addTodo$: Observable<Action> = this.actions$
@@ -46,10 +44,10 @@ export class TodoEffects {
           );
       });
 
-      // update todo effect and toggle done effect
+      // update todo effect
       @Effect()
       updateTodo$: Observable<Action> = this.actions$
-        .ofType<todoActions.UpdateTodoAction>(todoActions.UPDATE_TODO, todoActions.TOGGLE_DONE)
+        .ofType<todoActions.UpdateTodoAction>(todoActions.UPDATE_TODO)
         .map((action: todoActions.UpdateTodoAction) => action.payload)
         .concatMap((todo: TodoModel) => {
           return of(todo)
@@ -59,6 +57,20 @@ export class TodoEffects {
               catchError(() => of (new todoActions.UpdateTodoFailedAction()))
             );
        });
+
+       // toggle done effect
+       @Effect()
+       toggleTodo$: Observable<Action> = this.actions$
+         .ofType<todoActions.ToggleDoneAction>(todoActions.TOGGLE_DONE)
+         .map((action: todoActions.ToggleDoneAction) => action.payload)
+         .concatMap((todo: TodoModel) => {
+           return of(todo)
+             .pipe(
+               delay(DELAY_TIME),
+               map(data => new todoActions.ToggleDoneSuccessAction(data)),
+               catchError(() => of (new todoActions.ToggleDoneFailedAction()))
+             );
+        });
 
       // remove all todos
       @Effect()
