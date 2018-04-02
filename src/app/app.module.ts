@@ -37,11 +37,8 @@ export const metaReducers: MetaReducer<AppStore>[] = !environment.production ? [
     BrowserModule,
     FormsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-<<<<<<< Updated upstream
-    EffectsModule.forRoot([TodoEffects, InstructorEffects]),
-=======
+    EffectsModule.forRoot([TodoEffects, InstructorEffects, CourseEffects]),
     EffectsModule.forRoot([TodoEffects, CourseEffects]),
->>>>>>> Stashed changes
     AppRoutingModule,
 
     NgbModule.forRoot(),

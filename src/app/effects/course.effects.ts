@@ -6,11 +6,12 @@ import { Observable } from 'rxjs/Observable';
 import { Action } from '@ngrx/store';
 import { Actions, Effect } from '@ngrx/effects';
 import { of } from 'rxjs/observable/of';
-import { catchError, map, delay } from 'rxjs/operators';
+import { catchError, map, delay, mergeMap } from 'rxjs/operators';
+import { _throw } from 'rxjs/observable/throw';
 
 import * as todoActions from '../reducers/todo.actions';
 import * as courseActions from '../reducers/course.actions';
-import { TodoModel } from '../shared';
+import { TodoModel, CourseModel } from '../shared';
 
 const DELAY_TIME = 1000;
 
@@ -20,21 +21,27 @@ export class CourseEffects {
 
   @Effect()
   addCourse$: Observable<Action> = this.actions$
-    .ofType<todoActions.AddTodoAction>(todoActions.ADD_TODO)
-    .map((action: todoActions.AddTodoAction) => action.payload)
-    .concatMap((newTodo: TodoModel) => {
-      return of(newTodo)
+    .ofType<courseActions.AddCourseAction>(courseActions.ADD_COURSE)
+    .map((action: courseActions.AddCourseAction) => action.payload)
+    .concatMap((newCourse: CourseModel) => {
+      if (newCourse.name !== 'error') {
+        return of(newCourse)
+          .pipe(
+            // waits 1 seconds before returing add todo success action
+            delay(DELAY_TIME),
+            map(data => new courseActions.AddCourseSuccessAction(data)),
+            catchError(() => of(new courseActions.AddCourseFailedAction({ error: `Unable to add course ${newCourse.name}`})))
+          );
+      }
+      return _throw(`Unable to add course ${newCourse.name}`)
         .pipe(
-          // waits 1 seconds before returing add todo success action
-          delay(DELAY_TIME),
-          map(data => new todoActions.AddTodoSuccessAction(data)),
-          catchError(() => of(new todoActions.AddTodoFailedAction()))
+          catchError((error) => of(new courseActions.AddCourseFailedAction({ error })))
         );
     });
 
   @Effect()
   deleteCourse$: Observable<Action> = this.actions$
-    .ofType<todoActions.DeleteTodoAction>(todoActions.DELETE_TODO)
+    .ofType<courseActions.DeleteCourseAction>(courseActions.DELETE_COURSE)
     .map((action: todoActions.DeleteTodoAction) => action.payload.id)
     .mergeMap((todoId: string) => {
       return of(todoId)
