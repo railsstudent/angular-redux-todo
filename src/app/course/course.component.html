@@ -1,4 +1,7 @@
 <div class="container-fluid" id="course-container">
+  <div class="loading" *ngIf="courseLoading$ | async">
+    <img src="./assets/spinner.svg">
+  </div>
   <div class="row course">
     <div class="col-md-6" *ngIf="(courses$ | async) as courses">
       <div class="row bg-secondary text-white">

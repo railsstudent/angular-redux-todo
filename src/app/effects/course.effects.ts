@@ -27,12 +27,13 @@ export class CourseEffects {
       if (newCourse.name !== 'error') {
         return of(newCourse)
           .pipe(
-            // waits 1 seconds before returing add todo success action
+            // waits 1 seconds before returing add course action
             delay(DELAY_TIME),
             map(data => new courseActions.AddCourseSuccessAction(data)),
             catchError(() => of(new courseActions.AddCourseFailedAction({ error: `Unable to add course ${newCourse.name}`})))
           );
       }
+      // Fake error message
       return _throw(`Unable to add course ${newCourse.name}`)
         .pipe(
           catchError((error) => of(new courseActions.AddCourseFailedAction({ error })))
@@ -42,7 +43,7 @@ export class CourseEffects {
   @Effect()
   deleteCourse$: Observable<Action> = this.actions$
     .ofType<courseActions.DeleteCourseAction>(courseActions.DELETE_COURSE)
-    .map((action: todoActions.DeleteTodoAction) => action.payload.id)
+    .map((action: courseActions.DeleteCourseAction) => action.payload.id)
     .mergeMap((todoId: string) => {
       return of(todoId)
         .pipe(

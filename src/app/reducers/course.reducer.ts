@@ -107,7 +107,7 @@ export function courseReducer(state: CourseState = initialCourseState,
 export const selectCourseState = createFeatureSelector<CourseState>('course');
 export const selectCurrentCourseId = createSelector(selectCourseState,
   (state: CourseState) => state.selectedCourseId);
-export const selectCourseTodo = createSelector(selectCourseState, (state: CourseState) => state.loading);
+export const selectCourseLoading = createSelector(selectCourseState, (state: CourseState) => state.loading);
 export const selectCourseError = createSelector(selectCourseState, (state: CourseState) => state.error);
 
 export const {
