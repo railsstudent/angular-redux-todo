@@ -37,7 +37,6 @@ export const metaReducers: MetaReducer<AppStore>[] = !environment.production ? [
     BrowserModule,
     FormsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([TodoEffects, InstructorEffects, CourseEffects]),
     EffectsModule.forRoot([TodoEffects, CourseEffects]),
     AppRoutingModule,
 

@@ -15,7 +15,7 @@
               <a [routerLink]="['../instructor', course.rawCourse.instructorId]" routerLinkActive="active">{{course.instructorName}}</a>
              </div>
              <p class="card-text course-description">{{course.rawCourse.description}}</p>
-             <button type="button" class="btn btn-danger" (click)="deleteCourse(course.rawCourse.id)">Delete</button>
+             <button type="button" class="btn btn-danger" (click)="$event.stopPropagation(); deleteCourse(course.rawCourse.id)">Delete</button>
           </div>
         </div>
       </ng-container>
