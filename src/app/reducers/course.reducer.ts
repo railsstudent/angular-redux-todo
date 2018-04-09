@@ -84,7 +84,7 @@ export function courseReducer(state: CourseState = initialCourseState,
         loading: false,
         error: null
       };
-    case instructorActions.DELETE_INSTRUCTOR:
+    case instructorActions.DELETE_INSTRUCTOR_SUCCESS:
       const courseIds = Object.keys(state.entities)
         .filter(id => state.entities[id].instructorId === action.payload.id)
         .map(id => state.entities[id].id)

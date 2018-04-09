@@ -11,8 +11,6 @@ export const UPDATE_INSTRUCTOR = '[Instructor] UPDATE_INSTRUCTOR';
 export const UPDATE_INSTRUCTOR_SUCCESS = '[Instructor] UPDATE_INSTRUCTOR_SUCCESS';
 export const UPDATE_INSTRUCTOR_FAILED = '[Instructor] UPDATE_INSTRUCTOR_FAILED';
 export const SELECT_INSTRUCTOR = '[Instructor] SELECT_INSTRUCTOR';
-export const SELECT_INSTRUCTOR_SUCCESS = '[Instructor] SELECT_INSTRUCTOR_SUCCESS';
-export const SELECT_INSTRUCTOR_FAILED = '[Instructor] SELECT_INSTRUCTOR_FAILED';
 
 export class AddInstructorAction implements Action {
     readonly type = ADD_INSTRUCTOR;
@@ -26,7 +24,7 @@ export class AddInstructorSuccessAction implements Action {
 
 export class AddInstructorFailedAction implements Action {
     readonly type = ADD_INSTRUCTOR_FAILED;
-    constructor () {}
+    constructor (public payload: { error: string }) {}
 }
 
 export class DeleteInstructorAction implements Action {
@@ -41,7 +39,7 @@ export class DeleteInstructorSuccessAction implements Action {
 
 export class DeleteInstructorFailedAction implements Action {
     readonly type = DELETE_INSTRUCTOR_FAILED;
-    constructor () {}
+    constructor (public payload: { error: string }) {}
 }
 
 export class UpdateInstructorAction implements Action {
@@ -56,22 +54,12 @@ export class UpdateInstructorSuccessAction implements Action {
 
 export class UpdateInstructorFailedAction implements Action {
     readonly type = UPDATE_INSTRUCTOR_FAILED;
-    constructor () {}
+    constructor (public payload: { error: string }) {}
 }
 
 export class SelectInstructorAction implements Action {
     readonly type = SELECT_INSTRUCTOR;
     constructor (public payload: { id: string }) {}
-}
-
-export class SelectInstructorSuccessAction implements Action {
-    readonly type = SELECT_INSTRUCTOR_SUCCESS;
-    constructor (public payload: { id: string }) {}
-}
-
-export class SelectInstructorFailedAction implements Action {
-    readonly type = SELECT_INSTRUCTOR_FAILED;
-    constructor () {}
 }
 
 export type InstructorActions = AddInstructorAction
@@ -83,6 +71,4 @@ export type InstructorActions = AddInstructorAction
   | UpdateInstructorAction
   | UpdateInstructorSuccessAction
   | UpdateInstructorFailedAction
-  | SelectInstructorAction
-  | SelectInstructorSuccessAction
-  | SelectInstructorFailedAction;
+  | SelectInstructorAction;

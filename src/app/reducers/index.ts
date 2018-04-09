@@ -13,7 +13,8 @@ export {
 export {
   selectInstructorEntities, selectAllInstructors, selectInstructorTotal,
   selectCurrentInstructor,
-  instructorReducer, InstructorState
+  instructorReducer, InstructorState,
+  selectInstructorLoading, selectInstructorError
 } from './instructor.reducer';
 
 export {
