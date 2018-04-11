@@ -36,6 +36,15 @@ export function instructorReducer(state: InstructorState = initialState,
         loading: true,
         error: null
       }
+    case instructorActions.ADD_INSTRUCTOR_FAILED:
+    case instructorActions.DELETE_INSTRUCTOR_FAILED:
+    case instructorActions.UPDATE_INSTRUCTOR_FAILED:
+      const { error = null } = action.payload || {};
+      return {
+        ...state,
+        loading: false,
+        error
+      }
     case instructorActions.ADD_INSTRUCTOR_SUCCESS:
       return {
         ...instructorAdapter.addOne(action.payload, state),
@@ -63,10 +72,16 @@ export function instructorReducer(state: InstructorState = initialState,
     case instructorActions.SELECT_INSTRUCTOR:
       return {
         ...state,
-        selectedInstructorId: action.payload.id
+        selectedInstructorId: action.payload.id,
+        loading: false,
+        error: null
       };
     default:
-      return state;
+      return {
+        ...state,
+        loading: false,
+        error: null
+      };
   }
 }
 
