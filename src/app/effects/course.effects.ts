@@ -10,9 +10,7 @@ import { catchError, map, delay, mergeMap } from 'rxjs/operators';
 import { _throw } from 'rxjs/observable/throw';
 
 import * as courseActions from '../reducers/course.actions';
-import { CourseModel } from '../shared';
-
-const DELAY_TIME = 1000;
+import { CourseModel, DELAY_TIME } from '../shared';
 
 @Injectable()
 export class CourseEffects {
@@ -58,7 +56,7 @@ export class CourseEffects {
         );
     });
 
-  // update todo effect and toggle done effect
+  // update course effect
   @Effect()
   updateCourse$: Observable<Action> = this.actions$
     .ofType<courseActions.UpdateCourseAction>(courseActions.UPDATE_COURSE)
@@ -69,12 +67,12 @@ export class CourseEffects {
           .pipe(
             delay(DELAY_TIME),
             map(data => new courseActions.UpdateCourseSuccessAction(data)),
-            catchError((error) => of (new courseActions.UpdateCourseFailedAction({error})))
+            catchError((error) => of (new courseActions.UpdateCourseFailedAction({ error })))
           );
       }
       return _throw(`Uable to update course ${updatedCourse.name}`)
         .pipe(
-          catchError((error) => of (new courseActions.UpdateCourseFailedAction({error})))
+          catchError((error) => of (new courseActions.UpdateCourseFailedAction({ error })))
         );
    });
 }

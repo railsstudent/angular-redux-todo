@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import * as objectAssign from 'es6-object-assign';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { InstructorModel } from '../../shared';
-import { AppStore, selectCurrentInstructor } from '../../reducers';
+import { AppStore, selectCurrentInstructor, selectInstructorError } from '../../reducers';
 import * as instructorActions from '../../reducers/instructor.actions';
 
 const MAX_LEN = 500;
@@ -24,6 +24,8 @@ export class InstructorDetailComponent implements OnInit {
     description: ''
   };
   maxDescriptionLen: number = MAX_LEN;
+  instructorError$: Observable<string>;
+  instructorErrMsg: string;
 
   constructor(private store: Store<AppStore>, private route: ActivatedRoute) { }
 
@@ -39,6 +41,11 @@ export class InstructorDetailComponent implements OnInit {
     this.route.paramMap
     .subscribe((params: ParamMap) =>
       this.store.dispatch(new instructorActions.SelectInstructorAction({ id: params.get('id') })));
+
+    this.instructorError$ = this.store.select(selectInstructorError);
+    this.instructorError$.subscribe(err => {
+      this.instructorErrMsg = err;
+    });
   }
 
   updateInstructor() {

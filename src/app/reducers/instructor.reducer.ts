@@ -7,6 +7,7 @@ export interface InstructorState extends EntityState<InstructorModel> {
   // additional entities state properties
   selectedInstructorId: string | null;
   loading: boolean;
+  error: string | null;
 };
 export const instructorAdapter: EntityAdapter<InstructorModel> = createEntityAdapter<InstructorModel>();
 export const initialState: InstructorState = instructorAdapter.getInitialState({
@@ -20,49 +21,78 @@ export const initialState: InstructorState = instructorAdapter.getInitialState({
   },
   ids: ['1'],
   selectedInstructorId: null,
-  loading: false
+  loading: false,
+  error: null
 });
 
 export function instructorReducer(state: InstructorState = initialState,
   action: instructorActions.InstructorActions) {
   switch (action.type) {
     case instructorActions.ADD_INSTRUCTOR:
+    case instructorActions.DELETE_INSTRUCTOR:
+    case instructorActions.UPDATE_INSTRUCTOR:
       return {
         ...state,
-        loading: true
+        loading: true,
+        error: null
       }
-    case instructorActions.ADD_INSTRUCTOR:
+    case instructorActions.ADD_INSTRUCTOR_FAILED:
+    case instructorActions.DELETE_INSTRUCTOR_FAILED:
+    case instructorActions.UPDATE_INSTRUCTOR_FAILED:
+      const { error = null } = action.payload || {};
+      return {
+        ...state,
+        loading: false,
+        error
+      }
+    case instructorActions.ADD_INSTRUCTOR_SUCCESS:
       return {
         ...instructorAdapter.addOne(action.payload, state),
         selectedInstructorId: null,
-        loading: false
+        loading: false,
+        error: null
       };
-    case instructorActions.DELETE_INSTRUCTOR:
+    case instructorActions.DELETE_INSTRUCTOR_SUCCESS:
       return {
         ...instructorAdapter.removeOne(action.payload.id, state),
-        selectedInstructorId: (action.payload.id != state.selectedInstructorId) ? state.selectedInstructorId : null
+        selectedInstructorId: (action.payload.id != state.selectedInstructorId) ? state.selectedInstructorId : null,
+        loading: false,
+        error: null
       }
-    case instructorActions.UPDATE_INSTRUCTOR:
+    case instructorActions.UPDATE_INSTRUCTOR_SUCCESS:
       const { id = '', name = '', description = '' } = action.payload || {};
       const changes = { name, description };
       const newState: InstructorState = instructorAdapter.updateOne({ id, changes }, state);
       return {
         ...newState,
-        selectedInstructorId: null
+        selectedInstructorId: null,
+        loading: false,
+        error: null
       };
     case instructorActions.SELECT_INSTRUCTOR:
       return {
         ...state,
-        selectedInstructorId: action.payload.id
+        selectedInstructorId: action.payload.id,
+        loading: false,
+        error: null
       };
     default:
-      return state;
+      return {
+        ...state,
+        loading: false,
+        error: null
+      };
   }
 }
 
 export const selectInstructorState = createFeatureSelector<InstructorState>('instructor');
 export const selectCurrentInstructorId = createSelector(selectInstructorState,
   (state: InstructorState) => state.selectedInstructorId);
+export const selectInstructorLoading = createSelector(selectInstructorState,
+  (state: InstructorState) => state.loading);
+export const selectInstructorError = createSelector(selectInstructorState,
+    (state: InstructorState) => state.error);
+
 
 export const {
   // select the array of instructor ids

@@ -1,1 +1,1 @@
-export { TodoModel, InstructorModel, CourseModel, CourseOverviewModel, DisplayCourse } from './model';
+export { TodoModel, InstructorModel, CourseModel, CourseOverviewModel, DisplayCourse, DELAY_TIME } from './model';
