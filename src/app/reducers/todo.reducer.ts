@@ -80,7 +80,7 @@ export const selectTodos = createFeatureSelector<TodoState>('todo');
 export const {
   // select the array of todos
   selectAll: selectAllTodos,
-  // select the total todos courseEntities
+  // select the total todos
   selectTotal: selectTodosTotal
 } = todoAdapter.getSelectors(selectTodos);
 
