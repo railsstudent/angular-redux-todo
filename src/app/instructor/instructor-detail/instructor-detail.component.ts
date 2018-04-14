@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { UUID } from 'angular2-uuid';
 import { Observable } from 'rxjs/Observable';
 import * as objectAssign from 'es6-object-assign';
@@ -30,7 +30,7 @@ export class InstructorDetailComponent implements OnInit {
   constructor(private store: Store<AppStore>, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.currentInstructor$ = this.store.select(selectCurrentInstructor);
+    this.currentInstructor$ = this.store.pipe(select(selectCurrentInstructor));
     this.currentInstructor$.subscribe((instructor: InstructorModel) => {
       const { id = '', name = '', description = '' } = instructor || {};
       this.currentInstructor = objectAssign.assign({}, {
@@ -42,7 +42,7 @@ export class InstructorDetailComponent implements OnInit {
     .subscribe((params: ParamMap) =>
       this.store.dispatch(new instructorActions.SelectInstructorAction({ id: params.get('id') })));
 
-    this.instructorError$ = this.store.select(selectInstructorError);
+    this.instructorError$ = this.store.pipe(select(selectInstructorError));
     this.instructorError$.subscribe(err => {
       this.instructorErrMsg = err;
     });

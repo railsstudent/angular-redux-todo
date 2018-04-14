@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { CourseOverviewModel } from '../shared';
 import { AppStore, selectCourseOverview } from '../reducers';
@@ -16,7 +16,7 @@ export class CourseOverviewComponent implements OnInit {
   constructor(private store: Store<AppStore>) { }
 
   ngOnInit() {
-    this.courseOverview$ = this.store.select(selectCourseOverview);
+    this.courseOverview$ = this.store.pipe(select(selectCourseOverview));
   }
 
 }

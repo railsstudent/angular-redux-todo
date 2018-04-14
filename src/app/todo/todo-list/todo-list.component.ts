@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { TodoModel } from '../../shared/';
@@ -28,12 +28,12 @@ export class TodoListComponent implements OnInit {
   constructor(private store: Store<AppStore>, private modalService: NgbModal) {}
 
   ngOnInit() {
-    this.todos$ = this.store.select(selectAllTodos);
-    this.todosCount$ = this.store.select(selectTodosTotal);
-    this.completedTodos$ = this.store.select(selectCompletedTodos);
-    this.pendingTodos$ = this.store.select(selectPendingTodos);
-    this.completedTodosCount$ = this.store.select(selectCompletedTodosCount);
-    this.pendingTodosCount$ = this.store.select(selectPendingTodosCount);
+    this.todos$ = this.store.pipe(select(selectAllTodos));
+    this.todosCount$ = this.store.pipe(select(selectTodosTotal));
+    this.completedTodos$ = this.store.pipe(select(selectCompletedTodos));
+    this.pendingTodos$ = this.store.pipe(select(selectPendingTodos));
+    this.completedTodosCount$ = this.store.pipe(select(selectCompletedTodosCount));
+    this.pendingTodosCount$ = this.store.pipe(select(selectPendingTodosCount));
   }
 
   deleteTodo(id) {

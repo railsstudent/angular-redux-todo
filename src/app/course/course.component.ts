@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { DisplayCourse } from '../shared';
 import { AppStore, selectCourseTotal, selectCurrentCourse,
@@ -20,9 +20,9 @@ export class CourseComponent implements OnInit {
   constructor(private store: Store<AppStore>) { }
 
   ngOnInit() {
-    this.courses$ = this.store.select(selectAllCoursesWithInstructors);
-    this.courseTotal$ = this.store.select(selectCourseTotal);
-    this.courseLoading$ = this.store.select(selectCourseLoading);
+    this.courses$ = this.store.pipe(select(selectAllCoursesWithInstructors));
+    this.courseTotal$ = this.store.pipe(select(selectCourseTotal));
+    this.courseLoading$ = this.store.pipe(select(selectCourseLoading));
   }
 
   deleteCourse(id: string) {
