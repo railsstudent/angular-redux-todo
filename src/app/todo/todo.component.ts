@@ -10,7 +10,7 @@ import { selectTodoLoading, AppStore } from '../reducers';
   encapsulation: ViewEncapsulation.None
 })
 export class TodoComponent implements OnInit {
-  title = 'Todo App';
+  title = 'Todo App (ngrx 5.2.0)';
   todoLoading$: any;
 
   constructor(private store: Store<AppStore>) { }
