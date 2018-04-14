@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { InstructorModel } from '../shared';
 import { AppStore, selectAllInstructors, selectInstructorTotal, selectInstructorLoading } from '../reducers';
@@ -18,9 +18,9 @@ export class InstructorComponent implements OnInit {
   constructor(private store: Store<AppStore>) { }
 
   ngOnInit() {
-    this.instructors$ = this.store.select(selectAllInstructors);
-    this.instructorTotal$ = this.store.select(selectInstructorTotal);
-    this.instructorLoading$ = this.store.select(selectInstructorLoading);
+    this.instructors$ = this.store.pipe(select(selectAllInstructors));
+    this.instructorTotal$ = this.store.pipe(select(selectInstructorTotal));
+    this.instructorLoading$ = this.store.pipe(select(selectInstructorLoading));
   }
 
   deleteInstructor(id: string) {

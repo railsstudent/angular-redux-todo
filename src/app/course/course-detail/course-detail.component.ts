@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { UUID } from 'angular2-uuid';
 import * as objectAssign from 'es6-object-assign';
@@ -30,7 +30,7 @@ export class CourseDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.currentCourse$ = this.store.select(selectCurrentCourse);
+    this.currentCourse$ = this.store.pipe(select(selectCurrentCourse));
 
     this.currentCourse$.subscribe((course: CourseModel) => {
       const { id = '', name = '', description = '', instructorId = '' } = course || {};
@@ -38,8 +38,8 @@ export class CourseDetailComponent implements OnInit {
         id, name, description, instructorId
       });
     });
-    this.instructors$ = this.store.select(selectAllInstructors);
-    this.courseError$ = this.store.select(selectCourseError);
+    this.instructors$ = this.store.pipe(select(selectAllInstructors));
+    this.courseError$ = this.store.pipe(select(selectCourseError));
 
     this.courseError$.subscribe(err => {
       this.courseErrMsg = err;
