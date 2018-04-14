@@ -29,7 +29,7 @@ export class AddTodoSuccessAction implements Action {
 
 export class AddTodoFailedAction implements Action {
     readonly type = ADD_TODO_FAILED;
-    constructor () {}
+    constructor (public payload: {error: string}) {}
 }
 
 export class DeleteTodoAction implements Action {
@@ -44,7 +44,7 @@ export class DeleteTodoSuccessAction implements Action {
 
 export class DeleteTodoFailedAction implements Action {
     readonly type = DELETE_TODO_FAILED;
-    constructor () {}
+    constructor (public payload: {error: string}) {}
 }
 
 export class UpdateTodoAction implements Action {
@@ -59,7 +59,7 @@ export class UpdateTodoSuccessAction implements Action {
 
 export class UpdateTodoFailedAction implements Action {
     readonly type = UPDATE_TODO_FAILED;
-    constructor () {}
+    constructor (public payload: {error: string}) {}
 }
 
 export class ToggleDoneAction implements Action {
@@ -74,7 +74,7 @@ export class ToggleDoneSuccessAction implements Action {
 
 export class ToggleDoneFailedAction implements Action {
     readonly type = TOGGLE_DONE_FAILED;
-    constructor () {}
+    constructor (public payload: {error: string}) {}
 }
 
 export class RemoveTodosAction implements Action {
@@ -89,7 +89,7 @@ export class RemoveTodosSuccessAction implements Action {
 
 export class RemoveTodosFailedAction implements Action {
     readonly type = REMOVE_TODOS_FAILED;
-    constructor () {}
+    constructor (public payload: {error: string}) {}
 }
 
 export type TodoActions = AddTodoAction | DeleteTodoAction | UpdateTodoAction |

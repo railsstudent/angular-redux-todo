@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { UUID } from 'angular2-uuid';
 
 import { ADD_TODO } from '../../reducers/todo.actions';
@@ -20,7 +20,7 @@ export class TodoFormComponent implements OnInit {
   constructor(private store: Store<AppStore>) { }
 
   ngOnInit() {
-    this.todo$ = this.store.select(selectAllTodos);
+    this.todo$ = this.store.pipe(select(selectAllTodos));
   }
 
   addTodo() {
