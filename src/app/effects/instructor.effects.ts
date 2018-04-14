@@ -1,12 +1,9 @@
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/catch';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Action } from '@ngrx/store';
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs/observable/of';
-import { catchError, map, delay, merge } from 'rxjs/operators';
+import { catchError, map, delay, mergeMap, concatMap } from 'rxjs/operators';
 import { _throw } from 'rxjs/observable/throw';
 
 import { InstructorModel, DELAY_TIME } from '../shared';
@@ -14,36 +11,35 @@ import * as instructorActions from '../reducers/instructor.actions';
 
 @Injectable()
 export class InstructorEffects {
-  constructor(private actions$: Actions) {
-
-  }
+  constructor(private actions$: Actions) {}
 
   @Effect()
-  addInstructor$: Observable<Action> = this.actions$
-    .ofType<instructorActions.AddInstructorAction>(instructorActions.ADD_INSTRUCTOR)
-    .map((action: instructorActions.AddInstructorAction) => action.payload)
-    .mergeMap((newInstructor: InstructorModel) => {
-      if (newInstructor.name !== 'Bad Instructor') {
-        return of(newInstructor)
+  addInstructor$: Observable<Action> = this.actions$.pipe(
+      ofType<instructorActions.AddInstructorAction>(instructorActions.ADD_INSTRUCTOR),
+      map((action: instructorActions.AddInstructorAction) => action.payload),
+      mergeMap((newInstructor: InstructorModel) => {
+        if (newInstructor.name !== 'Bad Instructor') {
+          return of(newInstructor)
+            .pipe(
+              // waits 3 seconds before returing add instructor success action
+              delay(DELAY_TIME),
+              map(data => new instructorActions.AddInstructorSuccessAction(data)),
+              catchError(error => of(new instructorActions.AddInstructorFailedAction({ error })))
+            );
+        }
+        // Fake error message
+        return _throw(`Unable to add instructor ${newInstructor.name}`)
           .pipe(
-            // waits 3 seconds before returing add instructor success action
-            delay(DELAY_TIME),
-            map(data => new instructorActions.AddInstructorSuccessAction(data)),
             catchError(error => of(new instructorActions.AddInstructorFailedAction({ error })))
           );
-      }
-      // Fake error message
-      return _throw(`Unable to add instructor ${newInstructor.name}`)
-        .pipe(
-          catchError((error) => of(new instructorActions.AddInstructorFailedAction({ error })))
-        );
-    });
+      })
+    );
 
     @Effect()
-    deleteInstructor$: Observable<Action> = this.actions$
-      .ofType<instructorActions.DeleteInstructorAction>(instructorActions.DELETE_INSTRUCTOR)
-      .map((action: instructorActions.DeleteInstructorAction) => action.payload.id)
-      .mergeMap((instructorId: string) => {
+    deleteInstructor$: Observable<Action> = this.actions$.pipe(
+       ofType<instructorActions.DeleteInstructorAction>(instructorActions.DELETE_INSTRUCTOR),
+       map((action: instructorActions.DeleteInstructorAction) => action.payload.id),
+       mergeMap((instructorId: string) => {
         if (instructorId !== '1') {
           return of(instructorId)
             .pipe(
@@ -56,24 +52,26 @@ export class InstructorEffects {
           .pipe(
             catchError(error => of(new instructorActions.DeleteInstructorFailedAction({ error })))
           );
-      });
+      })
+    );
 
     @Effect()
-    updateInstructor$: Observable<Action> = this.actions$
-      .ofType<instructorActions.UpdateInstructorAction>(instructorActions.UPDATE_INSTRUCTOR)
-      .map((action: instructorActions.UpdateInstructorAction) => action.payload)
-      .concatMap((updatedInstructor: InstructorModel) => {
-        if (updatedInstructor.id !== '1') {
-          return of(updatedInstructor)
+    updateInstructor$: Observable<Action> = this.actions$.pipe(
+        ofType<instructorActions.UpdateInstructorAction>(instructorActions.UPDATE_INSTRUCTOR),
+        map((action: instructorActions.UpdateInstructorAction) => action.payload),
+        concatMap((updatedInstructor: InstructorModel) => {
+          if (updatedInstructor.id !== '1') {
+            return of(updatedInstructor)
+              .pipe(
+                delay(DELAY_TIME),
+                map(data => new instructorActions.UpdateInstructorSuccessAction(data)),
+                catchError(error => of (new instructorActions.UpdateInstructorFailedAction({ error })))
+              );
+          }
+          return _throw(`Uable to update instructor ${updatedInstructor.name}`)
             .pipe(
-              delay(DELAY_TIME),
-              map(data => new instructorActions.UpdateInstructorSuccessAction(data)),
-              catchError((error) => of (new instructorActions.UpdateInstructorFailedAction({ error })))
+              catchError(error => of (new instructorActions.UpdateInstructorFailedAction({ error })))
             );
-        }
-        return _throw(`Uable to update instructor ${updatedInstructor.name}`)
-          .pipe(
-            catchError((error) => of (new instructorActions.UpdateInstructorFailedAction({ error })))
-          );
-     });
+        })
+      );
 }
