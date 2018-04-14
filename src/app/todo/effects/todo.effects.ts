@@ -6,9 +6,8 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, delay, concatMap, mergeMap } from 'rxjs/operators';
 
 import * as todoActions from '../reducers/todo.actions';
-import { TodoModel } from '../shared';
-
-const DELAY_TIME = 1000;
+import { TodoModel } from '../models';
+import { DELAY_TIME } from '../../shared';
 
 @Injectable()
 export class TodoEffects {

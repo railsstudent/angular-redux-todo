@@ -3,10 +3,10 @@ import { Observable } from 'rxjs/Observable';
 import { Store, select } from '@ngrx/store';
 import { UUID } from 'angular2-uuid';
 
-import { ADD_TODO } from '../../reducers/todo.actions';
-import { TodoModel } from '../../shared/';
-import { AppStore, selectAllTodos } from '../../reducers/';
-import * as todoActions from '../../reducers/todo.actions';
+import { ADD_TODO } from '../reducers/todo.actions';
+import { TodoModel } from '../models/';
+import { todoStore, selectAllTodos } from '../reducers/';
+import * as todoActions from '../reducers/todo.actions';
 
 @Component({
   selector: 'app-todo-form',
@@ -17,7 +17,7 @@ export class TodoFormComponent implements OnInit {
   todo$: Observable<TodoModel[]>;
   newTodo: string = '';
 
-  constructor(private store: Store<AppStore>) { }
+  constructor(private store: Store<todoStore>) { }
 
   ngOnInit() {
     this.todo$ = this.store.pipe(select(selectAllTodos));
