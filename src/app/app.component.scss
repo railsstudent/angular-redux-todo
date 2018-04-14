@@ -1,7 +1,10 @@
+@import "../variables";
+
+$bg-color: #563d7c;
+
 #main {
-  
   .navbar {
-    background: #563d7c;
+    background: $bg-color;
   }
 
   .nav-link {
@@ -13,5 +16,24 @@
 
   .navbar-brand {
     color: #fff;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: $sticky-height;
+    line-height: $sticky-height; /* Vertically center the text there */
+    background-color: $bg-color;
+
+    > .container {
+      margin-left: 0;
+      margin-right: 0;
+
+      .text-muted {
+        color: #fff !important;
+      }
+    }
   }
 }
