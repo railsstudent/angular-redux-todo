@@ -1,1 +1,1 @@
-export { TodoModel, InstructorModel, CourseModel, CourseOverviewModel, DisplayCourse, DELAY_TIME } from './model';
+export const DELAY_TIME = 1000;

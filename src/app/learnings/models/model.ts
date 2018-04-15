@@ -1,9 +1,3 @@
-export interface TodoModel {
-  id: string;
-  done: boolean;
-  value: string;
-}
-
 export interface InstructorModel {
   id: string;
   name: string;
@@ -28,5 +22,3 @@ export interface CourseOverviewModel {
   description: string;
   courses: CourseModel[]
 }
-
-export const DELAY_TIME = 1000;

@@ -1,6 +1,6 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { TodoModel } from '../shared/';
+import { TodoModel } from '../models/';
 import * as todoActions from './todo.actions';
 
 export interface TodoState extends EntityState<TodoModel> {

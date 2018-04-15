@@ -7,37 +7,22 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment'; // Angular CLI environment
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { TodoEffects, CourseEffects, InstructorEffects } from './effects/';
 
-import {
-  AppStore,
-  reducers
-} from './reducers';
+import { AppStore } from './reducers';
 import { AppComponent } from './app.component';
-import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
-import { EditModalComponent } from './edit-modal/edit-modal.component';
-import { TodoListComponent } from './todo/todo-list/todo-list.component';
-import { TodoFormComponent } from './todo/todo-form/todo-form.component';
-import { AppRoutingModule, RoutingComponents } from './app-routing.module';
-import { CourseDetailComponent } from './course/course-detail/course-detail.component';
+import { AppRoutingModule } from './app-routing.module';
 
 export const metaReducers: MetaReducer<AppStore>[] = !environment.production ? [storeFreeze]: [];
 
 @NgModule({
   declarations: [
-    AppComponent,
-    RoutingComponents,
-    TodoListComponent,
-    TodoFormComponent,
-    ConfirmModalComponent,
-    EditModalComponent,
-    CourseDetailComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([TodoEffects, CourseEffects, InstructorEffects]),
+    StoreModule.forRoot({ metaReducers }),
+    EffectsModule.forRoot([]),
     AppRoutingModule,
 
     NgbModule.forRoot(),
@@ -47,10 +32,6 @@ export const metaReducers: MetaReducer<AppStore>[] = !environment.production ? [
   ],
   providers: [
     Title
-  ],
-  entryComponents: [
-    ConfirmModalComponent,
-    EditModalComponent
   ],
   bootstrap: [AppComponent]
 })

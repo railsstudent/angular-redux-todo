@@ -6,7 +6,8 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, delay, mergeMap, concatMap } from 'rxjs/operators';
 import { _throw } from 'rxjs/observable/throw';
 
-import { InstructorModel, DELAY_TIME } from '../shared';
+import { DELAY_TIME } from '../../shared';
+import { InstructorModel } from '../models';
 import * as instructorActions from '../reducers/instructor.actions';
 
 @Injectable()

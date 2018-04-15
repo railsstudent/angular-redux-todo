@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { CourseModel } from '../shared/';
+import { CourseModel } from '../models/';
 
 export const ADD_COURSE = '[Course] ADD_COURSE';
 export const ADD_COURSE_SUCCESS = '[Course] ADD_COURSE_SUCCESS';

@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { TodoModel } from '../shared/';
+import { TodoModel } from '../models/';
 
 export const ADD_TODO = '[TODO] ADD_TODO';
 export const ADD_TODO_SUCCESS = '[TODO] ADD_TODO_SUCCESS';

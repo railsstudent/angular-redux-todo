@@ -4,8 +4,8 @@ import { UUID } from 'angular2-uuid';
 import { Observable } from 'rxjs/Observable';
 import * as objectAssign from 'es6-object-assign';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { InstructorModel } from '../../shared';
-import { AppStore, selectCurrentInstructor, selectInstructorError } from '../../reducers';
+import { InstructorModel } from '../../models';
+import { LearningsStore, selectCurrentInstructor, selectInstructorError } from '../../reducers';
 import * as instructorActions from '../../reducers/instructor.actions';
 
 const MAX_LEN = 500;
@@ -27,7 +27,7 @@ export class InstructorDetailComponent implements OnInit {
   instructorError$: Observable<string>;
   instructorErrMsg: string;
 
-  constructor(private store: Store<AppStore>, private route: ActivatedRoute) { }
+  constructor(private store: Store<LearningsStore>, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.currentInstructor$ = this.store.pipe(select(selectCurrentInstructor));

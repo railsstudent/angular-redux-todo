@@ -7,7 +7,8 @@ import { catchError, map, delay, mergeMap, concatMap } from 'rxjs/operators';
 import { _throw } from 'rxjs/observable/throw';
 
 import * as courseActions from '../reducers/course.actions';
-import { CourseModel, DELAY_TIME } from '../shared';
+import { DELAY_TIME } from '../../shared';
+import { CourseModel } from '../models';
 
 @Injectable()
 export class CourseEffects {

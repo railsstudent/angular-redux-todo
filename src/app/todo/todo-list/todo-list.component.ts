@@ -3,13 +3,13 @@ import { Observable } from 'rxjs/Observable';
 import { Store, select } from '@ngrx/store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { TodoModel } from '../../shared/';
-import { AppStore, selectPendingTodos, selectCompletedTodos, selectAllTodos, selectTodosTotal,
+import { TodoModel } from '../models/';
+import { todoStore, selectPendingTodos, selectCompletedTodos, selectAllTodos, selectTodosTotal,
   selectCompletedTodosCount, selectPendingTodosCount
-} from '../../reducers/';
-import * as todoActions from '../../reducers/todo.actions';
-import { ConfirmModalComponent } from '../../confirm-modal/confirm-modal.component';
-import { EditModalComponent } from '../../edit-modal/edit-modal.component';
+} from '../reducers/';
+import * as todoActions from '../reducers/todo.actions';
+import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
+import { EditModalComponent } from '../edit-modal/edit-modal.component';
 
 @Component({
   selector: 'app-todo-list',
@@ -25,7 +25,7 @@ export class TodoListComponent implements OnInit {
   completedTodos$: Observable<TodoModel[]>;
   pendingTodos$: Observable<TodoModel[]>;
 
-  constructor(private store: Store<AppStore>, private modalService: NgbModal) {}
+  constructor(private store: Store<todoStore>, private modalService: NgbModal) {}
 
   ngOnInit() {
     this.todos$ = this.store.pipe(select(selectAllTodos));
