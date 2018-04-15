@@ -11,9 +11,9 @@ export class AppComponent implements OnInit {
   isCollapsed: boolean = true;
 
   links = {
-    instructor: ['/instructor'],
-    course: ['/course'],
-    courseOverview: ['/courseOverview']
+    instructor: ['/learnings/instructor'],
+    course: ['/learnings/course'],
+    courseOverview: ['/learnings/courseOverview']
   };
 
   constructor(private titleService: Title) {

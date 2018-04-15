@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { CourseOverviewModel } from '../shared';
-import { AppStore, selectCourseOverview } from '../reducers';
+import { CourseOverviewModel } from '../models';
+import { LearningsStore, selectCourseOverview } from '../reducers';
 
 @Component({
   selector: 'app-course-overview',
@@ -13,7 +13,7 @@ import { AppStore, selectCourseOverview } from '../reducers';
 export class CourseOverviewComponent implements OnInit {
   courseOverview$: Observable<CourseOverviewModel[]>;
 
-  constructor(private store: Store<AppStore>) { }
+  constructor(private store: Store<LearningsStore>) { }
 
   ngOnInit() {
     this.courseOverview$ = this.store.pipe(select(selectCourseOverview));

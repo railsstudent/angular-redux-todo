@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { InstructorModel } from '../shared/';
+import { InstructorModel } from '../models/';
 import * as instructorActions from './instructor.actions';
 
 export interface InstructorState extends EntityState<InstructorModel> {

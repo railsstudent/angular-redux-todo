@@ -22,5 +22,3 @@ export interface CourseOverviewModel {
   description: string;
   courses: CourseModel[]
 }
-
-export const DELAY_TIME = 1000;

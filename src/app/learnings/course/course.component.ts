@@ -1,9 +1,12 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { DisplayCourse } from '../shared';
-import { AppStore, selectCourseTotal, selectCurrentCourse,
-  selectAllCoursesWithInstructors, selectCourseLoading } from '../reducers';
+import { DisplayCourse } from '../models';
+import { LearningsStore,
+  selectCourseTotal,
+  selectCurrentCourse,
+  selectAllCoursesWithInstructors,
+  selectCourseLoading } from '../reducers';
 import * as courseActions from '../reducers/course.actions';
 
 @Component({
@@ -17,7 +20,7 @@ export class CourseComponent implements OnInit {
   courseTotal$: Observable<number>;
   courseLoading$: Observable<boolean>;
 
-  constructor(private store: Store<AppStore>) { }
+  constructor(private store: Store<LearningsStore>) { }
 
   ngOnInit() {
     this.courses$ = this.store.pipe(select(selectAllCoursesWithInstructors));

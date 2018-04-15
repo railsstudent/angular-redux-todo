@@ -1,6 +1,6 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { CourseModel } from '../shared/';
+import { CourseModel } from '../models/';
 import * as courseActions from './course.actions';
 import * as instructorActions  from './instructor.actions';
 

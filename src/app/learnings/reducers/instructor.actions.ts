@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { InstructorModel } from '../shared/';
+import { InstructorModel } from '../models/';
 
 export const ADD_INSTRUCTOR = '[Instructor] ADD_INSTRUCTOR';
 export const ADD_INSTRUCTOR_SUCCESS = '[Instructor] ADD_INSTRUCTOR_SUCCESS';
