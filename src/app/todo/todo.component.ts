@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store, select } from '@ngrx/store';
 import { todoStore, selectTodoLoading } from './reducers';
+import * as todoActions from './reducers/todo.actions';
 
 @Component({
   selector: 'app-todo',
@@ -17,5 +18,6 @@ export class TodoComponent implements OnInit {
 
   ngOnInit() {
     this.todoLoading$ = this.store.pipe(select(selectTodoLoading));
+    this.store.dispatch(new todoActions.LoadTodosAction());
   }
 }

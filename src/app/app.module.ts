@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment'; // Angular CLI environment
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { LocalStorageModule } from '@ngx-pwa/local-storage';
 
 import { AppStore } from './reducers';
 import { AppComponent } from './app.component';
@@ -21,14 +22,14 @@ export const metaReducers: MetaReducer<AppStore>[] = !environment.production ? [
   imports: [
     BrowserModule,
     FormsModule,
+    LocalStorageModule,
     StoreModule.forRoot({ metaReducers }),
     EffectsModule.forRoot([]),
-    AppRoutingModule,
-
     NgbModule.forRoot(),
     StoreDevtoolsModule.instrument({
-     maxAge: 25 //  Retains last 25 states
-   })
+      maxAge: 25 //  Retains last 25 states
+    }),
+    AppRoutingModule
   ],
   providers: [
     Title

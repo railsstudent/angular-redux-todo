@@ -6,6 +6,7 @@ import { todoReducer } from './reducers';
 import { TodoEffects } from './effects/';
 import { TodoRoutingModule, RoutingComponents, EntryComponents } from './todo-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { TodoService, TodoLocalstorageService } from './services';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { SharedModule } from '../shared/shared.module';
   ],
   entryComponents: [
     EntryComponents
-  ]
+  ],
+  providers: [TodoService, TodoLocalstorageService]
 })
 export class TodoModule { }

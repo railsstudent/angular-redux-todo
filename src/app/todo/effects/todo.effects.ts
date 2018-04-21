@@ -3,22 +3,37 @@ import { Observable } from 'rxjs/Observable';
 import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs/observable/of';
-import { catchError, map, delay, concatMap, mergeMap } from 'rxjs/operators';
+import { catchError, map, delay, concatMap, mergeMap, switchMap } from 'rxjs/operators';
+import { UUID } from 'angular2-uuid';
 
 import * as todoActions from '../reducers/todo.actions';
 import { TodoModel } from '../models';
 import { DELAY_TIME } from '../../shared';
+import { TodoService } from '../services';
 
 @Injectable()
 export class TodoEffects {
-  constructor(private actions$: Actions) {}
+  constructor(private actions$: Actions, private todoService: TodoService) {}
+
+  @Effect()
+  loadTodos$: Observable<Action> = this.actions$.pipe(
+        ofType<todoActions.LoadTodosAction>(todoActions.LOAD_TODOS),
+        switchMap(() => {
+          return this.todoService.get()
+            .pipe(
+              delay(DELAY_TIME),
+              map(data => new todoActions.LoadTodosSuccessAction(data)),
+              catchError(error => of(new todoActions.LoadTodosFailedAction({ error })))
+            )
+        })
+      );
 
   @Effect()
   addTodo$: Observable<Action> = this.actions$.pipe(
         ofType<todoActions.AddTodoAction>(todoActions.ADD_TODO),
-        map((action: todoActions.AddTodoAction) => action.payload),
+        map((action: todoActions.AddTodoAction) => ({ id: UUID.UUID(), ...action.payload })),
         concatMap((newTodo: TodoModel) =>
-           of(newTodo)
+           this.todoService.add(newTodo)
             .pipe(
               // waits 1 seconds before returing add todo success action
               delay(DELAY_TIME),
@@ -33,7 +48,7 @@ export class TodoEffects {
         ofType<todoActions.DeleteTodoAction>(todoActions.DELETE_TODO),
         map((action: todoActions.DeleteTodoAction) => action.payload.id),
         mergeMap((todoId: string) =>
-          of(todoId)
+          this.todoService.remove(todoId)
             .pipe(
               delay(DELAY_TIME),
               map(id => new todoActions.DeleteTodoSuccessAction({ id })),
@@ -48,7 +63,7 @@ export class TodoEffects {
           ofType<todoActions.UpdateTodoAction>(todoActions.UPDATE_TODO),
           map((action: todoActions.UpdateTodoAction) => action.payload),
           concatMap((todo: TodoModel) =>
-             of(todo)
+             this.todoService.update(todo)
               .pipe(
                 delay(DELAY_TIME),
                 map(data => new todoActions.UpdateTodoSuccessAction(data)),
@@ -63,7 +78,7 @@ export class TodoEffects {
           ofType<todoActions.ToggleDoneAction>(todoActions.TOGGLE_DONE),
           map((action: todoActions.ToggleDoneAction) => action.payload),
           concatMap((todo: TodoModel) =>
-            of(todo)
+            this.todoService.update(todo)
              .pipe(
                delay(DELAY_TIME),
                map(data => new todoActions.ToggleDoneSuccessAction(data)),
@@ -77,7 +92,7 @@ export class TodoEffects {
       removeAll$: Observable<Action> = this.actions$.pipe(
         ofType<todoActions.RemoveTodosAction>(todoActions.REMOVE_TODOS),
         mergeMap(() =>
-          of(null)
+          this.todoService.removeAll()
             .pipe(
               delay(DELAY_TIME),
               map(() => new todoActions.RemoveTodosSuccessAction()),
