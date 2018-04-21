@@ -37,7 +37,7 @@ export class LoadTodosFailedAction implements Action {
 
 export class AddTodoAction implements Action {
     readonly type = ADD_TODO;
-    constructor (public payload: TodoModel) {}
+    constructor (public payload: { value: string, done: boolean }) {}
 }
 
 export class AddTodoSuccessAction implements Action {

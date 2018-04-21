@@ -4,6 +4,7 @@ import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, delay, concatMap, mergeMap, switchMap } from 'rxjs/operators';
+import { UUID } from 'angular2-uuid';
 
 import * as todoActions from '../reducers/todo.actions';
 import { TodoModel } from '../models';
@@ -30,7 +31,7 @@ export class TodoEffects {
   @Effect()
   addTodo$: Observable<Action> = this.actions$.pipe(
         ofType<todoActions.AddTodoAction>(todoActions.ADD_TODO),
-        map((action: todoActions.AddTodoAction) => action.payload),
+        map((action: todoActions.AddTodoAction) => ({ id: UUID.UUID(), ...action.payload })),
         concatMap((newTodo: TodoModel) =>
            this.todoService.add(newTodo)
             .pipe(
