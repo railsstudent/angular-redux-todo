@@ -34,6 +34,8 @@ export class TodoListComponent implements OnInit {
     this.pendingTodos$ = this.store.pipe(select(selectPendingTodos));
     this.completedTodosCount$ = this.store.pipe(select(selectCompletedTodosCount));
     this.pendingTodosCount$ = this.store.pipe(select(selectPendingTodosCount));
+
+    this.store.dispatch(new todoActions.LoadTodosAction());
   }
 
   deleteTodo(id) {

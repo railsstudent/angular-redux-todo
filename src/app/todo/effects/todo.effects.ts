@@ -3,15 +3,40 @@ import { Observable } from 'rxjs/Observable';
 import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs/observable/of';
-import { catchError, map, delay, concatMap, mergeMap } from 'rxjs/operators';
+import { catchError, map, delay, concatMap, mergeMap, switchMap } from 'rxjs/operators';
 
 import * as todoActions from '../reducers/todo.actions';
 import { TodoModel } from '../models';
 import { DELAY_TIME } from '../../shared';
 
+const x = [
+  {
+      id: '1',
+      value: 'Learn to build angular app using ngrx/store',
+      done: false
+    },
+ {
+      id: '2',
+      value: 'Build a template-driven form to submit todo value',
+      done: false
+    }
+];
+
 @Injectable()
 export class TodoEffects {
   constructor(private actions$: Actions) {}
+
+  @Effect()
+  loadTodos$: Observable<Action> = this.actions$.pipe(
+        ofType<todoActions.LoadTodosAction>(todoActions.LOAD_TODOS),
+        switchMap(() => {
+          return of(x)
+            .pipe(
+              map(data => new todoActions.LoadTodosSuccessAction(data)),
+              catchError(error => of(new todoActions.LoadTodosFailedAction({ error })))
+            )
+        })
+      );
 
   @Effect()
   addTodo$: Observable<Action> = this.actions$.pipe(

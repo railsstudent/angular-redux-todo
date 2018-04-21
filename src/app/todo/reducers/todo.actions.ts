@@ -16,6 +16,24 @@ export const TOGGLE_DONE_FAILED = '[TODO] TOGGLE_DONE_FAILED';
 export const REMOVE_TODOS = '[TODO] REMOVE_TODOS';
 export const REMOVE_TODOS_SUCCESS = '[TODO] REMOVE_TODOS_SUCCESS';
 export const REMOVE_TODOS_FAILED = '[TODO] REMOVE_TODOS_FAILED';
+export const LOAD_TODOS = '[TODO] LOAD_TODOS';
+export const LOAD_TODOS_SUCCESS = '[TODO] LOAD_TODOS_SUCCESS';
+export const LOAD_TODOS_FAILED = '[TODO] LOAD_TODOS_FAILED';
+
+export class LoadTodosAction implements Action {
+    readonly type = LOAD_TODOS;
+    constructor () {}
+}
+
+export class LoadTodosSuccessAction implements Action {
+    readonly type = LOAD_TODOS_SUCCESS;
+    constructor (public payload: TodoModel[]) {}
+}
+
+export class LoadTodosFailedAction implements Action {
+    readonly type = LOAD_TODOS_FAILED;
+    constructor (public payload: {error: string}) {}
+}
 
 export class AddTodoAction implements Action {
     readonly type = ADD_TODO;
@@ -98,4 +116,6 @@ export type TodoActions = AddTodoAction | DeleteTodoAction | UpdateTodoAction |
   DeleteTodoSuccessAction | DeleteTodoFailedAction |
   UpdateTodoSuccessAction | UpdateTodoFailedAction |
   ToggleDoneSuccessAction | ToggleDoneFailedAction |
-  RemoveTodosSuccessAction | RemoveTodosFailedAction;
+  RemoveTodosSuccessAction | RemoveTodosFailedAction |
+  LoadTodosAction | LoadTodosSuccessAction |
+  LoadTodosFailedAction;

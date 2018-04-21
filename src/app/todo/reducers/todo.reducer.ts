@@ -2,30 +2,35 @@ import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { TodoModel } from '../models/';
 import * as todoActions from './todo.actions';
+import { TodoService } from '../services';
 
 export interface TodoState extends EntityState<TodoModel> {
   loading: boolean;
 }
 export const todoAdapter: EntityAdapter<TodoModel> = createEntityAdapter<TodoModel>();
+// export const initialTodoState: TodoState = todoAdapter.getInitialState({
+//   ids: ['1', '2', '3'],
+//   entities: {
+//     '1': {
+//       id: '1',
+//       value: 'Learn to build angular app using ngrx/store',
+//       done: false
+//     },
+//     '2': {
+//       id: '2',
+//       value: 'Build a template-driven form to submit todo value',
+//       done: false
+//     },
+//     '3': {
+//       id: '3',
+//       value: 'Style the app with ngBootstrap 4',
+//       done: false
+//     }
+//   },
+//   loading: false
+// });
+
 export const initialTodoState: TodoState = todoAdapter.getInitialState({
-  ids: ['1', '2', '3'],
-  entities: {
-    '1': {
-      id: '1',
-      value: 'Learn to build angular app using ngrx/store',
-      done: false
-    },
-    '2': {
-      id: '2',
-      value: 'Build a template-driven form to submit todo value',
-      done: false
-    },
-    '3': {
-      id: '3',
-      value: 'Style the app with ngBootstrap 4',
-      done: false
-    }
-  },
   loading: false
 });
 
@@ -36,6 +41,7 @@ export function todoReducer(state: TodoState = initialTodoState, action: todoAct
     case todoActions.UPDATE_TODO:
     case todoActions.TOGGLE_DONE:
     case todoActions.REMOVE_TODOS:
+    case todoActions.LOAD_TODOS:
       return { ...state, loading: true };
     case todoActions.ADD_TODO_SUCCESS:
       return {
@@ -47,7 +53,13 @@ export function todoReducer(state: TodoState = initialTodoState, action: todoAct
     case todoActions.UPDATE_TODO_FAILED:
     case todoActions.TOGGLE_DONE_FAILED:
     case todoActions.REMOVE_TODOS_FAILED:
+    case todoActions.LOAD_TODOS_FAILED:
       return { ...state, loading: false };
+    case todoActions.LOAD_TODOS_SUCCESS:
+      return {
+        ...todoAdapter.addAll(action.payload, state),
+        loading: false
+      }
     case todoActions.DELETE_TODO_SUCCESS:
       return {
         ...todoAdapter.removeOne(action.payload.id, state),
