@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { TodoLocalstorageService } from './todo-localstorage.service';
 import { map, catchError } from 'rxjs/operators';
-import { keys } from 'lodash-es';
 
 @Injectable()
 export class TodoService {
@@ -16,7 +15,7 @@ export class TodoService {
     return this.storage.get();
   }
 
-  add(newTodo: TodoModel): Observable<string | TodoModel> {
+  add(newTodo: TodoModel): Observable<TodoModel> {
     return this.storage.add(newTodo);
   }
 
@@ -28,7 +27,7 @@ export class TodoService {
     return this.storage.removeAll();
   }
 
-  update(todo: TodoModel): Observable<string | TodoModel> {
+  update(todo: TodoModel): Observable<TodoModel> {
     return this.storage.update(todo);
   }
 }

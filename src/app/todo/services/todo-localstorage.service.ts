@@ -3,7 +3,7 @@ import { LocalStorage } from '@ngx-pwa/local-storage';
 import { TodoModel } from '../models/';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { map, catchError, mergeMap, concatMap } from 'rxjs/operators';
+import { map, catchError, mergeMap, concatMap, switchMap } from 'rxjs/operators';
 import { assign, reject } from 'lodash-es';
 
 const TODO_LIST_KEY = 'todo_list';
@@ -37,17 +37,14 @@ export class TodoLocalstorageService {
   get(): Observable<TodoModel[]> {
     return this.localStorage.getItem<TodoModel[]>(TODO_LIST_KEY)
       .pipe(
-        map(data => {
+        switchMap(data => {
           console.log('localstorage service get()', data);
           if (data) {
-            return data;
+            return of(data);
           }
           return this.localStorage.setItem(TODO_LIST_KEY, DEFAULT_ENTITIES)
-            .pipe(
-              map(() => DEFAULT_ENTITIES)
-            )
-        }),
-        catchError(error => of(error))
+            .pipe(map(() => DEFAULT_ENTITIES))
+        })
       );
   }
 
@@ -58,12 +55,8 @@ export class TodoLocalstorageService {
         map(data => data.concat(newTodo)),
         concatMap(newData =>
           this.localStorage.setItem(TODO_LIST_KEY, newData)
-            .pipe(
-              map(() => newTodo),
-              catchError(() => of(`Error occurs when adding new todo ${id} to local storage`))
-            )
-        ),
-        catchError(() => of('Error occurs when retrieving todos from local storage'))
+            .pipe(map(() => newTodo))
+        )
       );
   }
 
@@ -73,21 +66,14 @@ export class TodoLocalstorageService {
           map(todos => reject(todos, { id })),
           mergeMap(newTodos =>
             this.localStorage.setItem(TODO_LIST_KEY, newTodos)
-              .pipe(
-                map(() => id),
-                catchError(() => of(`Error occurs when removing todo ${id} from local storage`))
-              )
-          ),
-          catchError(() => of('Error occurs when retrieving todos from local storage'))
+              .pipe(map(() => id))
+          )
       );
   }
 
   removeAll() {
     return this.localStorage.removeItem(TODO_LIST_KEY)
-      .pipe(
-          map(() => null),
-          catchError(() => of('Error occurs when removing all todos from local storage.'))
-      );
+      .pipe(map(() => null));
   }
 
   update(todo: TodoModel) {
@@ -97,12 +83,8 @@ export class TodoLocalstorageService {
           map(todos => todos.map(t => (t.id === id) ? todo : t)),
           concatMap(newTodos =>
             this.localStorage.setItem(TODO_LIST_KEY, newTodos)
-              .pipe(
-                map(() => todo),
-                catchError( () => of(`Error occurs when updating todo ${id} to local storage.`))
-              )
-          ),
-          catchError(() => of('Error occurs when retrieving todos from local storage.'))
+              .pipe(map(() => todo))
+          )
       );
   }
 }
