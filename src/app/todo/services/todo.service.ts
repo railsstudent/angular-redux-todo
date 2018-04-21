@@ -12,18 +12,8 @@ export class TodoService {
 
   constructor(private storage: TodoLocalstorageService) { }
 
-  get(): Observable<any> {
-    return this.storage.get()
-      .pipe(
-        map(entities => {
-          const data = {
-            ids: keys(entities),
-            entities
-          };
-          console.log('todo.service get function', data);
-          return data
-        })
-      );
+  get(): Observable<TodoModel[]> {
+    return this.storage.get();
   }
 
   add(newTodo: TodoModel): Observable<string | TodoModel> {
