@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { UUID } from 'angular2-uuid';
@@ -13,7 +13,7 @@ import * as courseActions from '../../reducers/course.actions';
   selector: 'app-course-detail',
   templateUrl: './course-detail.component.html',
   styleUrls: ['./course-detail.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseDetailComponent implements OnInit {
   currentCourse$: Observable<CourseModel>;

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { CourseOverviewModel } from '../models';
@@ -8,7 +8,7 @@ import { LearningsStore, selectCourseOverview } from '../reducers';
   selector: 'app-course-overview',
   templateUrl: './course-overview.component.html',
   styleUrls: ['./course-overview.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseOverviewComponent implements OnInit {
   courseOverview$: Observable<CourseOverviewModel[]>;

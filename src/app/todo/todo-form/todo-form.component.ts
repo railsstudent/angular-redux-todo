@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store, select } from '@ngrx/store';
 
@@ -10,7 +10,8 @@ import * as todoActions from '../reducers/todo.actions';
 @Component({
   selector: 'app-todo-form',
   templateUrl: './todo-form.component.html',
-  styleUrls: ['./todo-form.component.scss']
+  styleUrls: ['./todo-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoFormComponent implements OnInit {
   todo$: Observable<TodoModel[]>;
