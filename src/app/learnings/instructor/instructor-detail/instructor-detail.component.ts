@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { UUID } from 'angular2-uuid';
 import { Observable } from 'rxjs/Observable';
@@ -14,7 +14,7 @@ const MAX_LEN = 500;
   selector: 'app-instructor-detail',
   templateUrl: './instructor-detail.component.html',
   styleUrls: ['./instructor-detail.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InstructorDetailComponent implements OnInit {
   currentInstructor$: Observable<InstructorModel>;

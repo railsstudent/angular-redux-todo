@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { InstructorModel } from '../models';
@@ -11,7 +11,8 @@ import * as instructorActions from '../reducers/instructor.actions';
 @Component({
   selector: 'app-instructor',
   templateUrl: './instructor.component.html',
-  styleUrls: ['./instructor.component.scss']
+  styleUrls: ['./instructor.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InstructorComponent implements OnInit {
   instructors$: Observable<InstructorModel[]>;
