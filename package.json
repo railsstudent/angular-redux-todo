@@ -25,6 +25,7 @@
     "@ng-bootstrap/ng-bootstrap": "1.0.1",
     "@ngrx/effects": "~5.2.x",
     "@ngrx/entity": "~5.2.x",
+    "@ngrx/router-store": "^5.2.0",
     "@ngrx/store": "~5.2.x",
     "@ngrx/store-devtools": "~5.2.x",
     "@ngx-pwa/local-storage": "5.2.0",
