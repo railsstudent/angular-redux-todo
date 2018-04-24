@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { UUID } from 'angular2-uuid';
 import { Observable } from 'rxjs/Observable';
@@ -27,7 +27,7 @@ export class InstructorDetailComponent implements OnInit {
   instructorError$: Observable<string>;
   instructorErrMsg: string;
 
-  constructor(private store: Store<LearningsStore>, private route: ActivatedRoute) { }
+  constructor(private store: Store<LearningsStore>, private route: ActivatedRoute, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.currentInstructor$ = this.store.pipe(select(selectCurrentInstructor));
@@ -36,6 +36,7 @@ export class InstructorDetailComponent implements OnInit {
       this.currentInstructor = objectAssign.assign({}, {
         id, name, description
       });
+      this.cd.markForCheck();
     });
 
     this.route.paramMap
@@ -45,6 +46,7 @@ export class InstructorDetailComponent implements OnInit {
     this.instructorError$ = this.store.pipe(select(selectInstructorError));
     this.instructorError$.subscribe(err => {
       this.instructorErrMsg = err;
+      this.cd.markForCheck();
     });
   }
 

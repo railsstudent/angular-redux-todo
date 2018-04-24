@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { UUID } from 'angular2-uuid';
@@ -27,7 +27,7 @@ export class CourseDetailComponent implements OnInit {
   courseError$: Observable<string>;
   courseErrMsg: string;
 
-  constructor(private store: Store<LearningsStore>) {
+  constructor(private store: Store<LearningsStore>, private cd: ChangeDetectorRef) {
     this.courseErrMsg = '';
   }
 
@@ -42,12 +42,14 @@ export class CourseDetailComponent implements OnInit {
         description,
         instructorId
       };
+      this.cd.markForCheck();
     });
     this.instructors$ = this.store.pipe(select(selectAllInstructors));
     this.courseError$ = this.store.pipe(select(selectCourseError));
 
     this.courseError$.subscribe(err => {
       this.courseErrMsg = err;
+      this.cd.markForCheck();
     });
   }
 
