@@ -30,5 +30,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 * ng build --prod --base-href "https://railsstudent.github.io/angular-redux-todo/"
 * ngh --no-silent
 
+* Method 2
+  * npm run deploy
+
 ## Github.io URL
 https://railsstudent.github.io/angular-redux-todo/
