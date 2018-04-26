@@ -25,11 +25,8 @@ export class CourseDetailComponent implements OnInit {
   };
   instructors$: Observable<InstructorModel[]>;
   courseError$: Observable<string>;
-  courseErrMsg: string;
 
-  constructor(private store: Store<LearningsStore>, private cd: ChangeDetectorRef) {
-    this.courseErrMsg = '';
-  }
+  constructor(private store: Store<LearningsStore>, private cd: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.currentCourse$ = this.store.pipe(select(selectCurrentCourse));
@@ -46,11 +43,6 @@ export class CourseDetailComponent implements OnInit {
     });
     this.instructors$ = this.store.pipe(select(selectAllInstructors));
     this.courseError$ = this.store.pipe(select(selectCourseError));
-
-    this.courseError$.subscribe(err => {
-      this.courseErrMsg = err;
-      this.cd.markForCheck();
-    });
   }
 
   updateCourse() {
