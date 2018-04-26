@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { TodoModel } from '../models/';
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
 import { TodoLocalstorageService } from './todo-localstorage.service';
-import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class TodoService {

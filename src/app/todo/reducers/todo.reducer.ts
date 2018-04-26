@@ -6,6 +6,7 @@ import { TodoService } from '../services';
 
 export interface TodoState extends EntityState<TodoModel> {
   loading: boolean;
+  error: string;
 }
 export const todoAdapter: EntityAdapter<TodoModel> = createEntityAdapter<TodoModel>();
 // export const initialTodoState: TodoState = todoAdapter.getInitialState({
@@ -31,7 +32,8 @@ export const todoAdapter: EntityAdapter<TodoModel> = createEntityAdapter<TodoMod
 // });
 
 export const initialTodoState: TodoState = todoAdapter.getInitialState({
-  loading: false
+  loading: false,
+  error: null
 });
 
 export function todoReducer(state: TodoState = initialTodoState, action: todoActions.TodoActions): TodoState {
@@ -54,7 +56,8 @@ export function todoReducer(state: TodoState = initialTodoState, action: todoAct
     case todoActions.TOGGLE_DONE_FAILED:
     case todoActions.REMOVE_TODOS_FAILED:
     case todoActions.LOAD_TODOS_FAILED:
-      return { ...state, loading: false };
+      const { error = null } = action.payload || {};
+      return { ...state, loading: false, error };
     case todoActions.LOAD_TODOS_SUCCESS:
       return {
         ...todoAdapter.addAll(action.payload, state),
@@ -103,3 +106,4 @@ export const selectPendingTodos = createSelector(selectAllTodos,
 export const selectCompletedTodosCount = createSelector(selectCompletedTodos, (t: TodoModel[]) => t.length);
 export const selectPendingTodosCount = createSelector(selectPendingTodos, (t: TodoModel[]) => t.length);
 export const selectTodoLoading = createSelector(selectTodos, (state: TodoState) => state.loading);
+export const selectTodoError = createSelector(selectTodos, (state: TodoState) => state.error);
