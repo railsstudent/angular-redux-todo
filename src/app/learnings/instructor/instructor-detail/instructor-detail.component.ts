@@ -25,7 +25,6 @@ export class InstructorDetailComponent implements OnInit {
   };
   maxDescriptionLen: number = MAX_LEN;
   instructorError$: Observable<string>;
-  instructorErrMsg: string;
 
   constructor(private store: Store<LearningsStore>, private route: ActivatedRoute, private cd: ChangeDetectorRef) { }
 
@@ -44,10 +43,6 @@ export class InstructorDetailComponent implements OnInit {
       this.store.dispatch(new instructorActions.SelectInstructorAction({ id: params.get('id') })));
 
     this.instructorError$ = this.store.pipe(select(selectInstructorError));
-    this.instructorError$.subscribe(err => {
-      this.instructorErrMsg = err;
-      this.cd.markForCheck();
-    });
   }
 
   updateInstructor() {
