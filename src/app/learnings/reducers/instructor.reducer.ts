@@ -42,6 +42,7 @@ export function instructorReducer(state: InstructorState = initialState,
       const { error = null } = action.payload || {};
       return {
         ...state,
+        selectedInstructorId: null,
         loading: false,
         error
       }

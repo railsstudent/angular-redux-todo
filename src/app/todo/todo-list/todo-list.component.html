@@ -1,4 +1,7 @@
 <div id="todoList">
+  <div class="p-2 app-todo-section" *ngIf="this.todoError$ | async; let error">
+    <p class="text-danger">Error: {{error}}</p>
+  </div>
   <div class="p-2 app-todo-section">
     <div class="item stat">
       <div>

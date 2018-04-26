@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { TodoModel } from '../models/';
 import { todoStore, selectPendingTodos, selectCompletedTodos, selectAllTodos, selectTodosTotal,
-  selectCompletedTodosCount, selectPendingTodosCount
+  selectCompletedTodosCount, selectPendingTodosCount, selectTodoError
 } from '../reducers/';
 import * as todoActions from '../reducers/todo.actions';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
@@ -24,6 +24,7 @@ export class TodoListComponent implements OnInit {
   pendingTodosCount$: Observable<number>;
   completedTodos$: Observable<TodoModel[]>;
   pendingTodos$: Observable<TodoModel[]>;
+  todoError$: Observable<string>;
 
   constructor(private store: Store<todoStore>, private modalService: NgbModal) {}
 
@@ -34,6 +35,7 @@ export class TodoListComponent implements OnInit {
     this.pendingTodos$ = this.store.pipe(select(selectPendingTodos));
     this.completedTodosCount$ = this.store.pipe(select(selectCompletedTodosCount));
     this.pendingTodosCount$ = this.store.pipe(select(selectPendingTodosCount));
+    this.todoError$ = this.store.pipe(select(selectTodoError));
   }
 
   deleteTodo(id) {
