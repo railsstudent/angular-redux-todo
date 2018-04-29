@@ -1,6 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import { UUID } from 'angular2-uuid';
 import { InstructorModel, CourseModel  } from '../../models';
 import { LearningsStore,
@@ -25,13 +26,14 @@ export class CourseDetailComponent implements OnInit {
   };
   instructors$: Observable<InstructorModel[]>;
   courseError$: Observable<string>;
+  currentCourseSubscription: Subscription;
 
   constructor(private store: Store<LearningsStore>, private cd: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.currentCourse$ = this.store.pipe(select(selectCurrentCourse));
 
-    this.currentCourse$.subscribe((course: CourseModel) => {
+    this.currentCourseSubscription = this.currentCourse$.subscribe((course: CourseModel) => {
       const { id = '', name = '', description = '', instructorId = '' } = course || {};
       this.currentCourse = {
         id,
@@ -43,6 +45,12 @@ export class CourseDetailComponent implements OnInit {
     });
     this.instructors$ = this.store.pipe(select(selectAllInstructors));
     this.courseError$ = this.store.pipe(select(selectCourseError));
+  }
+
+  ngOnDestroy() {
+    if (this.currentCourseSubscription) {
+      this.currentCourseSubscription.unsubscribe();
+    }
   }
 
   updateCourse() {

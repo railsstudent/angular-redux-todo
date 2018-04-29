@@ -1,7 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { UUID } from 'angular2-uuid';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import * as objectAssign from 'es6-object-assign';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { InstructorModel } from '../../models';
@@ -16,7 +17,7 @@ const MAX_LEN = 500;
   styleUrls: ['./instructor-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InstructorDetailComponent implements OnInit {
+export class InstructorDetailComponent implements OnInit, OnDestroy {
   currentInstructor$: Observable<InstructorModel>;
   currentInstructor: InstructorModel = {
     id: '',
@@ -25,12 +26,13 @@ export class InstructorDetailComponent implements OnInit {
   };
   maxDescriptionLen: number = MAX_LEN;
   instructorError$: Observable<string>;
+  currentInstructorSubscription: Subscription;
 
   constructor(private store: Store<LearningsStore>, private route: ActivatedRoute, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.currentInstructor$ = this.store.pipe(select(selectCurrentInstructor));
-    this.currentInstructor$.subscribe((instructor: InstructorModel) => {
+    this.currentInstructorSubscription = this.currentInstructor$.subscribe((instructor: InstructorModel) => {
       const { id = '', name = '', description = '' } = instructor || {};
       this.currentInstructor = objectAssign.assign({}, {
         id, name, description
@@ -43,6 +45,12 @@ export class InstructorDetailComponent implements OnInit {
       this.store.dispatch(new instructorActions.SelectInstructorAction({ id: params.get('id') })));
 
     this.instructorError$ = this.store.pipe(select(selectInstructorError));
+  }
+
+  ngOnDestroy() {
+    if (this.currentInstructorSubscription) {
+      this.currentInstructorSubscription.unsubscribe();
+    }
   }
 
   updateInstructor() {
