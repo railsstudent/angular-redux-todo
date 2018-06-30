@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { TodoModel } from '../models/';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { TodoLocalstorageService } from './todo-localstorage.service';
 
 @Injectable()

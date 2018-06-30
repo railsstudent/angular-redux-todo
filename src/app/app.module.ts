@@ -1,31 +1,30 @@
-import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { StoreModule, MetaReducer } from '@ngrx/store';
-import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
-import { storeFreeze } from 'ngrx-store-freeze';
-import { FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { environment } from '../environments/environment'; // Angular CLI environment
-import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { LocalStorageModule } from '@ngx-pwa/local-storage';
+import { BrowserModule, Title } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { StoreModule, MetaReducer } from "@ngrx/store";
+import {
+  StoreRouterConnectingModule,
+  RouterStateSerializer
+} from "@ngrx/router-store";
+import { storeFreeze } from "ngrx-store-freeze";
+import { FormsModule } from "@angular/forms";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { environment } from "../environments/environment"; // Angular CLI environment
+import { EffectsModule } from "@ngrx/effects";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 
-import { AppStore, reducers,
-  CustomRouterStateSerializer
-} from './reducers';
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+import { AppStore, reducers, CustomRouterStateSerializer } from "./reducers";
+import { AppComponent } from "./app.component";
+import { AppRoutingModule } from "./app-routing.module";
 
-export const metaReducers: MetaReducer<AppStore>[] = !environment.production ? [storeFreeze]: [];
+export const metaReducers: MetaReducer<AppStore>[] = !environment.production
+  ? [storeFreeze]
+  : [];
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     FormsModule,
-    LocalStorageModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     /**
      * @ngrx/router-store keeps router state up-to-date in the store.
@@ -35,12 +34,12 @@ export const metaReducers: MetaReducer<AppStore>[] = !environment.production ? [
         They stateKey defines the name of the state used by the router-store reducer.
         This matches the key defined in the map of reducers
       */
-      stateKey: 'router',
+      stateKey: "router"
     }),
     EffectsModule.forRoot([]),
     NgbModule.forRoot(),
     StoreDevtoolsModule.instrument({
-      name: 'NgRx Todo App Store DevTools',
+      name: "NgRx Todo App Store DevTools",
       maxAge: 25 //  Retains last 25 states
     }),
     AppRoutingModule
@@ -56,4 +55,4 @@ export const metaReducers: MetaReducer<AppStore>[] = !environment.production ? [
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
