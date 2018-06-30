@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { TodoModel } from '../models/';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { Observable ,  of } from 'rxjs';
 import { map, catchError, mergeMap, concatMap, switchMap } from 'rxjs/operators';
 import { assign, reject } from 'lodash-es';
 

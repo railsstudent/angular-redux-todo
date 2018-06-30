@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { todoStore, selectTodoLoading } from './reducers';
 import * as todoActions from './reducers/todo.actions';

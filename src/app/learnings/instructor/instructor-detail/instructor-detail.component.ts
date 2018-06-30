@@ -1,8 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { UUID } from 'angular2-uuid';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
+import { Observable ,  Subscription } from 'rxjs';
 import * as objectAssign from 'es6-object-assign';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { InstructorModel } from '../../models';

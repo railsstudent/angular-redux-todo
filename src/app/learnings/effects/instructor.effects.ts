@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable ,  of ,  throwError as _throw } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs/observable/of';
 import { catchError, map, delay, mergeMap, concatMap } from 'rxjs/operators';
-import { _throw } from 'rxjs/observable/throw';
 
 import { DELAY_TIME } from '../../shared';
 import { InstructorModel } from '../models';
