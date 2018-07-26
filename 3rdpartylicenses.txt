@@ -1,3 +1,7 @@
+@ngrx/entity@6.0.1
+MIT
+MIT
+
 angular2-uuid@1.1.1
 MIT
 The MIT License (MIT)
@@ -469,10 +473,6 @@ MIT
 MIT
 
 @angular/core@6.0.7
-MIT
-MIT
-
-@ngrx/entity@6.0.1
 MIT
 MIT
 
