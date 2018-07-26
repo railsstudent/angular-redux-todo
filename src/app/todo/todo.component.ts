@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { todoStore, selectTodoLoading } from './reducers';
+import { TodoStore, selectTodoLoading } from './reducers';
 import * as todoActions from './reducers/todo.actions';
 
 @Component({
@@ -14,7 +14,7 @@ export class TodoComponent implements OnInit {
   title = 'Angular Todo App!';
   todoLoading$: any;
 
-  constructor(private store: Store<todoStore>) { }
+  constructor(private store: Store<TodoStore>) { }
 
   ngOnInit() {
     this.todoLoading$ = this.store.pipe(select(selectTodoLoading));
