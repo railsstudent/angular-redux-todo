@@ -34,15 +34,9 @@ export class CustomRouterStateSerializer implements RouterStateSerializer<Router
 }
 
 export interface AppStore {
-  todo: TodoState,
-  instructor: InstructorState,
-  course: CourseState,
   router: RouterReducerState<RouterStateUrl>;
 }
 
 export const reducers = {
-  todo: todoReducer,
-  instructor: instructorReducer,
-  course: courseReducer,
   router: routerReducer
 }
