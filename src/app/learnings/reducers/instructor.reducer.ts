@@ -8,7 +8,7 @@ export interface InstructorState extends EntityState<InstructorModel> {
   selectedInstructorId: string | null;
   loading: boolean;
   error: string | null;
-};
+}
 export const instructorAdapter: EntityAdapter<InstructorModel> = createEntityAdapter<InstructorModel>();
 export const initialState: InstructorState = instructorAdapter.getInitialState({
   // additional entities state properties
@@ -35,7 +35,7 @@ export function instructorReducer(state: InstructorState = initialState,
         ...state,
         loading: true,
         error: null
-      }
+      };
     case instructorActions.ADD_INSTRUCTOR_FAILED:
     case instructorActions.DELETE_INSTRUCTOR_FAILED:
     case instructorActions.UPDATE_INSTRUCTOR_FAILED:
@@ -45,7 +45,7 @@ export function instructorReducer(state: InstructorState = initialState,
         selectedInstructorId: null,
         loading: false,
         error
-      }
+      };
     case instructorActions.ADD_INSTRUCTOR_SUCCESS:
       return {
         ...instructorAdapter.addOne(action.payload, state),
@@ -56,10 +56,10 @@ export function instructorReducer(state: InstructorState = initialState,
     case instructorActions.DELETE_INSTRUCTOR_SUCCESS:
       return {
         ...instructorAdapter.removeOne(action.payload.id, state),
-        selectedInstructorId: (action.payload.id != state.selectedInstructorId) ? state.selectedInstructorId : null,
+        selectedInstructorId: (action.payload.id !== state.selectedInstructorId) ? state.selectedInstructorId : null,
         loading: false,
         error: null
-      }
+      };
     case instructorActions.UPDATE_INSTRUCTOR_SUCCESS:
       const { id = '', name = '', description = '' } = action.payload || {};
       const changes = { name, description };

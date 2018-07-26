@@ -5,15 +5,14 @@ import { InstructorDetailComponent } from './instructor/instructor-detail/instru
 import { CourseComponent } from './course/course.component';
 import { CourseDetailComponent } from './course/course-detail/course-detail.component';
 import { CourseOverviewComponent } from './course-overview/course-overview.component';
-//import { LearningsComponent } from './learnings.component';
 
 @NgModule({
   imports: [RouterModule.forChild(
     [
-      { path:'instructor', component: InstructorComponent },
-      { path:'instructor/:id', component: InstructorComponent },
-      { path:'course', component: CourseComponent },
-      { path:'courseOverview', component: CourseOverviewComponent }
+      { path: 'instructor', component: InstructorComponent },
+      { path: 'instructor/:id', component: InstructorComponent },
+      { path: 'course', component: CourseComponent },
+      { path: 'courseOverview', component: CourseOverviewComponent }
     ])],
   exports: [RouterModule]
 })

@@ -38,9 +38,9 @@ export const selectCourseOverview = createSelector(selectInstructorEntities, sel
   );
 
   export interface LearningsStore {
-    instructor: InstructorState,
-    course: CourseState
-  };
+    instructor: InstructorState;
+    course: CourseState;
+  }
 
   export const reducers: ActionReducerMap<LearningsStore> = {
     instructor: instructorReducer,

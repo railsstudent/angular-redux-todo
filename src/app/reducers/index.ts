@@ -39,4 +39,4 @@ export interface AppStore {
 
 export const reducers = {
   router: routerReducer
-}
+};

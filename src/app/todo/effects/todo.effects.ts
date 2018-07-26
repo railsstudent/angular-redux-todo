@@ -23,7 +23,7 @@ export class TodoEffects {
               delay(DELAY_TIME),
               map(data => new todoActions.LoadTodosSuccessAction(data)),
               catchError(error => of(new todoActions.LoadTodosFailedAction({ error })))
-            )
+            );
         })
       );
 

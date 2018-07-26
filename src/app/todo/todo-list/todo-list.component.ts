@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { TodoModel } from '../models/';
-import { todoStore, selectPendingTodos, selectCompletedTodos, selectAllTodos, selectTodosTotal,
+import { TodoStore, selectPendingTodos, selectCompletedTodos, selectAllTodos, selectTodosTotal,
   selectCompletedTodosCount, selectPendingTodosCount, selectTodoError
 } from '../reducers/';
 import * as todoActions from '../reducers/todo.actions';
@@ -26,7 +26,7 @@ export class TodoListComponent implements OnInit {
   pendingTodos$: Observable<TodoModel[]>;
   todoError$: Observable<string>;
 
-  constructor(private store: Store<todoStore>, private modalService: NgbModal) {}
+  constructor(private store: Store<TodoStore>, private modalService: NgbModal) {}
 
   ngOnInit() {
     this.todos$ = this.store.pipe(select(selectAllTodos));

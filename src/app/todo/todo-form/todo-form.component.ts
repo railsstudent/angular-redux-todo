@@ -2,9 +2,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
-import { ADD_TODO } from '../reducers/todo.actions';
 import { TodoModel } from '../models/';
-import { todoStore, selectAllTodos } from '../reducers/';
+import { TodoStore, selectAllTodos } from '../reducers/';
 import * as todoActions from '../reducers/todo.actions';
 
 @Component({
@@ -15,9 +14,9 @@ import * as todoActions from '../reducers/todo.actions';
 })
 export class TodoFormComponent implements OnInit {
   todo$: Observable<TodoModel[]>;
-  newTodo: string = '';
+  newTodo = '';
 
-  constructor(private store: Store<todoStore>) { }
+  constructor(private store: Store<TodoStore>) { }
 
   ngOnInit() {
     this.todo$ = this.store.pipe(select(selectAllTodos));

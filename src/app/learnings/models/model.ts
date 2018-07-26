@@ -20,5 +20,5 @@ export interface CourseOverviewModel {
   id: string;
   name: string;
   description: string;
-  courses: CourseModel[]
+  courses: CourseModel[];
 }

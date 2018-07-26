@@ -42,7 +42,7 @@ export class TodoLocalstorageService {
             return of(data);
           }
           return this.localStorage.setItem(TODO_LIST_KEY, DEFAULT_ENTITIES)
-            .pipe(map(() => DEFAULT_ENTITIES))
+            .pipe(map(() => DEFAULT_ENTITIES));
         })
       );
   }

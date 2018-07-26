@@ -7,7 +7,7 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
 
 const routes: Routes = [
-  { path:'', pathMatch: 'full', component: TodoComponent }
+  { path: '', pathMatch: 'full', component: TodoComponent }
 ];
 
 @NgModule({
@@ -20,7 +20,7 @@ export const RoutingComponents = [
   TodoComponent,
   TodoListComponent,
   TodoFormComponent
-]
+];
 
 export const EntryComponents = [
   ConfirmModalComponent,

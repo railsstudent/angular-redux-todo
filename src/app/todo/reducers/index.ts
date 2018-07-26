@@ -6,6 +6,6 @@ export {
 
 import { TodoState } from './todo.reducer';
 
-export interface todoStore {
-  todo: TodoState
+export interface TodoStore {
+  todo: TodoState;
 }

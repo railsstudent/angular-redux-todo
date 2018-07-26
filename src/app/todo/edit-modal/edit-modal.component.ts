@@ -10,9 +10,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class EditModalComponent implements OnInit {
 
   @Input()
-  todo: string = '';
+  todo = '';
   @Input()
-  title: string = '';
+  title = '';
 
   constructor(public activeModal: NgbActiveModal) { }
 

@@ -8,7 +8,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class AppComponent implements OnInit {
   title = 'Todo App';
-  isCollapsed: boolean = true;
+  isCollapsed = true;
 
   links = {
     instructor: ['/learnings/instructor'],

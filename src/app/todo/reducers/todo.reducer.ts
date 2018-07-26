@@ -2,7 +2,6 @@ import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { TodoModel } from '../models/';
 import * as todoActions from './todo.actions';
-import { TodoService } from '../services';
 
 export interface TodoState extends EntityState<TodoModel> {
   loading: boolean;
@@ -62,7 +61,7 @@ export function todoReducer(state: TodoState = initialTodoState, action: todoAct
       return {
         ...todoAdapter.addAll(action.payload, state),
         loading: false
-      }
+      };
     case todoActions.DELETE_TODO_SUCCESS:
       return {
         ...todoAdapter.removeOne(action.payload.id, state),
@@ -70,8 +69,8 @@ export function todoReducer(state: TodoState = initialTodoState, action: todoAct
       };
     case todoActions.UPDATE_TODO_SUCCESS:
     case todoActions.TOGGLE_DONE_SUCCESS:
-      let { id = '', value = '', done = false } = action.payload || {};
-      let changes = { value, done };
+      const { id = '', value = '', done = false } = action.payload || {};
+      const changes = { value, done };
       return {
         ...todoAdapter.updateOne({ id, changes }, state),
         loading: false

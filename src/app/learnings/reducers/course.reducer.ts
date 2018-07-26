@@ -2,14 +2,14 @@ import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { CourseModel } from '../models/';
 import * as courseActions from './course.actions';
-import * as instructorActions  from './instructor.actions';
+import * as instructorActions from './instructor.actions';
 
 export interface CourseState extends EntityState<CourseModel> {
   // additional entities state properties
-  selectedCourseId: string | null,
-  loading: boolean,
-  error: string | null
-};
+  selectedCourseId: string | null;
+  loading: boolean;
+  error: string | null;
+}
 export const courseAdapter: EntityAdapter<CourseModel> = createEntityAdapter<CourseModel>();
 export const initialCourseState: CourseState = courseAdapter.getInitialState({
   ids: ['1', '2'],
@@ -87,14 +87,14 @@ export function courseReducer(state: CourseState = initialCourseState,
     case instructorActions.DELETE_INSTRUCTOR_SUCCESS:
       const courseIds = Object.keys(state.entities)
         .filter(id => state.entities[id].instructorId === action.payload.id)
-        .map(id => state.entities[id].id)
+        .map(id => state.entities[id].id);
       console.log('courseIds', courseIds);
       return {
         ...courseAdapter.removeMany(courseIds, state),
         selectedCourseId: courseIds.indexOf(state.selectedCourseId) < 0 ? state.selectedCourseId : null,
         loading: false,
         error: null
-      }
+      };
     default:
       return {
         ...state,
