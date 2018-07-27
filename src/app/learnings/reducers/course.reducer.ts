@@ -63,7 +63,7 @@ export function courseReducer(state: CourseState = initialCourseState,
     case courseActions.DELETE_COURSE_SUCCESS:
       return {
         ...courseAdapter.removeOne(action.payload.id, state),
-        selectedCourseId: (action.payload.id != state.selectedCourseId) ? state.selectedCourseId : null,
+        selectedCourseId: (action.payload.id !== state.selectedCourseId) ? state.selectedCourseId : null,
         loading: false,
         error: null
       };
@@ -86,8 +86,8 @@ export function courseReducer(state: CourseState = initialCourseState,
       };
     case instructorActions.DELETE_INSTRUCTOR_SUCCESS:
       const courseIds = Object.keys(state.entities)
-        .filter(id => state.entities[id].instructorId === action.payload.id)
-        .map(id => state.entities[id].id);
+        .filter(courseId => state.entities[courseId].instructorId === action.payload.id)
+        .map(courseId => state.entities[courseId].id);
       console.log('courseIds', courseIds);
       return {
         ...courseAdapter.removeMany(courseIds, state),
