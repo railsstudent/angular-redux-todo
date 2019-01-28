@@ -10,7 +10,7 @@ import * as todoActions from "./reducers/todo.actions";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoComponent implements OnInit {
-  title = "Angular Todo App!";
+  title = "NgRx Todo App";
   todoLoading$: any;
 
   constructor(private store: Store<TodoStore>) {}

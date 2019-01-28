@@ -22,7 +22,6 @@ export const LOAD_TODOS_FAILED = "[TODO] LOAD_TODOS_FAILED";
 
 export class LoadTodosAction implements Action {
   readonly type = LOAD_TODOS;
-  constructor() {}
 }
 
 export class LoadTodosSuccessAction implements Action {
@@ -97,12 +96,10 @@ export class ToggleDoneFailedAction implements Action {
 
 export class RemoveTodosAction implements Action {
   readonly type = REMOVE_TODOS;
-  constructor() {}
 }
 
 export class RemoveTodosSuccessAction implements Action {
   readonly type = REMOVE_TODOS_SUCCESS;
-  constructor() {}
 }
 
 export class RemoveTodosFailedAction implements Action {

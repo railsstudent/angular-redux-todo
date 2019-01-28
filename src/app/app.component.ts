@@ -7,7 +7,7 @@ import { Title } from "@angular/platform-browser";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit {
-  title = "Todo App";
+  title = "NgRx Todo App";
   isCollapsed = true;
 
   links = {
