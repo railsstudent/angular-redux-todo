@@ -1,2 +1,2 @@
-export { TodoService } from './todo.service';
-export { TodoLocalstorageService } from './todo-localstorage.service';
+export { TodoLocalstorageService } from "./todo-localstorage.service";
+export { TodoService } from "./todo.service";

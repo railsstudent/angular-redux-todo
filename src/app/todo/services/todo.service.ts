@@ -1,13 +1,11 @@
-import { Injectable } from '@angular/core';
-import { LocalStorage } from '@ngx-pwa/local-storage';
-import { TodoModel } from '../models/';
-import { Observable } from 'rxjs';
-import { TodoLocalstorageService } from './todo-localstorage.service';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { TodoModel } from "../models/";
+import { TodoLocalstorageService } from "./todo-localstorage.service";
 
 @Injectable()
 export class TodoService {
-
-  constructor(private storage: TodoLocalstorageService) { }
+  constructor(private storage: TodoLocalstorageService) {}
 
   get(): Observable<TodoModel[]> {
     return this.storage.get();

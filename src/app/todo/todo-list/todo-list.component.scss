@@ -33,4 +33,10 @@
     font-weight: bold;
     font-size: 1.2em;
   }
+
+  button {
+    &.group {
+      margin-right: 0.5rem;
+    }
+  }
 }

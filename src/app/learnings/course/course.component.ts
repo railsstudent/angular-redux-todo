@@ -1,18 +1,19 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { DisplayCourse } from '../models';
-import { LearningsStore,
-  selectCourseTotal,
-  selectCurrentCourse,
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { select, Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+import { DisplayCourse } from "../models";
+import {
+  LearningsStore,
   selectAllCoursesWithInstructors,
-  selectCourseLoading } from '../reducers';
-import * as courseActions from '../reducers/course.actions';
+  selectCourseLoading,
+  selectCourseTotal
+} from "../reducers";
+import * as courseActions from "../reducers/course.actions";
 
 @Component({
-  selector: 'app-course',
-  templateUrl: './course.component.html',
-  styleUrls: ['./course.component.scss'],
+  selector: "app-course",
+  templateUrl: "./course.component.html",
+  styleUrls: ["./course.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseComponent implements OnInit {
@@ -20,7 +21,7 @@ export class CourseComponent implements OnInit {
   courseTotal$: Observable<number>;
   courseLoading$: Observable<boolean>;
 
-  constructor(private store: Store<LearningsStore>) { }
+  constructor(private store: Store<LearningsStore>) {}
 
   ngOnInit() {
     this.courses$ = this.store.pipe(select(selectAllCoursesWithInstructors));

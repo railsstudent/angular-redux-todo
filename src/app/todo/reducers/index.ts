@@ -1,16 +1,23 @@
 export {
-  selectCompletedTodos, selectPendingTodos,
-  selectAllTodos, selectTodosTotal, selectCompletedTodosCount, selectPendingTodosCount,
-  todoReducer, TodoState, selectTodoLoading, selectTodoError
-} from './todo.reducer';
+  selectAllTodos,
+  selectCompletedTodos,
+  selectCompletedTodosCount,
+  selectPendingTodos,
+  selectPendingTodosCount,
+  selectTodoError,
+  selectTodoLoading,
+  selectTodosTotal,
+  todoReducer,
+  TodoState
+} from "./todo.reducer";
 
-import { ActionReducerMap } from '@ngrx/store';
-import { TodoState, todoReducer } from './todo.reducer';
+import { ActionReducerMap } from "@ngrx/store";
+import { todoReducer, TodoState } from "./todo.reducer";
 
 export interface TodoStore {
   todo: TodoState;
 }
 
 export const reducers: ActionReducerMap<TodoStore> = {
-  todo: todoReducer,
+  todo: todoReducer
 };

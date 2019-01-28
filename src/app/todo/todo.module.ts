@@ -1,27 +1,25 @@
-import { NgModule } from '@angular/core';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-
-import { todoReducer } from './reducers';
-import { TodoEffects } from './effects/';
-import { TodoRoutingModule, RoutingComponents, EntryComponents } from './todo-routing.module';
-import { SharedModule } from '../shared/shared.module';
-import { TodoService, TodoLocalstorageService } from './services';
+import { NgModule } from "@angular/core";
+import { EffectsModule } from "@ngrx/effects";
+import { StoreModule } from "@ngrx/store";
+import { SharedModule } from "../shared/shared.module";
+import { TodoEffects } from "./effects/";
+import { todoReducer } from "./reducers";
+import { TodoLocalstorageService, TodoService } from "./services";
+import {
+  EntryComponents,
+  RoutingComponents,
+  TodoRoutingModule
+} from "./todo-routing.module";
 
 @NgModule({
-  declarations: [
-    RoutingComponents,
-    EntryComponents
-  ],
+  declarations: [RoutingComponents, EntryComponents],
   imports: [
     SharedModule,
-    StoreModule.forFeature('todo', todoReducer),
+    StoreModule.forFeature("todo", todoReducer),
     EffectsModule.forFeature([TodoEffects]),
     TodoRoutingModule
   ],
-  entryComponents: [
-    EntryComponents
-  ],
+  entryComponents: [EntryComponents],
   providers: [TodoService, TodoLocalstorageService]
 })
-export class TodoModule { }
+export class TodoModule {}

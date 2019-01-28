@@ -1,20 +1,19 @@
-import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { StoreModule, MetaReducer } from '@ngrx/store';
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { BrowserModule, Title } from "@angular/platform-browser";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { EffectsModule } from "@ngrx/effects";
 import {
-  StoreRouterConnectingModule,
-  RouterStateSerializer
-} from '@ngrx/router-store';
-import { storeFreeze } from 'ngrx-store-freeze';
-import { FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { environment } from '../environments/environment'; // Angular CLI environment
-import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
-import { AppStore, reducers, CustomRouterStateSerializer } from './reducers';
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+  RouterStateSerializer,
+  StoreRouterConnectingModule
+} from "@ngrx/router-store";
+import { MetaReducer, StoreModule } from "@ngrx/store";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { storeFreeze } from "ngrx-store-freeze";
+import { environment } from "../environments/environment"; // Angular CLI environment
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { AppStore, CustomRouterStateSerializer, reducers } from "./reducers";
 
 export const metaReducers: MetaReducer<AppStore>[] = !environment.production
   ? [storeFreeze]
@@ -34,12 +33,12 @@ export const metaReducers: MetaReducer<AppStore>[] = !environment.production
         They stateKey defines the name of the state used by the router-store reducer.
         This matches the key defined in the map of reducers
       */
-      stateKey: 'router'
+      stateKey: "router"
     }),
     EffectsModule.forRoot([]),
     NgbModule.forRoot(),
     StoreDevtoolsModule.instrument({
-      name: 'NgRx Todo App Store DevTools',
+      name: "NgRx Todo App Store DevTools",
       maxAge: 25 //  Retains last 25 states
     }),
     AppRoutingModule

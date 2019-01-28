@@ -1,1 +1,1 @@
-export { TodoModel } from './model';
+export { TodoModel } from "./model";

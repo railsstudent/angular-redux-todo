@@ -1,17 +1,19 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { InstructorModel } from '../models';
-import { LearningsStore,
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { select, Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+import { InstructorModel } from "../models";
+import {
+  LearningsStore,
   selectAllInstructors,
-  selectInstructorTotal,
-  selectInstructorLoading } from '../reducers';
-import * as instructorActions from '../reducers/instructor.actions';
+  selectInstructorLoading,
+  selectInstructorTotal
+} from "../reducers";
+import * as instructorActions from "../reducers/instructor.actions";
 
 @Component({
-  selector: 'app-instructor',
-  templateUrl: './instructor.component.html',
-  styleUrls: ['./instructor.component.scss'],
+  selector: "app-instructor",
+  templateUrl: "./instructor.component.html",
+  styleUrls: ["./instructor.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InstructorComponent implements OnInit {
@@ -19,7 +21,7 @@ export class InstructorComponent implements OnInit {
   instructorTotal$: Observable<number>;
   instructorLoading$: Observable<boolean>;
 
-  constructor(private store: Store<LearningsStore>) { }
+  constructor(private store: Store<LearningsStore>) {}
 
   ngOnInit() {
     this.instructors$ = this.store.pipe(select(selectAllInstructors));

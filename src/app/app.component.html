@@ -2,23 +2,46 @@
 <div id="main">
   <nav class="navbar navbar-light">
     <div class="container-fluid">
-        <a class="navbar-brand" routerLink="/">Home</a>
-        <button class="navbar-toggler" type="button"
-            aria-controls="navbarNav"
-            aria-expanded="!isCollapsed" aria-label="Toggle navigation"
-            (click)="isCollapsed = !isCollapsed">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      <div class="collapse navbar-collapse" id="navbarNav" [ngbCollapse]="isCollapsed">
+      <a class="navbar-brand" routerLink="/">Home</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        aria-controls="navbarNav"
+        aria-expanded="!isCollapsed"
+        aria-label="Toggle navigation"
+        (click)="isCollapsed = !isCollapsed"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="collapse navbar-collapse"
+        id="navbarNav"
+        [ngbCollapse]="isCollapsed"
+      >
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" [routerLink]="links.courseOverview" routerLinkActive="active">Course Overview <span class="sr-only">(current)</span></a>
+            <a
+              class="nav-link"
+              [routerLink]="links.courseOverview"
+              routerLinkActive="active"
+              >Course Overview <span class="sr-only">(current)</span></a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="links.instructor" routerLinkActive="active">Instructor</a>
+            <a
+              class="nav-link"
+              [routerLink]="links.instructor"
+              routerLinkActive="active"
+              >Instructor</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="links.course" routerLinkActive="active">Course</a>
+            <a
+              class="nav-link"
+              [routerLink]="links.course"
+              routerLinkActive="active"
+              >Course</a
+            >
           </li>
         </ul>
       </div>
@@ -28,7 +51,9 @@
   <router-outlet></router-outlet>
   <footer class="footer">
     <div class="container">
-      <span class="text-muted">Made by Connie Leung @2018 ver. 1.2</span>
+      <span class="text-muted"
+        >Made by Connie Leung @{{ currentYear }} ver. 1.3</span
+      >
     </div>
   </footer>
 </div>

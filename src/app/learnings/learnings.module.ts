@@ -1,26 +1,22 @@
-import { NgModule } from '@angular/core';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { CourseEffects, InstructorEffects } from './effects/';
-import { SharedModule } from '../shared/shared.module';
-
+import { NgModule } from "@angular/core";
+import { EffectsModule } from "@ngrx/effects";
+import { StoreModule } from "@ngrx/store";
+import { SharedModule } from "../shared/shared.module";
+import { CourseEffects, InstructorEffects } from "./effects/";
 import {
-  LearningsStore,
-  reducers
-} from './reducers';
-import { RoutingComponents } from './learnings-routing.module';
-import { LearningsRoutingModule } from './learnings-routing.module';
+  LearningsRoutingModule,
+  RoutingComponents
+} from "./learnings-routing.module";
+import { reducers } from "./reducers";
 
 @NgModule({
-  declarations: [
-    RoutingComponents
-  ],
+  declarations: [RoutingComponents],
   imports: [
     SharedModule,
-    StoreModule.forFeature('instructor', reducers.instructor),
-    StoreModule.forFeature('course', reducers.course),
+    StoreModule.forFeature("instructor", reducers.instructor),
+    StoreModule.forFeature("course", reducers.course),
     EffectsModule.forFeature([CourseEffects, InstructorEffects]),
     LearningsRoutingModule
   ]
 })
-export class LearningsModule { }
+export class LearningsModule {}

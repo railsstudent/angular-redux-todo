@@ -1,12 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Observable ,  of ,  throwError as _throw } from 'rxjs';
-import { Action } from '@ngrx/store';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import { catchError, map, delay, mergeMap, concatMap } from 'rxjs/operators';
-
-import * as courseActions from '../reducers/course.actions';
-import { DELAY_TIME } from '../../shared';
-import { CourseModel } from '../models';
+import { Injectable } from "@angular/core";
+import { Actions, Effect, ofType } from "@ngrx/effects";
+import { Action } from "@ngrx/store";
+import { Observable, of, throwError as _throw } from "rxjs";
+import { catchError, concatMap, delay, map, mergeMap } from "rxjs/operators";
+import { DELAY_TIME } from "../../shared";
+import { CourseModel } from "../models";
+import * as courseActions from "../reducers/course.actions";
 
 @Injectable()
 export class CourseEffects {
@@ -17,61 +16,67 @@ export class CourseEffects {
     ofType<courseActions.AddCourseAction>(courseActions.ADD_COURSE),
     map((action: courseActions.AddCourseAction) => action.payload),
     concatMap((newCourse: CourseModel) => {
-      if (newCourse.name !== 'Bad Course') {
-        return of(newCourse)
-          .pipe(
-            // waits 1 seconds before returing add course action
-            delay(DELAY_TIME),
-            map(data => new courseActions.AddCourseSuccessAction(data)),
-            catchError(error => of(new courseActions.AddCourseFailedAction({ error })))
-          );
+      if (newCourse.name !== "Bad Course") {
+        return of(newCourse).pipe(
+          // waits 1 seconds before returing add course action
+          delay(DELAY_TIME),
+          map(data => new courseActions.AddCourseSuccessAction(data)),
+          catchError(error =>
+            of(new courseActions.AddCourseFailedAction({ error }))
+          )
+        );
       }
       // Fake error message
-      return _throw(`Unable to add course ${newCourse.name}`)
-        .pipe(
-          catchError(error => of(new courseActions.AddCourseFailedAction({ error })))
-        );
+      return _throw(`Unable to add course ${newCourse.name}`).pipe(
+        catchError(error =>
+          of(new courseActions.AddCourseFailedAction({ error }))
+        )
+      );
     })
   );
 
   @Effect()
   deleteCourse$: Observable<Action> = this.actions$.pipe(
-      ofType<courseActions.DeleteCourseAction>(courseActions.DELETE_COURSE),
-      map((action: courseActions.DeleteCourseAction) => action.payload.id),
-      mergeMap((courseId: string) => {
-        if (courseId !== '1') {
-          return of(courseId)
-            .pipe(
-              delay(DELAY_TIME),
-              map(id => new courseActions.DeleteCourseSuccessAction({ id })),
-              catchError(error => of(new courseActions.DeleteCourseFailedAction({error})))
-            );
-        }
-        return _throw(`Unable to delete course id ${courseId}`)
-          .pipe(
-            catchError(error => of(new courseActions.DeleteCourseFailedAction({error})))
-          );
-      })
-    );
+    ofType<courseActions.DeleteCourseAction>(courseActions.DELETE_COURSE),
+    map((action: courseActions.DeleteCourseAction) => action.payload.id),
+    mergeMap((courseId: string) => {
+      if (courseId !== "1") {
+        return of(courseId).pipe(
+          delay(DELAY_TIME),
+          map(id => new courseActions.DeleteCourseSuccessAction({ id })),
+          catchError(error =>
+            of(new courseActions.DeleteCourseFailedAction({ error }))
+          )
+        );
+      }
+      return _throw(`Unable to delete course id ${courseId}`).pipe(
+        catchError(error =>
+          of(new courseActions.DeleteCourseFailedAction({ error }))
+        )
+      );
+    })
+  );
 
   // update course effect
   @Effect()
   updateCourse$: Observable<Action> = this.actions$.pipe(
-      ofType<courseActions.UpdateCourseAction>(courseActions.UPDATE_COURSE),
-      map((action: courseActions.UpdateCourseAction) => action.payload),
-      concatMap((updatedCourse: CourseModel) => {
-        if (updatedCourse.id !== '1') {
-          return of(updatedCourse)
-            .pipe(
-              delay(DELAY_TIME),
-              map(data => new courseActions.UpdateCourseSuccessAction(data)),
-              catchError(error => of (new courseActions.UpdateCourseFailedAction({ error })))
-            );
-        }
-        return _throw(`Uable to update course ${updatedCourse.name}`)
-          .pipe(
-            catchError(error => of (new courseActions.UpdateCourseFailedAction({ error })))
-          );
-      })
-    );
+    ofType<courseActions.UpdateCourseAction>(courseActions.UPDATE_COURSE),
+    map((action: courseActions.UpdateCourseAction) => action.payload),
+    concatMap((updatedCourse: CourseModel) => {
+      if (updatedCourse.id !== "1") {
+        return of(updatedCourse).pipe(
+          delay(DELAY_TIME),
+          map(data => new courseActions.UpdateCourseSuccessAction(data)),
+          catchError(error =>
+            of(new courseActions.UpdateCourseFailedAction({ error }))
+          )
+        );
+      }
+      return _throw(`Uable to update course ${updatedCourse.name}`).pipe(
+        catchError(error =>
+          of(new courseActions.UpdateCourseFailedAction({ error }))
+        )
+      );
+    })
+  );
 }

@@ -1,2 +1,2 @@
-export { InstructorEffects } from './instructor.effects';
-export { CourseEffects } from './course.effects';
+export { CourseEffects } from "./course.effects";
+export { InstructorEffects } from "./instructor.effects";

@@ -1,1 +1,6 @@
-export { InstructorModel, CourseModel, CourseOverviewModel, DisplayCourse } from './model';
+export {
+  CourseModel,
+  CourseOverviewModel,
+  DisplayCourse,
+  InstructorModel
+} from "./model";

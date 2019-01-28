@@ -1,13 +1,15 @@
-import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { TodoModel } from '../models/';
-import * as todoActions from './todo.actions';
+import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
+import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { TodoModel } from "../models/";
+import * as todoActions from "./todo.actions";
 
 export interface TodoState extends EntityState<TodoModel> {
   loading: boolean;
   error: string;
 }
-export const todoAdapter: EntityAdapter<TodoModel> = createEntityAdapter<TodoModel>();
+export const todoAdapter: EntityAdapter<TodoModel> = createEntityAdapter<
+  TodoModel
+>();
 // export const initialTodoState: TodoState = todoAdapter.getInitialState({
 //   ids: ['1', '2', '3'],
 //   entities: {
@@ -35,7 +37,10 @@ export const initialTodoState: TodoState = todoAdapter.getInitialState({
   error: null
 });
 
-export function todoReducer(state: TodoState = initialTodoState, action: todoActions.TodoActions): TodoState {
+export function todoReducer(
+  state: TodoState = initialTodoState,
+  action: todoActions.TodoActions
+): TodoState {
   switch (action.type) {
     case todoActions.ADD_TODO:
     case todoActions.DELETE_TODO:
@@ -69,7 +74,7 @@ export function todoReducer(state: TodoState = initialTodoState, action: todoAct
       };
     case todoActions.UPDATE_TODO_SUCCESS:
     case todoActions.TOGGLE_DONE_SUCCESS:
-      const { id = '', value = '', done = false } = action.payload || {};
+      const { id = "", value = "", done = false } = action.payload || {};
       const changes = { value, done };
       return {
         ...todoAdapter.updateOne({ id, changes }, state),
@@ -89,7 +94,7 @@ export function todoReducer(state: TodoState = initialTodoState, action: todoAct
 }
 
 // Todos Selectors
-export const selectTodos = createFeatureSelector<TodoState>('todo');
+export const selectTodos = createFeatureSelector<TodoState>("todo");
 
 export const {
   // select the array of todos
@@ -98,11 +103,27 @@ export const {
   selectTotal: selectTodosTotal
 } = todoAdapter.getSelectors(selectTodos);
 
-export const selectCompletedTodos = createSelector(selectAllTodos,
-  (todos: TodoModel[]) => todos.filter(todo => todo.done === true));
-export const selectPendingTodos = createSelector(selectAllTodos,
-  (todos: TodoModel[]) => todos.filter(todo => todo.done === false));
-export const selectCompletedTodosCount = createSelector(selectCompletedTodos, (t: TodoModel[]) => t.length);
-export const selectPendingTodosCount = createSelector(selectPendingTodos, (t: TodoModel[]) => t.length);
-export const selectTodoLoading = createSelector(selectTodos, (state: TodoState) => state.loading);
-export const selectTodoError = createSelector(selectTodos, (state: TodoState) => state.error);
+export const selectCompletedTodos = createSelector(
+  selectAllTodos,
+  (todos: TodoModel[]) => todos.filter(todo => todo.done === true)
+);
+export const selectPendingTodos = createSelector(
+  selectAllTodos,
+  (todos: TodoModel[]) => todos.filter(todo => todo.done === false)
+);
+export const selectCompletedTodosCount = createSelector(
+  selectCompletedTodos,
+  (t: TodoModel[]) => t.length
+);
+export const selectPendingTodosCount = createSelector(
+  selectPendingTodos,
+  (t: TodoModel[]) => t.length
+);
+export const selectTodoLoading = createSelector(
+  selectTodos,
+  (state: TodoState) => state.loading
+);
+export const selectTodoError = createSelector(
+  selectTodos,
+  (state: TodoState) => state.error
+);

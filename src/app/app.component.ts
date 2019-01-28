@@ -1,25 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Component, OnInit } from "@angular/core";
+import { Title } from "@angular/platform-browser";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit {
-  title = 'Todo App';
+  title = "Todo App";
   isCollapsed = true;
 
   links = {
-    instructor: ['/learnings/instructor'],
-    course: ['/learnings/course'],
-    courseOverview: ['/learnings/courseOverview']
+    instructor: ["/learnings/instructor"],
+    course: ["/learnings/course"],
+    courseOverview: ["/learnings/courseOverview"]
   };
 
-  constructor(private titleService: Title) {
+  currentYear = new Date().getFullYear();
+
+  constructor(titleService: Title) {
     titleService.setTitle(this.title);
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }
