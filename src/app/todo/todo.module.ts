@@ -5,7 +5,7 @@ import { SharedModule } from "../shared/shared.module";
 import { TodoEffects } from "./effects/";
 import { todoReducer } from "./reducers";
 import { TodoLocalstorageService, TodoService } from "./services";
-import { TodoListItemComponent } from "./todo-list-item/todo-list-item.component";
+import { TodoListTableComponent } from "./todo-list-table/todo-list-table.component";
 import {
   EntryComponents,
   RoutingComponents,
@@ -13,7 +13,7 @@ import {
 } from "./todo-routing.module";
 
 @NgModule({
-  declarations: [RoutingComponents, EntryComponents, TodoListItemComponent],
+  declarations: [RoutingComponents, EntryComponents, TodoListTableComponent],
   imports: [
     SharedModule,
     StoreModule.forFeature("todo", todoReducer),

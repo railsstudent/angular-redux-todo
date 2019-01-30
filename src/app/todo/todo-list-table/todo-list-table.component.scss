@@ -1,0 +1,14 @@
+.app {
+  &-item {
+    &-done {
+      text-decoration: line-through;
+      color: salmon;
+    }
+  }
+}
+
+button {
+  &.space {
+    margin-right: 0.5rem;
+  }
+}

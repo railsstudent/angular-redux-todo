@@ -1,0 +1,41 @@
+<table class="table table-striped table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th>Task</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tr *ngFor="let todo of todos">
+    <td>
+      <span [class.app-item-done]="todo.done">{{ todo.value }}</span>
+    </td>
+    <td>
+      <button
+        (click)="toggleDone(todo)"
+        class="btn btn-outline-secondary space"
+        placement="top"
+        ngbTooltip="Mark this task done"
+      >
+        <i class="fa fa-check" aria-hidden="true"></i>
+      </button>
+      <button
+        (click)="openEdit(todo)"
+        *ngIf="!todo.done"
+        class="btn btn-outline-primary space"
+        placement="top"
+        ngbTooltip="Revise this task"
+      >
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+      </button>
+      <button
+        (click)="openConfirmDelete(todo)"
+        class="btn btn-outline-danger"
+        placement="top"
+        ngbTooltip="This task will be deleted"
+        *ngIf="!todo.done"
+      >
+        <i class="fa fa-trash-o" aria-hidden="true"></i>
+      </button>
+    </td>
+  </tr>
+</table>
