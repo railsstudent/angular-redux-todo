@@ -11,9 +11,15 @@ import {
   RoutingComponents,
   TodoRoutingModule
 } from "./todo-routing.module";
+import { TodoSummaryComponent } from "./todo-summary/todo-summary.component";
 
 @NgModule({
-  declarations: [RoutingComponents, EntryComponents, TodoListTableComponent],
+  declarations: [
+    RoutingComponents,
+    EntryComponents,
+    TodoListTableComponent,
+    TodoSummaryComponent
+  ],
   imports: [
     SharedModule,
     StoreModule.forFeature("todo", todoReducer),

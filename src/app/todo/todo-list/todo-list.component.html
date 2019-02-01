@@ -6,6 +6,8 @@
     <p class="text-danger">Error: {{ error }}</p>
   </div>
   <div class="p-2 app-todo-section">
+    <todo-summary></todo-summary>
+    <!--
     <div class="item stat">
       <div>
         <span>Number of todo items:</span
@@ -36,7 +38,7 @@
         Remove all
       </button>
     </div>
-  </div>
+  --></div>
   <div *ngIf="(todos$ | async)?.length > 0; else noItems">
     <ngb-tabset [justify]="'justified'">
       <ngb-tab title="All">
