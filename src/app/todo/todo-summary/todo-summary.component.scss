@@ -1,22 +1,19 @@
-.app {
-  &-todo-section {
+:host {
+  display: flex;
+}
+
+.item {
+  &.stat {
+    flex: 3 3 0;
     display: flex;
     flex-wrap: wrap;
-    .item {
-      flex: 1 0 auto;
-    }
+    justify-content: space-between;
+  }
 
-    .stat {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      max-width: 50%;
-    }
-
-    .remove {
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-start;
-    }
+  &.remove {
+    flex: 1 1 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
   }
 }
