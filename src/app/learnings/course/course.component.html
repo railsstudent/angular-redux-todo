@@ -2,9 +2,7 @@
   <app-loader [condition]="courseLoading$ | async"></app-loader>
   <div class="row course">
     <div class="col-md-6" *ngIf="(courses$ | async) as courses">
-      <div class="row bg-secondary text-white">
-        <span>Total Courses: {{ courseTotal$ | async }}</span>
-      </div>
+      <app-total-count [templateRef]="courseCountRef"></app-total-count>
       <ng-container *ngIf="courses.length > 0; else noCourses">
         <div
           *ngFor="let course of courses"
@@ -48,4 +46,8 @@
       <p class="card-text">No course. You can start to create some!!!</p>
     </div>
   </div>
+</ng-template>
+
+<ng-template #courseCountRef>
+  <span>Total Courses: {{ courseTotal$ | async }}</span>
 </ng-template>

@@ -2,9 +2,7 @@
   <app-loader [condition]="instructorLoading$ | async"></app-loader>
   <div class="row instructor">
     <div class="col-md-6" *ngIf="(instructors$ | async) as instructors">
-      <div class="row bg-secondary text-white">
-        <span>Total Instructors: {{ instructorTotal$ | async }}</span>
-      </div>
+      <app-total-count [templateRef]="instructorCountRef"></app-total-count>
       <ng-container *ngIf="instructors.length > 0; else noInstructors">
         <div class="row">
           <div
@@ -43,4 +41,8 @@
       <p class="card-text">No instructor. You can start to create some!!!</p>
     </div>
   </div>
+</ng-template>
+
+<ng-template #instructorCountRef>
+  <span>Total Instructors: {{ instructorTotal$ | async }}</span>
 </ng-template>
