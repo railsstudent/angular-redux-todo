@@ -20,7 +20,7 @@ import * as courseActions from "../../reducers/course.actions";
 @Component({
   selector: "app-course-detail",
   templateUrl: "./course-detail.component.html",
-  styleUrls: ["./course-detail.component.scss"],
+  styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseDetailComponent implements OnInit, OnDestroy {
