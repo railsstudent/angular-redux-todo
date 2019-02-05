@@ -1,24 +1,7 @@
 #course-container {
   .course {
     &-description {
-      white-space: pre-line;;
+      white-space: pre-line;
     }
-  }
-  
-  .loading {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    z-index: 1000;
-  }
-
-  .loading:before {
-    content: '';
-    position: fixed;
-    background: rgba(0, 0, 0, 0.5);
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
   }
 }
