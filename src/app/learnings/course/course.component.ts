@@ -13,7 +13,7 @@ import * as courseActions from "../reducers/course.actions";
 @Component({
   selector: "app-course",
   templateUrl: "./course.component.html",
-  styleUrls: ["./course.component.scss"],
+  styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseComponent implements OnInit {

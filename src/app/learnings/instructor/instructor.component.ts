@@ -13,7 +13,7 @@ import * as instructorActions from "../reducers/instructor.actions";
 @Component({
   selector: "app-instructor",
   templateUrl: "./instructor.component.html",
-  styleUrls: ["./instructor.component.scss"],
+  styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InstructorComponent implements OnInit {
