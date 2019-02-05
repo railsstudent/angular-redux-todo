@@ -9,18 +9,23 @@
           class="card mt-3"
           (click)="selectCourse(course.rawCourse.id)"
         >
-          <div class="card-body">
-            <div class="card-block">
-              <h3 class="card-title">{{ course.rawCourse.name }}</h3>
-              <a
-                [routerLink]="['../instructor', course.rawCourse.instructorId]"
-                routerLinkActive="active"
-                >{{ course.instructorName }}</a
-              >
-            </div>
-            <p class="card-text course-description">
-              {{ course.rawCourse.description }}
-            </p>
+          <app-card
+            [nameTemplateRef]="nameTemplateRef"
+            [actionsTemplateRef]="actionsTemplateRef"
+            [descriptionTemplateRef]="descriptionTemplateRef"
+            [blockTemplateRef]="blockTemplateRef"
+          ></app-card>
+          <ng-template #nameTemplateRef>{{
+            course.rawCourse.name
+          }}</ng-template>
+          <ng-template #blockTemplateRef>
+            <a
+              [routerLink]="['../instructor', course.rawCourse.instructorId]"
+              routerLinkActive="active"
+              >{{ course.instructorName }}</a
+            >
+          </ng-template>
+          <ng-template #actionsTemplateRef>
             <button
               type="button"
               class="btn btn-danger"
@@ -30,7 +35,10 @@
             >
               Delete
             </button>
-          </div>
+          </ng-template>
+          <ng-template #descriptionTemplateRef>
+            {{ course.rawCourse.description }}
+          </ng-template>
         </div>
       </ng-container>
     </div>

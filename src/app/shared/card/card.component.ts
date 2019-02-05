@@ -10,6 +10,9 @@ import {
   template: `
     <div class="card-body">
       <div class="card-block">
+        <h3 class="card-title">
+          <ng-template [ngTemplateOutlet]="nameTemplateRef"></ng-template>
+        </h3>
         <ng-template [ngTemplateOutlet]="blockTemplateRef"></ng-template>
       </div>
       <p class="card-text description">
@@ -33,6 +36,9 @@ export class CardComponent {
 
   @Input()
   descriptionTemplateRef: TemplateRef<any>;
+
+  @Input()
+  nameTemplateRef: TemplateRef<any>;
 
   @Input()
   actionsTemplateRef: TemplateRef<any>;

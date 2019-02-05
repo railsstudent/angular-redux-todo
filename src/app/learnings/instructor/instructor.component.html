@@ -10,11 +10,13 @@
             class="card mt-3 col-md-6"
             (click)="selectInstructor(instructor.id)"
           >
-            <div class="card-body">
-              <h4 class="card-title">{{ instructor.name }}</h4>
-              <p class="card-text instructor-description">
-                {{ instructor.description }}
-              </p>
+            <app-card
+              [nameTemplateRef]="nameTemplateRef"
+              [actionsTemplateRef]="actionsTemplateRef"
+              [descriptionTemplateRef]="descriptionTemplateRef"
+            ></app-card>
+            <ng-template #nameTemplateRef>{{ instructor.name }}</ng-template>
+            <ng-template #actionsTemplateRef>
               <button
                 type="button"
                 class="btn btn-danger"
@@ -24,7 +26,10 @@
               >
                 Delete
               </button>
-            </div>
+            </ng-template>
+            <ng-template #descriptionTemplateRef>
+              {{ instructor.description }}</ng-template
+            >
           </div>
         </div>
       </ng-container>
