@@ -1,7 +1,5 @@
 <div class="container-fluid" id="container">
-  <div class="loading" *ngIf="instructorLoading$ | async">
-    <img src="./assets/spinner.svg">
-  </div>
+  <app-loader [condition]="instructorLoading$ | async"></app-loader>
   <div class="row instructor">
     <div class="col-md-6" *ngIf="(instructors$ | async) as instructors">
       <div class="row bg-secondary text-white">
@@ -9,13 +7,27 @@
       </div>
       <ng-container *ngIf="instructors.length > 0; else noInstructors">
         <div class="row">
-            <div *ngFor="let instructor of instructors" class="card mt-3 col-md-6"  (click)="selectInstructor(instructor.id)">
-              <div class="card-body">
-                 <h4 class="card-title">{{instructor.name}}</h4>
-                 <p class="card-text instructor-description">{{instructor.description}}</p>
-                 <button type="button" class="btn btn-danger" (click)="$event.stopPropagation(); deleteInstructor(instructor.id)">Delete</button>
-              </div>
+          <div
+            *ngFor="let instructor of instructors"
+            class="card mt-3 col-md-6"
+            (click)="selectInstructor(instructor.id)"
+          >
+            <div class="card-body">
+              <h4 class="card-title">{{ instructor.name }}</h4>
+              <p class="card-text instructor-description">
+                {{ instructor.description }}
+              </p>
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="
+                  $event.stopPropagation(); deleteInstructor(instructor.id)
+                "
+              >
+                Delete
+              </button>
             </div>
+          </div>
         </div>
       </ng-container>
     </div>

@@ -1,21 +1,37 @@
 <div class="container-fluid" id="course-container">
-  <div class="loading" *ngIf="courseLoading$ | async">
-    <img src="./assets/spinner.svg">
-  </div>
+  <app-loader [condition]="courseLoading$ | async"></app-loader>
   <div class="row course">
     <div class="col-md-6" *ngIf="(courses$ | async) as courses">
       <div class="row bg-secondary text-white">
         <span>Total Courses: {{ courseTotal$ | async }}</span>
       </div>
       <ng-container *ngIf="courses.length > 0; else noCourses">
-        <div *ngFor="let course of courses" class="card mt-3"  (click)="selectCourse(course.rawCourse.id)">
+        <div
+          *ngFor="let course of courses"
+          class="card mt-3"
+          (click)="selectCourse(course.rawCourse.id)"
+        >
           <div class="card-body">
             <div class="card-block">
-              <h3 class="card-title">{{course.rawCourse.name}}</h3>
-              <a [routerLink]="['../instructor', course.rawCourse.instructorId]" routerLinkActive="active">{{course.instructorName}}</a>
-             </div>
-             <p class="card-text course-description">{{course.rawCourse.description}}</p>
-             <button type="button" class="btn btn-danger" (click)="$event.stopPropagation(); deleteCourse(course.rawCourse.id)">Delete</button>
+              <h3 class="card-title">{{ course.rawCourse.name }}</h3>
+              <a
+                [routerLink]="['../instructor', course.rawCourse.instructorId]"
+                routerLinkActive="active"
+                >{{ course.instructorName }}</a
+              >
+            </div>
+            <p class="card-text course-description">
+              {{ course.rawCourse.description }}
+            </p>
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="
+                $event.stopPropagation(); deleteCourse(course.rawCourse.id)
+              "
+            >
+              Delete
+            </button>
           </div>
         </div>
       </ng-container>
