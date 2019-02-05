@@ -9,7 +9,7 @@ import {
   selector: "app-total-count",
   template: `
     <div class="row summary-bg text-white">
-      <template [ngTemplateOutlet]="templateRef"> </template>
+      <ng-template [ngTemplateOutlet]="templateRef"> </ng-template>
     </div>
   `,
   styles: [
