@@ -11,6 +11,8 @@ export const UPDATE_COURSE = "[Course] UPDATE_COURSE";
 export const UPDATE_COURSE_SUCCESS = "[Course] UPDATE_COURSE_SUCCESS";
 export const UPDATE_COURSE_FAILED = "[Course] UPDATE_COURSE_FAILED";
 export const SELECT_COURSE = "[Course] SELECT_COURSE";
+export const DELETE_COURSES_BY_INSTRUCTOR =
+  "[Course] DELETE_COURSES_BY_INSTRUCTOR";
 
 export class AddCourseAction implements Action {
   readonly type = ADD_COURSE;
@@ -62,6 +64,11 @@ export class SelectCourseAction implements Action {
   constructor(public payload: { id: string }) {}
 }
 
+export class DeleteCoursesByInstructor implements Action {
+  readonly type = DELETE_COURSES_BY_INSTRUCTOR;
+  constructor(public payload: { instructorId: string }) {}
+}
+
 export type CourseActions =
   | AddCourseAction
   | AddCourseSuccessAction
@@ -72,4 +79,5 @@ export type CourseActions =
   | UpdateCourseAction
   | UpdateCourseSuccessAction
   | UpdateCourseFailedAction
-  | SelectCourseAction;
+  | SelectCourseAction
+  | DeleteCoursesByInstructor;

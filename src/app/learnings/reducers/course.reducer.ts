@@ -104,11 +104,12 @@ export function courseReducer(
         loading: false,
         error: null
       };
-    case instructorActions.DELETE_INSTRUCTOR_SUCCESS:
+    case courseActions.DELETE_COURSES_BY_INSTRUCTOR:
+      const { payload } = action;
       const courseIds = Object.keys(state.entities)
         .filter(
           courseId =>
-            state.entities[courseId].instructorId === action.payload.id
+            state.entities[courseId].instructorId === payload.instructorId
         )
         .map(courseId => state.entities[courseId].id);
       console.log("courseIds", courseIds);

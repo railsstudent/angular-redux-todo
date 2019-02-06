@@ -2,9 +2,17 @@ import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import { Action } from "@ngrx/store";
 import { Observable, of, throwError as _throw } from "rxjs";
-import { catchError, concatMap, delay, map, mergeMap } from "rxjs/operators";
+import {
+  catchError,
+  concatMap,
+  delay,
+  map,
+  mergeMap,
+  switchMap
+} from "rxjs/operators";
 import { DELAY_TIME } from "../../shared";
 import { InstructorModel } from "../models";
+import * as courseActions from "../reducers/course.actions";
 import * as instructorActions from "../reducers/instructor.actions";
 
 @Injectable()
@@ -49,11 +57,20 @@ export class InstructorEffects {
       if (instructorId !== "1") {
         return of(instructorId).pipe(
           delay(DELAY_TIME),
-          map(
-            id => new instructorActions.DeleteInstructorSuccessAction({ id })
-          ),
+          switchMap(id => [
+            new courseActions.DeleteCoursesByInstructor({
+              instructorId: id
+            }),
+            new instructorActions.DeleteInstructorSuccessAction({
+              id
+            })
+          ]),
           catchError(error =>
-            of(new instructorActions.DeleteInstructorFailedAction({ error }))
+            of(
+              new instructorActions.DeleteInstructorFailedAction({
+                error
+              })
+            )
           )
         );
       }
