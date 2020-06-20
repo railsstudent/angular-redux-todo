@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Title } from "@angular/platform-browser";
+import { environment } from "../environments/environment";
 
 @Component({
   selector: "app-root",
@@ -9,6 +10,7 @@ import { Title } from "@angular/platform-browser";
 export class AppComponent implements OnInit {
   title = "NgRx Todo App";
   isCollapsed = true;
+  version = environment.version;
 
   links = {
     instructor: ["/learnings/instructor"],
