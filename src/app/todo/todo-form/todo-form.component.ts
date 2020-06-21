@@ -23,7 +23,7 @@ export class TodoFormComponent implements OnInit {
 
   addTodo() {
     this.store.dispatch(
-      new todoActions.AddTodoAction({
+      todoActions.AddTodoAction({
         value: this.newTodo,
         done: false
       })

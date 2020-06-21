@@ -17,6 +17,6 @@ export class TodoComponent implements OnInit {
 
   ngOnInit() {
     this.todoLoading$ = this.store.pipe(select(selectTodoLoading));
-    this.store.dispatch(new todoActions.LoadTodosAction());
+    this.store.dispatch(todoActions.LoadTodosAction());
   }
 }

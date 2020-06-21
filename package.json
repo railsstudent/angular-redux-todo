@@ -8,9 +8,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "build-ngh": "ng build --prod --base-href \"https://railsstudent.github.io/angular-redux-todo/\"",
-    "deploy": "npm run build-ngh && ngh --no-silent"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -39,7 +37,7 @@
     "lodash-es": "~4.17.x",
     "ngrx-store-freeze": "0.2.4",
     "rxjs": "~6.5.5",
-    "tslib": "^1.9.0",
+    "tslib": "^1.13.0",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
@@ -63,6 +61,6 @@
     "protractor": "~7.0.0",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
-    "typescript": "~3.4.0"
+    "typescript": "~3.5.2"
   }
 }

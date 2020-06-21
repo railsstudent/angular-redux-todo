@@ -1,128 +1,38 @@
-import { Action } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
 import { TodoModel } from "../models/";
 
-export const ADD_TODO = "[TODO] ADD_TODO";
-export const ADD_TODO_SUCCESS = "[TODO] ADD_TODO_SUCCESS";
-export const ADD_TODO_FAILED = "[TODO] ADD_TODO_FAILED";
-export const DELETE_TODO = "[TODO] DELETE_TODO";
-export const DELETE_TODO_SUCCESS = "[TODO] DELETE_TODO_SUCCESS";
-export const DELETE_TODO_FAILED = "[TODO] DELETE_TODO_FAILED";
-export const UPDATE_TODO = "[TODO] UPDATE_TODO";
-export const UPDATE_TODO_SUCCESS = "[TODO] UPDATE_TODO_SUCCESS";
-export const UPDATE_TODO_FAILED = "[TODO] UPDATE_TODO_FAILED";
-export const TOGGLE_DONE = "[TODO] TOGGLE_DONE";
-export const TOGGLE_DONE_SUCCESS = "[TODO] TOGGLE_DONE_SUCCESS";
-export const TOGGLE_DONE_FAILED = "[TODO] TOGGLE_DONE_FAILED";
-export const REMOVE_TODOS = "[TODO] REMOVE_TODOS";
-export const REMOVE_TODOS_SUCCESS = "[TODO] REMOVE_TODOS_SUCCESS";
-export const REMOVE_TODOS_FAILED = "[TODO] REMOVE_TODOS_FAILED";
-export const LOAD_TODOS = "[TODO] LOAD_TODOS";
-export const LOAD_TODOS_SUCCESS = "[TODO] LOAD_TODOS_SUCCESS";
-export const LOAD_TODOS_FAILED = "[TODO] LOAD_TODOS_FAILED";
+export const LoadTodosAction = createAction("[TODO] LOAD_TODOS");
 
-export class LoadTodosAction implements Action {
-  readonly type = LOAD_TODOS;
-}
+export const LoadTodosSuccessAction = createAction("[TODO] LOAD_TODOS_SUCCESS", props<{ payload: TodoModel[] }>());
 
-export class LoadTodosSuccessAction implements Action {
-  readonly type = LOAD_TODOS_SUCCESS;
-  constructor(public payload: TodoModel[]) {}
-}
+export const LoadTodosFailedAction = createAction("[TODO] LOAD_TODOS_FAILED", props<{ error: string }>());
 
-export class LoadTodosFailedAction implements Action {
-  readonly type = LOAD_TODOS_FAILED;
-  constructor(public payload: { error: string }) {}
-}
+export const AddTodoAction = createAction("[TODO] ADD_TODO", props<{ value: string; done: boolean }>());
 
-export class AddTodoAction implements Action {
-  readonly type = ADD_TODO;
-  constructor(public payload: { value: string; done: boolean }) {}
-}
+export const AddTodoSuccessAction = createAction("[TODO] ADD_TODO_SUCCESS", props<{ payload: TodoModel }>());
 
-export class AddTodoSuccessAction implements Action {
-  readonly type = ADD_TODO_SUCCESS;
-  constructor(public payload: TodoModel) {}
-}
+export const AddTodoFailedAction = createAction("[TODO] ADD_TODO_FAILED", props<{ error: string }>());
 
-export class AddTodoFailedAction implements Action {
-  readonly type = ADD_TODO_FAILED;
-  constructor(public payload: { error: string }) {}
-}
+export const DeleteTodoAction = createAction("[TODO] DELETE_TODO", props<{ id: string }>());
 
-export class DeleteTodoAction implements Action {
-  readonly type = DELETE_TODO;
-  constructor(public payload: { id: string }) {}
-}
+export const DeleteTodoSuccessAction = createAction("[TODO] DELETE_TODO_SUCCESS", props<{ id: string }>());
 
-export class DeleteTodoSuccessAction implements Action {
-  readonly type = DELETE_TODO_SUCCESS;
-  constructor(public payload: { id: string }) {}
-}
+export const DeleteTodoFailedAction = createAction("[TODO] DELETE_TODO_FAILED", props<{ error: string }>());
 
-export class DeleteTodoFailedAction implements Action {
-  readonly type = DELETE_TODO_FAILED;
-  constructor(public payload: { error: string }) {}
-}
+export const UpdateTodoAction = createAction("[TODO] UPDATE_TODO", props<{ payload: TodoModel }>());
 
-export class UpdateTodoAction implements Action {
-  readonly type = UPDATE_TODO;
-  constructor(public payload: TodoModel) {}
-}
+export const UpdateTodoSuccessAction = createAction("[TODO] UPDATE_TODO_SUCCESS", props<{ payload: TodoModel }>());
 
-export class UpdateTodoSuccessAction implements Action {
-  readonly type = UPDATE_TODO_SUCCESS;
-  constructor(public payload: TodoModel) {}
-}
+export const UpdateTodoFailedAction = createAction("[TODO] UPDATE_TODO_FAILED", props<{ error: string }>());
 
-export class UpdateTodoFailedAction implements Action {
-  readonly type = UPDATE_TODO_FAILED;
-  constructor(public payload: { error: string }) {}
-}
+export const ToggleDoneAction = createAction("[TODO] TOGGLE_DONE", props<{ payload: TodoModel }>());
 
-export class ToggleDoneAction implements Action {
-  readonly type = TOGGLE_DONE;
-  constructor(public payload: TodoModel) {}
-}
+export const ToggleDoneSuccessAction = createAction("[TODO] TOGGLE_DONE_SUCCESS", props<{ payload: TodoModel }>());
 
-export class ToggleDoneSuccessAction implements Action {
-  readonly type = TOGGLE_DONE_SUCCESS;
-  constructor(public payload: TodoModel) {}
-}
+export const ToggleDoneFailedAction = createAction("[TODO] TOGGLE_DONE_FAILED", props<{ error: string }>());
 
-export class ToggleDoneFailedAction implements Action {
-  readonly type = TOGGLE_DONE_FAILED;
-  constructor(public payload: { error: string }) {}
-}
+export const RemoveTodosAction = createAction("[TODO] REMOVE_TODOS");
 
-export class RemoveTodosAction implements Action {
-  readonly type = REMOVE_TODOS;
-}
+export const RemoveTodosSuccessAction = createAction("[TODO] REMOVE_TODOS_SUCCESS");
 
-export class RemoveTodosSuccessAction implements Action {
-  readonly type = REMOVE_TODOS_SUCCESS;
-}
-
-export class RemoveTodosFailedAction implements Action {
-  readonly type = REMOVE_TODOS_FAILED;
-  constructor(public payload: { error: string }) {}
-}
-
-export type TodoActions =
-  | AddTodoAction
-  | DeleteTodoAction
-  | UpdateTodoAction
-  | ToggleDoneAction
-  | RemoveTodosAction
-  | AddTodoSuccessAction
-  | AddTodoFailedAction
-  | DeleteTodoSuccessAction
-  | DeleteTodoFailedAction
-  | UpdateTodoSuccessAction
-  | UpdateTodoFailedAction
-  | ToggleDoneSuccessAction
-  | ToggleDoneFailedAction
-  | RemoveTodosSuccessAction
-  | RemoveTodosFailedAction
-  | LoadTodosAction
-  | LoadTodosSuccessAction
-  | LoadTodosFailedAction;
+export const RemoveTodosFailedAction = createAction("[TODO] REMOVE_TODOS_FAILED", props<{ error: string }>());

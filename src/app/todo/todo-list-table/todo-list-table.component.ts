@@ -23,10 +23,9 @@ export class TodoListTableComponent {
   ) {}
 
   toggleDone(todo: TodoModel) {
-    const { id, value, done } = todo;
-    this.store.dispatch(
-      new todoActions.ToggleDoneAction({ id, value, done: !done })
-    );
+    const { done } = todo;
+    const payload = { ...todo, done: !done };
+    this.store.dispatch(todoActions.ToggleDoneAction({ payload }));
   }
 
   openConfirmDelete(todo: TodoModel) {
@@ -53,12 +52,11 @@ export class TodoListTableComponent {
     );
   }
 
-  deleteTodo(id) {
-    this.store.dispatch(new todoActions.DeleteTodoAction({ id }));
+  deleteTodo(id: string) {
+    this.store.dispatch(todoActions.DeleteTodoAction({ id }));
   }
 
-  updateTodo(todo: TodoModel) {
-    const { id, value, done } = todo;
-    this.store.dispatch(new todoActions.UpdateTodoAction({ id, value, done }));
+  updateTodo(payload: TodoModel) {
+    this.store.dispatch(todoActions.UpdateTodoAction({ payload }));
   }
 }

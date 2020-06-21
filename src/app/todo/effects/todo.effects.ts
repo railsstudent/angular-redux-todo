@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
-import { Actions, Effect, ofType } from "@ngrx/effects";
-import { Action } from "@ngrx/store";
+import { Actions, ofType, createEffect } from "@ngrx/effects";
 import { UUID } from "angular2-uuid";
-import { Observable, of } from "rxjs";
+import { of } from "rxjs";
 import {
   catchError,
   concatMap,
@@ -12,7 +11,6 @@ import {
   switchMap
 } from "rxjs/operators";
 import { DELAY_TIME } from "../../shared";
-import { TodoModel } from "../models";
 import * as todoActions from "../reducers/todo.actions";
 import { TodoService } from "../services";
 
@@ -20,96 +18,87 @@ import { TodoService } from "../services";
 export class TodoEffects {
   constructor(private actions$: Actions, private todoService: TodoService) {}
 
-  @Effect()
-  loadTodos$: Observable<Action> = this.actions$.pipe(
-    ofType<todoActions.LoadTodosAction>(todoActions.LOAD_TODOS),
-    switchMap(() => {
-      return this.todoService.get().pipe(
-        delay(DELAY_TIME),
-        map(data => new todoActions.LoadTodosSuccessAction(data)),
-        catchError(error =>
-          of(new todoActions.LoadTodosFailedAction({ error }))
-        )
-      );
-    })
+  loadTodos$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(todoActions.LoadTodosAction),
+      switchMap(() => {
+        return this.todoService.get().pipe(
+          delay(DELAY_TIME),
+          map(payload => todoActions.LoadTodosSuccessAction({ payload })),
+          catchError(error => of(todoActions.LoadTodosFailedAction({ error })))
+        );
+      })
+    )
   );
 
-  @Effect()
-  addTodo$: Observable<Action> = this.actions$.pipe(
-    ofType<todoActions.AddTodoAction>(todoActions.ADD_TODO),
-    map((action: todoActions.AddTodoAction) => ({
-      id: UUID.UUID(),
-      ...action.payload
-    })),
-    concatMap((newTodo: TodoModel) =>
-      this.todoService.add(newTodo).pipe(
+  addTodo$ = createEffect(() => this.actions$.pipe(
+    ofType(todoActions.AddTodoAction),
+    concatMap(({ value, done }) =>
+      this.todoService.add({ id: UUID.UUID(), value, done }).pipe(
         // waits 1 seconds before returing add todo success action
         delay(DELAY_TIME),
-        map(data => new todoActions.AddTodoSuccessAction(data)),
-        catchError(error => of(new todoActions.AddTodoFailedAction({ error })))
+        map(payload => todoActions.AddTodoSuccessAction({ payload })),
+        catchError(error => of(todoActions.AddTodoFailedAction({ error })))
       )
     )
-  );
+  ));
 
-  @Effect()
-  deleteTodo$: Observable<Action> = this.actions$.pipe(
-    ofType<todoActions.DeleteTodoAction>(todoActions.DELETE_TODO),
-    map((action: todoActions.DeleteTodoAction) => action.payload.id),
-    mergeMap((todoId: string) =>
-      this.todoService.remove(todoId).pipe(
-        delay(DELAY_TIME),
-        map(id => new todoActions.DeleteTodoSuccessAction({ id })),
-        catchError(error =>
-          of(new todoActions.DeleteTodoFailedAction({ error }))
+  deleteTodo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(todoActions.DeleteTodoAction),
+      mergeMap(({ id: todoId }) =>
+        this.todoService.remove(todoId).pipe(
+          delay(DELAY_TIME),
+          map(id => todoActions.DeleteTodoSuccessAction({ id })),
+          catchError(error =>
+            of(todoActions.DeleteTodoFailedAction({ error }))
+          )
         )
       )
-    )
-  );
+    ));
 
   // update todo effect
-  @Effect()
-  updateTodo$: Observable<Action> = this.actions$.pipe(
-    ofType<todoActions.UpdateTodoAction>(todoActions.UPDATE_TODO),
-    map((action: todoActions.UpdateTodoAction) => action.payload),
-    concatMap((todo: TodoModel) =>
-      this.todoService.update(todo).pipe(
-        delay(DELAY_TIME),
-        map(data => new todoActions.UpdateTodoSuccessAction(data)),
-        catchError(error =>
-          of(new todoActions.UpdateTodoFailedAction({ error }))
+  updateTodo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(todoActions.UpdateTodoAction),
+      concatMap(({ payload: todo }) =>
+        this.todoService.update(todo).pipe(
+          delay(DELAY_TIME),
+          map(payload => todoActions.UpdateTodoSuccessAction({ payload })),
+          catchError(error =>
+            of(todoActions.UpdateTodoFailedAction({ error }))
+          )
         )
       )
-    )
-  );
+    ));
 
   // toggle done effect
-  @Effect()
-  toggleTodo$: Observable<Action> = this.actions$.pipe(
-    ofType<todoActions.ToggleDoneAction>(todoActions.TOGGLE_DONE),
-    map((action: todoActions.ToggleDoneAction) => action.payload),
-    concatMap((todo: TodoModel) =>
-      this.todoService.update(todo).pipe(
-        delay(DELAY_TIME),
-        map(data => new todoActions.ToggleDoneSuccessAction(data)),
-        catchError(error =>
-          of(new todoActions.ToggleDoneFailedAction({ error }))
+  toggleTodo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(todoActions.ToggleDoneAction),
+      concatMap(({ payload: todo }) =>
+        this.todoService.update(todo).pipe(
+          delay(DELAY_TIME),
+          map(payload => todoActions.ToggleDoneSuccessAction({ payload })),
+          catchError(error =>
+            of(todoActions.ToggleDoneFailedAction({ error }))
+          )
         )
       )
-    )
-  );
+    ));
 
   // remove all todos
-  @Effect()
-  removeAll$: Observable<Action> = this.actions$.pipe(
-    ofType<todoActions.RemoveTodosAction>(todoActions.REMOVE_TODOS),
-    mergeMap(() =>
-      this.todoService.removeAll().pipe(
-        delay(DELAY_TIME),
-        map(() => new todoActions.RemoveTodosSuccessAction()),
-        catchError(error =>
-          of(new todoActions.RemoveTodosFailedAction({ error }))
+  removeAll$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(todoActions.RemoveTodosAction),
+      mergeMap(() =>
+        this.todoService.removeAll().pipe(
+          delay(DELAY_TIME),
+          map(() => todoActions.RemoveTodosSuccessAction()),
+          catchError(error =>
+            of(todoActions.RemoveTodosFailedAction({ error }))
+          )
         )
       )
-    )
-  );
+    ));
 }

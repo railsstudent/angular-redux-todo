@@ -1,10 +1,10 @@
 language: node_js
 
 node_js:
-  - "8"
+  - "12"
 
 cache:
-  yarn: true
+  npm: true
   directories:
     - node_modules
     - dist
@@ -16,21 +16,21 @@ env:
     - GITHUB_NAME="railsstudent"
     - GITHUB_EMAIL="cleung334@gmail.com"
 
-before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash -s
-  - export PATH="$HOME/.yarn/bin:$PATH"
-
 install:
-  - yarn install --pure-lockfile
+  - npm install
 
 script:
-  - yarn audit
-  - yarn lint
-  - yarn build-ngh
-
-after_success:
-  - ngh --repo="$GITHUB_ORG/$GITHUB_NAME/$REPO_NAME.git" --name="$GITHUB_NAME" --email="$GITHUB_EMAIL" --no-silent
+  - npm audit --audit-level=moderate
+  - npm run lint
+  - ng deploy --base-href="$GITHUB_PAGE/$REPO_NAME/" --repo="$GITHUB_ORG/$GITHUB_NAME/$REPO_NAME.git" --name="$GITHUB_NAME" --email="$GITHUB_EMAIL" --no-silent
 
 branches:
   only:
     - master
+
+notifications:
+  email:
+    recipients:
+      - cleung334@gmail.com
+    on_success: never # default: change
+    on_failure: always # default: always

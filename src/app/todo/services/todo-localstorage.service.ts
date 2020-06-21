@@ -52,7 +52,7 @@ export class TodoLocalstorageService {
   add(newTodo: TodoModel) {
     const { id } = newTodo;
     return this.localStorage.getItem<TodoModel[]>(TODO_LIST_KEY).pipe(
-      map(data => data.concat(newTodo)),
+      map(data => (data || []).concat(newTodo)),
       concatMap(newData =>
         this.localStorage
           .setItem(TODO_LIST_KEY, newData)

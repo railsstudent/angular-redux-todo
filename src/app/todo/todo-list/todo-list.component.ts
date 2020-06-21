@@ -49,24 +49,22 @@ export class TodoListComponent implements OnInit {
     this.todoError$ = this.store.pipe(select(selectTodoError));
   }
 
-  deleteTodo(id) {
-    this.store.dispatch(new todoActions.DeleteTodoAction({ id }));
+  deleteTodo(id: string) {
+    this.store.dispatch(todoActions.DeleteTodoAction({ id }));
   }
 
-  updateTodo(todo: TodoModel) {
-    const { id, value, done } = todo;
-    this.store.dispatch(new todoActions.UpdateTodoAction({ id, value, done }));
+  updateTodo(payload: TodoModel) {
+    this.store.dispatch(todoActions.UpdateTodoAction({ payload }));
   }
 
   toggleDone(todo: TodoModel) {
-    const { id, value, done } = todo;
-    this.store.dispatch(
-      new todoActions.ToggleDoneAction({ id, value, done: !done })
-    );
+    const { done } = todo;
+    const payload = { ...todo, done: !done };
+    this.store.dispatch(todoActions.ToggleDoneAction({ payload }));
   }
 
   removeTodos() {
-    this.store.dispatch(new todoActions.RemoveTodosAction());
+    this.store.dispatch(todoActions.RemoveTodosAction());
   }
 
   openAllRemove() {

@@ -17,6 +17,7 @@
         [todosCount]="o.todosCount"
         [pendingTodosCount]="o.pendingTodosCount"
         [completedTodosCount]="o.completedTodosCount"
+        (removeTodos)="removeTodos()"
       ></todo-summary>
     </div>
     <div *ngIf="o.todos.length > 0; else noItems">
