@@ -4,7 +4,6 @@ import { StoreModule } from "@ngrx/store";
 import { SharedModule } from "../shared/shared.module";
 import { TodoEffects } from "./effects/";
 import { todoReducer } from "./reducers";
-import { TodoLocalstorageService, TodoService } from "./services";
 import { TodoListTableComponent } from "./todo-list-table/todo-list-table.component";
 import {
   EntryComponents,
@@ -27,6 +26,5 @@ import { TodoSummaryComponent } from "./todo-summary/todo-summary.component";
     TodoRoutingModule
   ],
   entryComponents: [EntryComponents],
-  providers: [TodoService, TodoLocalstorageService]
 })
 export class TodoModule {}

@@ -3,7 +3,9 @@ import { Observable } from "rxjs";
 import { TodoModel } from "../models/";
 import { TodoLocalstorageService } from "./todo-localstorage.service";
 
-@Injectable()
+@Injectable({
+  providedIn: "root"
+})
 export class TodoService {
   constructor(private storage: TodoLocalstorageService) {}
 

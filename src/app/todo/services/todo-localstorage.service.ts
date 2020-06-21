@@ -29,7 +29,9 @@ const DEFAULT_ENTITIES: TodoModel[] = [
   }
 ];
 
-@Injectable()
+@Injectable({
+  providedIn: "root"
+})
 export class TodoLocalstorageService {
   constructor(private localStorage: LocalStorage) {}
 
