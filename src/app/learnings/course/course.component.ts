@@ -30,10 +30,10 @@ export class CourseComponent implements OnInit {
   }
 
   deleteCourse(id: string) {
-    this.store.dispatch(new courseActions.DeleteCourseAction({ id }));
+    this.store.dispatch(courseActions.DeleteCourseAction({ id }));
   }
 
   selectCourse(id: string = null) {
-    this.store.dispatch(new courseActions.SelectCourseAction({ id }));
+    this.store.dispatch(courseActions.SelectCourseAction({ id }));
   }
 }
